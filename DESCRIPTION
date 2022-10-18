@@ -1,22 +1,26 @@
+Type: Package
 Package: codexchain
-Title: What the Package Does (One Line, Title Case)
+Title: Access Public Medical Coding Data APIs
 Version: 0.0.0.9000
 Authors@R: 
     person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre"))
+Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
 Description: What the package does (one paragraph).
 License: GPL (>= 3)
+URL: https://github.com/andrewallenbruce/codexchain
+BugReports: https://github.com/andrewallenbruce/codexchain/issues
+Imports: 
+    httr2,
+    tibble,
+    attempt,
+    curl
+Suggests: 
+    covr,
+    dplyr,
+    httptest2,
+    stringr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-URL: https://github.com/andrewallenbruce/codexchain
-BugReports: https://github.com/andrewallenbruce/codexchain/issues
-Suggests: 
-    httptest2,
-    dplyr,
-    stringr,
-    testthat (>= 3.0.0),
-    covr
-Config/testthat/edition: 3
-Imports: 
-    httr2,
-    tibble

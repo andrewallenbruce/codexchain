@@ -4,7 +4,7 @@
 \name{codexchain-package}
 \alias{codexchain}
 \alias{codexchain-package}
-\title{codexchain: What the Package Does (One Line, Title Case)}
+\title{codexchain: Access Public Medical Coding Data APIs}
 \description{
 What the package does (one paragraph).
 }
