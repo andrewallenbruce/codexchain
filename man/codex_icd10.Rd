@@ -3,6 +3,9 @@
 \name{codex_icd10}
 \alias{codex_icd10}
 \title{Search the National Library of Medicine's ICD-10-CM API}
+\source{
+National Institute of Health/National Library of Medicine
+}
 \usage{
 codex_icd10(code = NULL, term = NULL, field = "both", limit = 10)
 }
@@ -22,47 +25,35 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \code{\link[=codex_icd10]{codex_icd10()}} allows you to search the NLM's ICD-10-CM
 API by code or associated term.
 }
-\section{NLM's Clinical Table Search Service ICD-10-CM API}{
+\details{
 ICD-10-CM (International Classification of Diseases, 10th Revision,
 Clinical Modification) is a medical coding system for classifying
 diagnoses and reasons for visits in U.S. health care settings.
-\href{http://www.cdc.gov/nchs/icd/icd10cm.htm}{Learn more about ICD-10-CM.}
-\subsection{Current Version}{
-
-ICD-10-CM \strong{2023}
-}
-
-\subsection{Data Source}{
-
-National Institute of Health/National Library of Medicine
-}
-
 \subsection{Links}{
 \itemize{
 \item \href{https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html}{NIH NLM Clinical Table Service ICD-10-CM API}
+\item \href{http://www.cdc.gov/nchs/icd/icd10cm.htm}{Learn more about ICD-10-CM.}
 }
 }
 }
-
+\note{
+Current Version: ICD-10-CM \strong{2023}
+}
 \examples{
 # Returns the seven codes beginning with "A15"
-
 codex_icd10(code = "A15")
 
-# Returns the first 20 codes associated with tuberculosis
-
-codex_icd10(term = "tuber", limit = 20)
+# Returns the first five codes associated with tuberculosis
+codex_icd10(term = "tuber", limit = 5)
 
 # Returns the two codes associated with pleurisy
-
 codex_icd10(term = "pleurisy")
 
 # If you're searching for codes beginning with a certain letter, you
 # must set the `field` param to "code" or it will search for terms as well:
 
 # Returns terms containing the letter "Z"
-
-codex_icd10(code = "z")
+codex_icd10(code = "z", limit = 5)
 
 # Returns codes beginning with "Z"
 codex_icd10(code = "z", field = "code")

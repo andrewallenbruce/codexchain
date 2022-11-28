@@ -39,6 +39,7 @@
 #'
 #' codex_mue()
 #' }
+#' @autoglobal
 #' @export
 
 codex_mue <- function() {

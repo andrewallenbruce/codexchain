@@ -13,14 +13,22 @@ Imports:
     httr2,
     tibble,
     attempt,
-    curl
+    curl,
+    janitor,
+    lubridate,
+    purrr
 Suggests: 
     covr,
     dplyr,
     httptest2,
+    roxyglobals (>= 0.2.1),
     stringr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+Roxygen: list(
+    markdown = TRUE,
+    roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
+RoxygenNote: 7.2.2
+Remotes: 
+    anthonynorth/roxyglobals

@@ -9,8 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
-)
+  out.width = "100%")
 ```
 
 # `codexchain`
@@ -38,73 +37,107 @@ remotes::install_github("andrewallenbruce/codexchain")
 ```
 
 ```{r}
-library(codexchain)
+
 ```
 
 <br>
 
-## NIH NLM CTSS ICD-10-CM 2023 API
+## NIH/NLM ICD-10-CM 2023 API
 
 <br>
 
 ```{r}
-# Returns the seven ICD-10 codes beginning with "A15"
-codex_icd10(code = "A15") |> knitr::kable()
+# Load library
+library(codexchain)
+
+# Return the seven ICD-10 codes beginning with "A15"
+codex_icd10(code = "A15") |> 
+            knitr::kable()
 ```
+
 <br>
 
 ```{r}
 # Return the first 20 ICD-10 codes associated with tuberculosis
-codex_icd10(term = "tuber", limit = 20) |> knitr::kable()
+codex_icd10(term = "tuber", 
+            limit = 20) |> 
+            knitr::kable()
 ```
+
 <br>
 
 ```{r}
 # Return the two ICD-10 codes associated with pleurisy
-codex_icd10(term = "pleurisy") |> knitr::kable()
+codex_icd10(term = "pleurisy") |> 
+            knitr::kable()
 ```
 
 <br>
 
-When searching for codes by letter, you must set the `field` param to "code" or it will search for terms containing the letter as well:
+When searching for ICD-10 codes by letter, you must set the `field` param to "code" or it will search for *terms* containing the letter as well:
 
 <br>
 
 ```{r}
 # Without field = "code", returns terms containing the letter "Z":
-codex_icd10(code = "Z", limit = 25) |> knitr::kable()
+codex_icd10(code = "Z", 
+            limit = 5) |> 
+            knitr::kable()
 ```
 
 <br>
 
 ```{r}
 # With field = "code", returns only codes containing "Z":
-codex_icd10(code = "z", field = "code", limit = 25) |> knitr::kable()
+codex_icd10(code = "z", 
+            field = "code", 
+            limit = 5) |> 
+            knitr::kable()
 ```
 
-## CMS NCCI Procedure to Procedure Edits (PTP) API
+## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 
 <br>
 
 ```{r}
-codex_ptp() |> head() |> knitr::kable()
-```
-
-<br>
-
-```{r}
-codex_ptp(explain = TRUE) |> head() |> knitr::kable()
+codex_cert(hcpcs = "92002", 
+           decision = "Disagree") |> 
+           knitr::kable()
 ```
 
 
 <br>
 
-## CMS NCCI Medically Unlikely Edits (MUEs) API
+
+## NCCI Procedure-to-Procedure Edits (PTP) API
 
 <br>
 
 ```{r}
-codex_mue() |> head() |> knitr::kable()
+codex_ptp() |> 
+     head() |> 
+     knitr::kable()
+```
+
+<br>
+
+```{r}
+codex_ptp(explain = TRUE) |> 
+                   head() |> 
+                   knitr::kable()
+```
+
+
+<br>
+
+## NCCI Medically Unlikely Edits (MUEs) API
+
+<br>
+
+```{r}
+codex_mue() |> 
+     head() |> 
+     knitr::kable()
 ```
 
 <br>

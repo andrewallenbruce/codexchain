@@ -32,19 +32,19 @@ devtools::install_github("andrewallenbruce/codexchain")
 remotes::install_github("andrewallenbruce/codexchain")
 ```
 
+<br>
+
+## NIH/NLM ICD-10-CM 2023 API
+
+<br>
+
 ``` r
+# Load library
 library(codexchain)
-```
 
-<br>
-
-## NIH NLM CTSS ICD-10-CM 2023 API
-
-<br>
-
-``` r
-# Returns the seven ICD-10 codes beginning with "A15"
-codex_icd10(code = "A15") |> knitr::kable()
+# Return the seven ICD-10 codes beginning with "A15"
+codex_icd10(code = "A15") |> 
+            knitr::kable()
 ```
 
 | icd_10_cm_code | icd_10_cm_term                               |
@@ -61,7 +61,9 @@ codex_icd10(code = "A15") |> knitr::kable()
 
 ``` r
 # Return the first 20 ICD-10 codes associated with tuberculosis
-codex_icd10(term = "tuber", limit = 20) |> knitr::kable()
+codex_icd10(term = "tuber", 
+            limit = 20) |> 
+            knitr::kable()
 ```
 
 | icd_10_cm_code | icd_10_cm_term                                    |
@@ -91,7 +93,8 @@ codex_icd10(term = "tuber", limit = 20) |> knitr::kable()
 
 ``` r
 # Return the two ICD-10 codes associated with pleurisy
-codex_icd10(term = "pleurisy") |> knitr::kable()
+codex_icd10(term = "pleurisy") |> 
+            knitr::kable()
 ```
 
 | icd_10_cm_code | icd_10_cm_term       |
@@ -101,119 +104,114 @@ codex_icd10(term = "pleurisy") |> knitr::kable()
 
 <br>
 
-When searching for codes by letter, you must set the `field` param to
-“code” or it will search for terms containing the letter as well:
+When searching for ICD-10 codes by letter, you must set the `field`
+param to “code” or it will search for *terms* containing the letter as
+well:
 
 <br>
 
 ``` r
 # Without field = "code", returns terms containing the letter "Z":
-codex_icd10(code = "Z", limit = 25) |> knitr::kable()
+codex_icd10(code = "Z", 
+            limit = 5) |> 
+            knitr::kable()
 ```
 
-| icd_10_cm_code | icd_10_cm_term                                                                                  |
-|:---------------|:------------------------------------------------------------------------------------------------|
-| A28.8          | Other specified zoonotic bacterial diseases, not elsewhere classified                           |
-| A28.9          | Zoonotic bacterial disease, unspecified                                                         |
-| A92.5          | Zika virus disease                                                                              |
-| B02.0          | Zoster encephalitis                                                                             |
-| B02.1          | Zoster meningitis                                                                               |
-| B02.30         | Zoster ocular disease, unspecified                                                              |
-| B02.31         | Zoster conjunctivitis                                                                           |
-| B02.32         | Zoster iridocyclitis                                                                            |
-| B02.33         | Zoster keratitis                                                                                |
-| B02.34         | Zoster scleritis                                                                                |
-| B02.39         | Other herpes zoster eye disease                                                                 |
-| B02.7          | Disseminated zoster                                                                             |
-| B02.8          | Zoster with other complications                                                                 |
-| B02.9          | Zoster without complications                                                                    |
-| B46.8          | Other zygomycoses                                                                               |
-| B46.9          | Zygomycosis, unspecified                                                                        |
-| C21.2          | Malignant neoplasm of cloacogenic zone                                                          |
-| C88.4          | Extranodal marginal zone B-cell lymphoma of mucosa-associated lymphoid tissue \[MALT-lymphoma\] |
-| D57.42         | Sickle-cell thalassemia beta zero without crisis                                                |
-| D57.431        | Sickle-cell thalassemia beta zero with acute chest syndrome                                     |
-| D57.432        | Sickle-cell thalassemia beta zero with splenic sequestration                                    |
-| D57.433        | Sickle-cell thalassemia beta zero with cerebral vascular involvement                            |
-| D57.438        | Sickle-cell thalassemia beta zero with crisis with other specified complication                 |
-| D57.439        | Sickle-cell thalassemia beta zero with crisis, unspecified                                      |
-| E60            | Dietary zinc deficiency                                                                         |
+| icd_10_cm_code | icd_10_cm_term                                                        |
+|:---------------|:----------------------------------------------------------------------|
+| A28.8          | Other specified zoonotic bacterial diseases, not elsewhere classified |
+| A28.9          | Zoonotic bacterial disease, unspecified                               |
+| A92.5          | Zika virus disease                                                    |
+| B02.0          | Zoster encephalitis                                                   |
+| B02.1          | Zoster meningitis                                                     |
 
 <br>
 
 ``` r
 # With field = "code", returns only codes containing "Z":
-codex_icd10(code = "z", field = "code", limit = 25) |> knitr::kable()
+codex_icd10(code = "z", 
+            field = "code", 
+            limit = 5) |> 
+            knitr::kable()
 ```
 
-| icd_10_cm_code | icd_10_cm_term                                                                                           |
-|:---------------|:---------------------------------------------------------------------------------------------------------|
-| Z00.00         | Encounter for general adult medical examination without abnormal findings                                |
-| Z00.01         | Encounter for general adult medical examination with abnormal findings                                   |
-| Z00.110        | Health examination for newborn under 8 days old                                                          |
-| Z00.111        | Health examination for newborn 8 to 28 days old                                                          |
-| Z00.121        | Encounter for routine child health examination with abnormal findings                                    |
-| Z00.129        | Encounter for routine child health examination without abnormal findings                                 |
-| Z00.2          | Encounter for examination for period of rapid growth in childhood                                        |
-| Z00.3          | Encounter for examination for adolescent development state                                               |
-| Z00.5          | Encounter for examination of potential donor of organ and tissue                                         |
-| Z00.6          | Encounter for examination for normal comparison and control in clinical research program                 |
-| Z00.70         | Encounter for examination for period of delayed growth in childhood without abnormal findings            |
-| Z00.71         | Encounter for examination for period of delayed growth in childhood with abnormal findings               |
-| Z00.8          | Encounter for other general examination                                                                  |
-| Z01.00         | Encounter for examination of eyes and vision without abnormal findings                                   |
-| Z01.01         | Encounter for examination of eyes and vision with abnormal findings                                      |
-| Z01.020        | Encounter for examination of eyes and vision following failed vision screening without abnormal findings |
-| Z01.021        | Encounter for examination of eyes and vision following failed vision screening with abnormal findings    |
-| Z01.10         | Encounter for examination of ears and hearing without abnormal findings                                  |
-| Z01.110        | Encounter for hearing examination following failed hearing screening                                     |
-| Z01.118        | Encounter for examination of ears and hearing with other abnormal findings                               |
-| Z01.12         | Encounter for hearing conservation and treatment                                                         |
-| Z01.20         | Encounter for dental examination and cleaning without abnormal findings                                  |
-| Z01.21         | Encounter for dental examination and cleaning with abnormal findings                                     |
-| Z01.30         | Encounter for examination of blood pressure without abnormal findings                                    |
-| Z01.31         | Encounter for examination of blood pressure with abnormal findings                                       |
+| icd_10_cm_code | icd_10_cm_term                                                            |
+|:---------------|:--------------------------------------------------------------------------|
+| Z00.00         | Encounter for general adult medical examination without abnormal findings |
+| Z00.01         | Encounter for general adult medical examination with abnormal findings    |
+| Z00.110        | Health examination for newborn under 8 days old                           |
+| Z00.111        | Health examination for newborn 8 to 28 days old                           |
+| Z00.121        | Encounter for routine child health examination with abnormal findings     |
 
-## CMS NCCI Procedure to Procedure Edits (PTP) API
+## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 
 <br>
 
 ``` r
-codex_ptp() |> head() |> knitr::kable()
+codex_cert(hcpcs = "92002", 
+           decision = "Disagree") |> 
+           knitr::kable()
 ```
 
-| quarter_begin_date | category     | column_1 | column_2 | effective_date | deletion_date | modifier_indicator | ptp_edit_rationale            |
-|:-------------------|:-------------|:---------|:---------|:---------------|:--------------|-------------------:|:------------------------------|
-| 2022-10-01         | DME Services | 29000    | 29010    | 2013-04-01     | NA            |                  0 | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000    | 29015    | 2013-04-01     | NA            |                  0 | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000    | 29020    | 2013-04-01     | 2014-12-31    |                  0 | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000    | 29025    | 2013-04-01     | 2014-12-31    |                  0 | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000    | 29035    | 2013-04-01     | NA            |                  0 | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000    | 29040    | 2013-04-01     | NA            |                  0 | Mutually exclusive procedures |
+| year | claim_control_number | part       | drg | hcpcs_procedure_code | provider_type | type_of_bill | review_decision | error_code                 |
+|-----:|---------------------:|:-----------|:----|:---------------------|:--------------|:-------------|:----------------|:---------------------------|
+| 2021 |              2134770 | 1\. Part B |     | 92002                | Optometry     |              | Disagree        | Other                      |
+| 2021 |              2136243 | 1\. Part B |     | 92002                | Ophthalmology |              | Disagree        | Insufficient Documentation |
+| 2021 |              2139556 | 1\. Part B |     | 92002                | Optometry     |              | Disagree        | Incorrect Coding           |
+| 2021 |              2142814 | 1\. Part B |     | 92002                | Ophthalmology |              | Disagree        | Incorrect Coding           |
+| 2021 |              2139587 | 1\. Part B |     | 92002                | Ophthalmology |              | Disagree        | Incorrect Coding           |
+| 2021 |              2146877 | 1\. Part B |     | 92002                | Optometry     |              | Disagree        | Incorrect Coding           |
+| 2021 |              2145036 | 1\. Part B |     | 92002                | Ophthalmology |              | Disagree        | Incorrect Coding           |
+| 2021 |              2145815 | 1\. Part B |     | 92002                | Optometry     |              | Disagree        | Incorrect Coding           |
+
+<br>
+
+## NCCI Procedure-to-Procedure Edits (PTP) API
 
 <br>
 
 ``` r
-codex_ptp(explain = TRUE) |> head() |> knitr::kable()
+codex_ptp() |> 
+     head() |> 
+     knitr::kable()
 ```
 
-| quarter_begin_date | category     | comprehensive | component | effective_date | deletion_date | modifier | reason                        |
-|:-------------------|:-------------|:--------------|:----------|:---------------|:--------------|:---------|:------------------------------|
-| 2022-10-01         | DME Services | 29000         | 29010     | 2013-04-01     | NA            | Allowed  | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000         | 29015     | 2013-04-01     | NA            | Allowed  | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000         | 29020     | 2013-04-01     | 2014-12-31    | Allowed  | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000         | 29025     | 2013-04-01     | 2014-12-31    | Allowed  | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000         | 29035     | 2013-04-01     | NA            | Allowed  | Mutually exclusive procedures |
-| 2022-10-01         | DME Services | 29000         | 29040     | 2013-04-01     | NA            | Allowed  | Mutually exclusive procedures |
-
-<br>
-
-## CMS NCCI Medically Unlikely Edits (MUEs) API
+| record_number | quarter_begin_date | category     | column_1 | column_2 | effective_date | deletion_date | modifier_indicator | ptp_edit_rationale            |
+|:--------------|:-------------------|:-------------|:---------|:---------|:---------------|:--------------|:-------------------|:------------------------------|
+| 1             | 2022-10-01         | DME Services | 29000    | 29010    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 6             | 2022-10-01         | DME Services | 29000    | 29015    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 11            | 2022-10-01         | DME Services | 29000    | 29020    | 2013-04-01     | 2014-12-31    | 0                  | Mutually exclusive procedures |
+| 16            | 2022-10-01         | DME Services | 29000    | 29025    | 2013-04-01     | 2014-12-31    | 0                  | Mutually exclusive procedures |
+| 21            | 2022-10-01         | DME Services | 29000    | 29035    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 26            | 2022-10-01         | DME Services | 29000    | 29040    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
 
 <br>
 
 ``` r
-codex_mue() |> head() |> knitr::kable()
+codex_ptp(explain = TRUE) |> 
+                   head() |> 
+                   knitr::kable()
+```
+
+| record_number | quarter_begin_date | category     | hcpcs_comprehensive | hcpcs_component | effective_date | deletion_date | modifier_use | reasoning                     |
+|:--------------|:-------------------|:-------------|:--------------------|:----------------|:---------------|:--------------|:-------------|:------------------------------|
+| 1             | 2022-10-01         | DME Services | 29000               | 29010           | 2013-04-01     | NA            | Allowed (0)  | Mutually exclusive procedures |
+| 6             | 2022-10-01         | DME Services | 29000               | 29015           | 2013-04-01     | NA            | Allowed (0)  | Mutually exclusive procedures |
+| 11            | 2022-10-01         | DME Services | 29000               | 29020           | 2013-04-01     | 2014-12-31    | Allowed (0)  | Mutually exclusive procedures |
+| 16            | 2022-10-01         | DME Services | 29000               | 29025           | 2013-04-01     | 2014-12-31    | Allowed (0)  | Mutually exclusive procedures |
+| 21            | 2022-10-01         | DME Services | 29000               | 29035           | 2013-04-01     | NA            | Allowed (0)  | Mutually exclusive procedures |
+| 26            | 2022-10-01         | DME Services | 29000               | 29040           | 2013-04-01     | NA            | Allowed (0)  | Mutually exclusive procedures |
+
+<br>
+
+## NCCI Medically Unlikely Edits (MUEs) API
+
+<br>
+
+``` r
+codex_mue() |> 
+     head() |> 
+     knitr::kable()
 ```
 
 | quarter_begin_date | category                     | hcpcs_code | mue_value | mue_rationale                 |

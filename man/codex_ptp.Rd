@@ -4,9 +4,50 @@
 \alias{codex_ptp}
 \title{Search CMS' NCCI Procedure to Procedure Edits (PTP) API}
 \usage{
-codex_ptp(explain = FALSE)
+codex_ptp(
+  category = NULL,
+  comprehensive = NULL,
+  component = NULL,
+  mod = NULL,
+  reason = NULL,
+  limit = NULL,
+  offset = 0,
+  count = "true",
+  results = "true",
+  schema = "true",
+  keys = "true",
+  format = "json",
+  rowIds = "true",
+  explain = FALSE
+)
 }
 \arguments{
+\item{category}{definition}
+
+\item{comprehensive}{definition}
+
+\item{component}{definition}
+
+\item{mod}{definition}
+
+\item{reason}{definition}
+
+\item{limit}{definition}
+
+\item{offset}{definition}
+
+\item{count}{definition}
+
+\item{results}{definition}
+
+\item{schema}{definition}
+
+\item{keys}{definition}
+
+\item{format}{definition}
+
+\item{rowIds}{definition}
+
 \item{explain}{If \code{TRUE}, converts data to a more human-readable form;
 default is \code{FALSE}.}
 }
@@ -44,7 +85,12 @@ Centers for Medicare & Medicaid Services
 \dontrun{
 # Returns the first 10,000 results
 
-codex_ptp()
+codex_ptp(category = "DME",
+          comprehensive = 29000,
+          component = 29010,
+          mod = 0,
+          reason = "mutually",
+          explain = TRUE)
 
 codex_ptp(explain = TRUE)
 }
