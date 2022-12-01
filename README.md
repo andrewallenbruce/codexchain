@@ -34,7 +34,7 @@ remotes::install_github("andrewallenbruce/codexchain")
 
 <br>
 
-## NIH/NLM ICD-10-CM 2023 API
+## NIH ICD-10-CM 2023 API
 
 <br>
 
@@ -142,6 +142,47 @@ codex_icd10(code = "z",
 | Z00.110        | Health examination for newborn under 8 days old                           |
 | Z00.111        | Health examination for newborn 8 to 28 days old                           |
 | Z00.121        | Encounter for routine child health examination with abnormal findings     |
+
+<br>
+
+### BMI Coding Example
+
+<br>
+
+``` r
+codex_icd10(term = "bmi adult", 
+            limit = 30) |> 
+            knitr::kable()
+```
+
+| icd_10_cm_code | icd_10_cm_term                               |
+|:---------------|:---------------------------------------------|
+| Z68.45         | Body mass index \[BMI\] 70 or greater, adult |
+| Z68.1          | Body mass index \[BMI\] 19.9 or less, adult  |
+| Z68.20         | Body mass index \[BMI\] 20.0-20.9, adult     |
+| Z68.21         | Body mass index \[BMI\] 21.0-21.9, adult     |
+| Z68.22         | Body mass index \[BMI\] 22.0-22.9, adult     |
+| Z68.23         | Body mass index \[BMI\] 23.0-23.9, adult     |
+| Z68.24         | Body mass index \[BMI\] 24.0-24.9, adult     |
+| Z68.25         | Body mass index \[BMI\] 25.0-25.9, adult     |
+| Z68.26         | Body mass index \[BMI\] 26.0-26.9, adult     |
+| Z68.27         | Body mass index \[BMI\] 27.0-27.9, adult     |
+| Z68.28         | Body mass index \[BMI\] 28.0-28.9, adult     |
+| Z68.29         | Body mass index \[BMI\] 29.0-29.9, adult     |
+| Z68.30         | Body mass index \[BMI\] 30.0-30.9, adult     |
+| Z68.31         | Body mass index \[BMI\] 31.0-31.9, adult     |
+| Z68.32         | Body mass index \[BMI\] 32.0-32.9, adult     |
+| Z68.33         | Body mass index \[BMI\] 33.0-33.9, adult     |
+| Z68.34         | Body mass index \[BMI\] 34.0-34.9, adult     |
+| Z68.35         | Body mass index \[BMI\] 35.0-35.9, adult     |
+| Z68.36         | Body mass index \[BMI\] 36.0-36.9, adult     |
+| Z68.37         | Body mass index \[BMI\] 37.0-37.9, adult     |
+| Z68.38         | Body mass index \[BMI\] 38.0-38.9, adult     |
+| Z68.39         | Body mass index \[BMI\] 39.0-39.9, adult     |
+| Z68.41         | Body mass index \[BMI\] 40.0-44.9, adult     |
+| Z68.42         | Body mass index \[BMI\] 45.0-49.9, adult     |
+| Z68.43         | Body mass index \[BMI\] 50.0-59.9, adult     |
+| Z68.44         | Body mass index \[BMI\] 60.0-69.9, adult     |
 
 ## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 

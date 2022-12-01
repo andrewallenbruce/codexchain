@@ -36,13 +36,9 @@ devtools::install_github("andrewallenbruce/codexchain")
 remotes::install_github("andrewallenbruce/codexchain")
 ```
 
-```{r}
-
-```
-
 <br>
 
-## NIH/NLM ICD-10-CM 2023 API
+## NIH ICD-10-CM 2023 API
 
 <br>
 
@@ -94,6 +90,20 @@ codex_icd10(code = "z",
             limit = 5) |> 
             knitr::kable()
 ```
+
+<br>
+
+### BMI Coding Example
+
+<br>
+
+
+```{r}
+codex_icd10(term = "bmi adult", 
+            limit = 30) |> 
+            knitr::kable()
+```
+
 
 ## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 
