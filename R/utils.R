@@ -273,6 +273,16 @@ param_format <- function(param, arg) {
 #' @noRd
 param_space <- function(param) {gsub(" ", "%20", param)}
 
+#' param_format ------------------------------------------------------------
+#' @param param API parameter
+#' @param arg API function arg
+#' @return formatted API filters
+#' @autoglobal
+#' @noRd
+medline_format <- function(param, arg) {
+  if (is.null(arg)) {param <- NULL} else {
+    x <- gsub(" ", "%20", arg)
+    paste0(param, x, "&")}}
 
 #' Calculate Body Mass Index (BMI)
 #' @param wt weight in kg

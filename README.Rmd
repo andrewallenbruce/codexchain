@@ -38,81 +38,111 @@ remotes::install_github("andrewallenbruce/codexchain")
 
 <br>
 
-## NIH ICD-10-CM 2023 API
-
-<br>
+## Usage
 
 ```{r}
-# Load library
 library(codexchain)
-
-# Return the seven ICD-10 codes beginning with "A15"
-codex_icd10(code = "A15") |> 
-            knitr::kable()
 ```
 
 <br>
 
-```{r}
-# Return the first 20 ICD-10 codes associated with tuberculosis
-codex_icd10(term = "tuber", 
-            limit = 20) |> 
-            knitr::kable()
+## NLM's ICD-10-CM 2023 API
+
+Return the seven ICD-10-CM codes beginning with "A15"
+
+```{r results='asis', echo=TRUE}
+codex_icd10(code = "A15") |> gluedown::md_table()
 ```
 
 <br>
 
-```{r}
-# Return the two ICD-10 codes associated with pleurisy
-codex_icd10(term = "pleurisy") |> 
-            knitr::kable()
+Return the first 20 ICD-10-CM codes associated with tuberculosis
+
+```{r results='asis', echo=TRUE}
+codex_icd10(term = "tuber", limit = 20) |> gluedown::md_table()
+```
+<br>
+
+Return the two ICD-10-CM codes associated with pleurisy
+
+```{r results='asis', echo=TRUE}
+codex_icd10(term = "pleurisy") |> gluedown::md_table()
 ```
 
 <br>
 
-When searching for ICD-10 codes by letter, you must set the `field` param to "code" or it will search for *terms* containing the letter as well:
+When searching for ICD-10-CM codes by letter, you must set the `field` param to "code" or it will search for *terms* containing the letter as well. For example, without `field = "code"`, the following returns terms containing the letter "Z":
 
-<br>
-
-```{r}
-# Without field = "code", returns terms containing the letter "Z":
-codex_icd10(code = "Z", 
-            limit = 5) |> 
-            knitr::kable()
+```{r results='asis', echo=TRUE}
+codex_icd10(code = "Z", limit = 10) |> gluedown::md_table()
 ```
 
 <br>
 
-```{r}
-# With field = "code", returns only codes containing "Z":
-codex_icd10(code = "z", 
-            field = "code", 
-            limit = 5) |> 
-            knitr::kable()
+With `field = "code"`, it returns only codes containing "Z":
+
+```{r results='asis', echo=TRUE}
+codex_icd10(code = "z", field = "code", limit = 10) |> gluedown::md_table()
 ```
 
 <br>
 
 ### BMI Coding Example
 
+```{r results='asis', echo=TRUE}
+NHANES::NHANES |> 
+  janitor::clean_names() |> 
+  dplyr::select(age, weight, height, bmi, bmi_who) |> 
+  dplyr::filter(age > 20) |> 
+  dplyr::slice(1:100) |> 
+  dplyr::arrange(age) |> 
+  gluedown::md_table()
+```
+
 <br>
 
+```{r results='asis', echo=TRUE}
+codex_icd10(term = "bmi adult", limit = 30) |> gluedown::md_table()
+```
+<br>
 
-```{r}
-codex_icd10(term = "bmi adult", 
-            limit = 30) |> 
-            knitr::kable()
+## NLM's MedlinePlus Connect API
+
+```{r results='asis', echo=TRUE}
+rx <- codex_medline(code_title = "Chantix 0.5 MG Oral Tablet", 
+              code_system = "rxcui")
+
+rx |> 
+  dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
 ```
 
 
-## Medicare Fee-for-Service Comprehensive Error Rate Testing API
+
+```{r results='asis', echo=TRUE}
+sno <- codex_medline(code = "41381004", 
+              code_title = "Pneumonia due to Pseudomonas", 
+              code_system = "snomed")
+
+sno |> 
+  dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
 
 <br>
 
-```{r}
+## Medicare Fee-for-Service Comprehensive Error Rate Testing API
+
+```{r results='asis', echo=TRUE}
 codex_cert(hcpcs = "92002", 
            decision = "Disagree") |> 
-           knitr::kable()
+  dplyr::select(-type_of_bill, -drg) |> 
+           gluedown::md_table()
 ```
 
 
@@ -121,33 +151,30 @@ codex_cert(hcpcs = "92002",
 
 ## NCCI Procedure-to-Procedure Edits (PTP) API
 
-<br>
-
-```{r}
+```{r results='asis', echo=TRUE}
 codex_ptp() |> 
-     head() |> 
-     knitr::kable()
+  head() |> 
+  dplyr::select(-record_number) |> 
+  gluedown::md_table()
 ```
 
 <br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 codex_ptp(explain = TRUE) |> 
-                   head() |> 
-                   knitr::kable()
+  head() |> 
+  dplyr::select(-record_number) |> 
+  gluedown::md_table()
 ```
-
 
 <br>
 
 ## NCCI Medically Unlikely Edits (MUEs) API
 
-<br>
-
-```{r}
+```{r results='asis', echo=TRUE}
 codex_mue() |> 
      head() |> 
-     knitr::kable()
+     gluedown::md_table()
 ```
 
 <br>

@@ -2,5 +2,6 @@
 
 export(codex_cert)
 export(codex_icd10)
+export(codex_medline)
 export(codex_mue)
 export(codex_ptp)
