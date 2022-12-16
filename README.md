@@ -154,122 +154,9 @@ codex_icd10(code = "z", field = "code", limit = 10) |> gluedown::md_table()
 ### BMI Coding Example
 
 ``` r
-NHANES::NHANES |> 
-  janitor::clean_names() |> 
-  dplyr::select(age, weight, height, bmi, bmi_who) |> 
-  dplyr::filter(age > 20) |> 
-  dplyr::slice(1:100) |> 
-  dplyr::arrange(age) |> 
+codex_icd10(term = "bmi adult", 
+            limit = 30) |> 
   gluedown::md_table()
-```
-
-| age | weight | height |   bmi | bmi_who      |
-|----:|-------:|-------:|------:|:-------------|
-|  21 |  103.5 |  166.5 | 37.33 | 30.0_plus    |
-|  21 |  103.5 |  166.5 | 37.33 | 30.0_plus    |
-|  25 |   86.3 |  178.6 | 27.06 | 25.0_to_29.9 |
-|  26 |   64.9 |  175.8 | 21.00 | 18.5_to_24.9 |
-|  26 |   67.9 |  162.0 | 25.87 | 25.0_to_29.9 |
-|  26 |   67.9 |  162.0 | 25.87 | 25.0_to_29.9 |
-|  26 |   67.9 |  162.0 | 25.87 | 25.0_to_29.9 |
-|  26 |   66.7 |  171.0 | 22.81 | 18.5_to_24.9 |
-|  27 |   69.9 |  165.5 | 25.52 | 25.0_to_29.9 |
-|  28 |   78.2 |  175.3 | 25.45 | 25.0_to_29.9 |
-|  28 |  134.3 |  169.6 | 46.69 | 30.0_plus    |
-|  29 |   87.8 |  164.4 | 32.49 | 30.0_plus    |
-|  29 |   87.8 |  164.4 | 32.49 | 30.0_plus    |
-|  29 |   87.8 |  164.4 | 32.49 | 30.0_plus    |
-|  29 |   94.1 |  174.5 | 30.90 | 30.0_plus    |
-|  29 |   94.1 |  174.5 | 30.90 | 30.0_plus    |
-|  29 |   94.1 |  174.5 | 30.90 | 30.0_plus    |
-|  29 |   94.1 |  174.5 | 30.90 | 30.0_plus    |
-|  29 |   92.3 |  181.8 | 27.93 | 25.0_to_29.9 |
-|  30 |  125.8 |  186.2 | 36.28 | 30.0_plus    |
-|  30 |   88.4 |  175.8 | 28.60 | 25.0_to_29.9 |
-|  30 |   54.0 |  162.4 | 20.47 | 18.5_to_24.9 |
-|  30 |   54.0 |  162.4 | 20.47 | 18.5_to_24.9 |
-|  30 |   54.0 |  162.4 | 20.47 | 18.5_to_24.9 |
-|  31 |   64.9 |  149.7 | 28.96 | 25.0_to_29.9 |
-|  31 |   64.9 |  149.7 | 28.96 | 25.0_to_29.9 |
-|  31 |  129.3 |  162.6 | 48.91 | 30.0_plus    |
-|  32 |   60.3 |  173.0 | 20.15 | 18.5_to_24.9 |
-|  33 |   93.8 |  181.3 | 28.54 | 25.0_to_29.9 |
-|  34 |   87.4 |  164.7 | 32.22 | 30.0_plus    |
-|  34 |   87.4 |  164.7 | 32.22 | 30.0_plus    |
-|  34 |   87.4 |  164.7 | 32.22 | 30.0_plus    |
-|  34 |   76.6 |  173.8 | 25.36 | 25.0_to_29.9 |
-|  34 |   76.6 |  173.8 | 25.36 | 25.0_to_29.9 |
-|  34 |   76.6 |  173.8 | 25.36 | 25.0_to_29.9 |
-|  35 |   58.8 |  169.8 | 20.39 | 18.5_to_24.9 |
-|  36 |   79.2 |  174.7 | 25.95 | 25.0_to_29.9 |
-|  37 |   50.7 |  154.8 | 21.16 | 18.5_to_24.9 |
-|  38 |  117.3 |  180.9 | 35.84 | 30.0_plus    |
-|  38 |   78.9 |  174.5 | 25.91 | 25.0_to_29.9 |
-|  38 |   78.9 |  174.5 | 25.91 | 25.0_to_29.9 |
-|  38 |   78.9 |  174.5 | 25.91 | 25.0_to_29.9 |
-|  41 |   91.1 |  176.9 | 29.11 | 25.0_to_29.9 |
-|  43 |  136.3 |  185.0 | 39.82 | 30.0_plus    |
-|  43 |  136.3 |  185.0 | 39.82 | 30.0_plus    |
-|  44 |   86.5 |  165.9 | 31.43 | 30.0_plus    |
-|  44 |   86.5 |  165.9 | 31.43 | 30.0_plus    |
-|  44 |   84.6 |  182.0 | 25.54 | 25.0_to_29.9 |
-|  44 |   57.8 |  155.1 | 24.03 | 18.5_to_24.9 |
-|  44 |   57.8 |  155.1 | 24.03 | 18.5_to_24.9 |
-|  44 |   57.8 |  155.1 | 24.03 | 18.5_to_24.9 |
-|  44 |   57.8 |  155.1 | 24.03 | 18.5_to_24.9 |
-|  45 |   75.7 |  166.7 | 27.24 | 25.0_to_29.9 |
-|  45 |   75.7 |  166.7 | 27.24 | 25.0_to_29.9 |
-|  45 |   75.7 |  166.7 | 27.24 | 25.0_to_29.9 |
-|  46 |   60.0 |  148.2 | 27.32 | 25.0_to_29.9 |
-|  49 |   86.7 |  168.4 | 30.57 | 30.0_plus    |
-|  49 |   87.6 |  173.4 | 29.13 | 25.0_to_29.9 |
-|  50 |   84.1 |  177.8 | 26.60 | 25.0_to_29.9 |
-|  50 |   85.2 |  169.0 | 29.83 | 25.0_to_29.9 |
-|  50 |   97.9 |  155.1 | 40.70 | 30.0_plus    |
-|  50 |   87.2 |  171.5 | 29.65 | 25.0_to_29.9 |
-|  51 |   82.1 |  163.8 | 30.60 | 30.0_plus    |
-|  51 |   82.1 |  163.8 | 30.60 | 30.0_plus    |
-|  54 |   74.7 |  169.4 | 26.03 | 25.0_to_29.9 |
-|  54 |  113.9 |  177.1 | 36.32 | 30.0_plus    |
-|  54 |  113.9 |  177.1 | 36.32 | 30.0_plus    |
-|  54 |   53.9 |  160.1 | 21.03 | 18.5_to_24.9 |
-|  54 |   53.9 |  160.1 | 21.03 | 18.5_to_24.9 |
-|  54 |   53.9 |  160.1 | 21.03 | 18.5_to_24.9 |
-|  56 |   57.5 |  170.7 | 19.73 | 18.5_to_24.9 |
-|  56 |   57.5 |  170.7 | 19.73 | 18.5_to_24.9 |
-|  56 |   72.7 |  170.6 | 24.98 | 25.0_to_29.9 |
-|  56 |   67.8 |  154.3 | 28.48 | 25.0_to_29.9 |
-|  56 |   67.8 |  154.3 | 28.48 | 25.0_to_29.9 |
-|  57 |   51.0 |  157.1 | 20.66 | 18.5_to_24.9 |
-|  58 |   78.4 |  181.9 | 23.69 | 18.5_to_24.9 |
-|  58 |   57.5 |  148.1 | 26.22 | 25.0_to_29.9 |
-|  58 |  106.0 |  167.2 | 37.92 | 30.0_plus    |
-|  58 |  106.0 |  167.2 | 37.92 | 30.0_plus    |
-|  58 |  106.0 |  167.2 | 37.92 | 30.0_plus    |
-|  58 |   94.0 |  179.2 | 29.27 | 25.0_to_29.9 |
-|  59 |   54.3 |  145.1 | 25.79 | 25.0_to_29.9 |
-|  59 |   54.3 |  145.1 | 25.79 | 25.0_to_29.9 |
-|  60 |   74.6 |  169.9 | 25.84 | 25.0_to_29.9 |
-|  61 |   61.8 |  147.6 | 28.37 | 25.0_to_29.9 |
-|  63 |   75.2 |  150.6 | 33.16 | 30.0_plus    |
-|  63 |   87.8 |  178.8 | 27.46 | 25.0_to_29.9 |
-|  64 |   62.8 |  152.0 | 27.18 | 25.0_to_29.9 |
-|  66 |   68.0 |  169.5 | 23.67 | 18.5_to_24.9 |
-|  66 |   68.9 |  155.2 | 28.60 | 25.0_to_29.9 |
-|  66 |   68.9 |  155.2 | 28.60 | 25.0_to_29.9 |
-|  70 |   86.0 |  145.8 | 40.46 | 30.0_plus    |
-|  76 |   85.2 |  163.4 | 31.91 | 30.0_plus    |
-|  78 |   51.6 |  151.0 | 22.63 | 18.5_to_24.9 |
-|  80 |   66.9 |  156.7 | 27.25 | 25.0_to_29.9 |
-|  80 |   66.9 |  156.7 | 27.25 | 25.0_to_29.9 |
-|  80 |   51.4 |  169.6 | 17.87 | 12.0_18.5    |
-|  80 |   95.5 |  167.5 | 34.04 | 30.0_plus    |
-|  80 |   82.8 |  168.0 | 29.34 | 25.0_to_29.9 |
-
-<br>
-
-``` r
-codex_icd10(term = "bmi adult", limit = 30) |> gluedown::md_table()
 ```
 
 | icd_10_cm_code | icd_10_cm_term                               |
@@ -303,6 +190,43 @@ codex_icd10(term = "bmi adult", limit = 30) |> gluedown::md_table()
 
 <br>
 
+``` r
+NHANES::NHANES |> 
+  janitor::clean_names() |> 
+  dplyr::filter(age >= 20) |> 
+  dplyr::select(id, gender, age, weight, height) |> 
+  dplyr::slice_sample(n = 20) |> 
+  dplyr::mutate(bmi = codexchain:::calc_bmi(wt = weight, ht = height),
+                icd_10_code = codexchain:::assign_bmi_icd(bmi),
+                bmi_status = codexchain:::assign_bmi_status(bmi)) |> 
+  gluedown::md_table()
+```
+
+|    id | gender | age | weight | height |      bmi | icd_10_code | bmi_status     |
+|------:|:-------|----:|-------:|-------:|---------:|:------------|:---------------|
+| 70689 | male   |  56 |   68.9 |  162.6 | 26.06022 | Z68.26      | Overweight     |
+| 60594 | male   |  20 |   53.0 |  169.7 | 18.40400 | Z68.1       | Underweight    |
+| 62231 | female |  48 |   90.1 |  164.7 | 33.21526 | Z68.33      | Obese          |
+| 59368 | male   |  22 |   71.9 |  162.4 | 27.26195 | Z68.27      | Overweight     |
+| 66205 | female |  28 |  120.0 |  172.2 | 40.46830 | Z68.41      | Obese          |
+| 60803 | male   |  53 |   80.7 |  174.0 | 26.65478 | Z68.26      | Overweight     |
+| 57116 | male   |  24 |   79.3 |  178.1 | 25.00031 | Z68.25      | NA             |
+| 58725 | male   |  49 |  134.8 |  183.4 | 40.07663 | Z68.41      | Obese          |
+| 61326 | female |  57 |   81.4 |  169.3 | 28.39949 | Z68.28      | Overweight     |
+| 63071 | female |  53 |   77.7 |  161.3 | 29.86430 | Z68.29      | Overweight     |
+| 63089 | female |  43 |   82.2 |  164.7 | 30.30293 | Z68.30      | Obese          |
+| 57606 | female |  54 |  126.2 |  176.0 | 40.74122 | Z68.41      | Obese          |
+| 66915 | male   |  51 |  109.4 |  184.4 | 32.17329 | Z68.32      | Obese          |
+| 52948 | male   |  36 |  100.3 |  175.6 | 32.52759 | Z68.32      | Obese          |
+| 65217 | female |  22 |   47.3 |  158.7 | 18.78051 | Z68.1       | Healthy Weight |
+| 55885 | female |  54 |   62.5 |  149.9 | 27.81485 | Z68.27      | Overweight     |
+| 53746 | female |  38 |  119.4 |  171.3 | 40.69018 | Z68.41      | Obese          |
+| 52185 | male   |  33 |   93.4 |  165.4 | 34.14097 | Z68.34      | Obese          |
+| 57543 | female |  28 |   54.6 |  147.4 | 25.13030 | Z68.25      | Overweight     |
+| 61015 | female |  22 |   58.1 |  159.6 | 22.80922 | Z68.22      | Healthy Weight |
+
+<br>
+
 ## NLM’s MedlinePlus Connect API
 
 ``` r
@@ -310,25 +234,21 @@ rx <- codex_medline(code_title = "Chantix 0.5 MG Oral Tablet",
               code_system = "rxcui")
 
 rx |> 
-  dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
+  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
   dplyr::mutate(dplyr::across(everything(), as.character)) |> 
   tidyr::pivot_longer(cols = dplyr::everything()) |> 
   gluedown::md_table()
 ```
 
-| name                | value                                                                                           |
-|:--------------------|:------------------------------------------------------------------------------------------------|
-| updated             | 2022-12-13 22:48:07                                                                             |
-| entry_title         | Varenicline                                                                                     |
-| source              | U.S. National Library of Medicine                                                               |
-| search_description  | , RXNORM, Chantix 0.5 MG Oral Tablet, PAT                                                       |
-| results_description | MedlinePlus Connect results for RXCUI                                                           |
-| entry_link          | <https://medlineplus.gov/druginfo/meds/a606024.html?utm_source=mplusconnect&utm_medium=service> |
-| entry_summary       | Varenicline is used along with education and counseling to help people stop                     |
-
-smoking. Varenicline is in a class of medications called smoking
-cessation aids. It works by blocking the pleasant effects of nicotine
-(from smoking) on the brain. \|
+| name                | value                                                                                                                                                                                                                                           |
+|:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| updated             | 2022-12-16 01:22:46                                                                                                                                                                                                                             |
+| entry_title         | Varenicline                                                                                                                                                                                                                                     |
+| source              | U.S. National Library of Medicine                                                                                                                                                                                                               |
+| search_description  | , RXNORM, Chantix 0.5 MG Oral Tablet, PAT                                                                                                                                                                                                       |
+| results_description | MedlinePlus Connect results for RXCUI                                                                                                                                                                                                           |
+| entry_link          | <https://medlineplus.gov/druginfo/meds/a606024.html?utm_source=mplusconnect&utm_medium=service>                                                                                                                                                 |
+| entry_summary       | Varenicline is used along with education and counseling to help people stop smoking. Varenicline is in a class of medications called smoking cessation aids. It works by blocking the pleasant effects of nicotine (from smoking) on the brain. |
 
 ``` r
 sno <- codex_medline(code = "41381004", 
@@ -336,7 +256,7 @@ sno <- codex_medline(code = "41381004",
               code_system = "snomed")
 
 sno |> 
-  dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
+  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
   dplyr::mutate(dplyr::across(everything(), as.character)) |> 
   tidyr::pivot_longer(cols = dplyr::everything()) |> 
   gluedown::md_table()
@@ -344,96 +264,198 @@ sno |>
 
 | name                | value                                                                               |
 |:--------------------|:------------------------------------------------------------------------------------|
-| updated             | 2022-12-13 22:48:07                                                                 |
+| updated             | 2022-12-16 01:22:46                                                                 |
 | entry_title         | Pneumonia                                                                           |
 | source              | U.S. National Library of Medicine                                                   |
 | search_description  | 41381004, SNOMEDCT, Pneumonia due to Pseudomonas, PAT                               |
 | results_description | MedlinePlus Connect results for SNOMED CT 41381004                                  |
 | entry_link          | <https://medlineplus.gov/pneumonia.html?utm_source=mplusconnect&utm_medium=service> |
-| entry_summary       | What is pneumonia? Pneumonia is an infection in one or both of the lungs. It        |
+| entry_summary       | What is pneumonia?                                                                  |
 
-causes the air sacs of the lungs to fill up with fluid or pus. It can
-range from mild to severe, depending on the type of germ causing the
-infection, your age, and your overall health. What causes pneumonia?
-Bacterial, viral, and fungal infections can cause pneumonia. Bacteria
-are the most common cause. Bacterial pneumonia can occur on its own. It
-can also develop after you’ve had certain viral infections such as a
-cold or the flu. Several different types of bacteria can cause
-pneumonia, including: • Streptococcus pneumoniae • Legionella
-pneumophila; this pneumonia is often called Legionnaires’ disease •
-Mycoplasma pneumoniae • Chlamydia pneumoniae • Haemophilus influenzae
+Pneumonia is an infection in one or both of the lungs. It causes the air
+sacs of the lungs to fill up with fluid or pus. It can range from mild
+to severe, depending on the type of germ causing the infection, your
+age, and your overall health.
+
+What causes pneumonia?
+
+Bacterial, viral, and fungal infections can cause pneumonia.
+
+Bacteria are the most common cause. Bacterial pneumonia can occur on its
+own. It can also develop after you’ve had certain viral infections such
+as a cold or the flu. Several different types of bacteria can cause
+pneumonia, including:
+
+• Streptococcus pneumoniae
+
+• Legionella pneumophila; this pneumonia is often called Legionnaires’
+disease
+
+• Mycoplasma pneumoniae
+
+• Chlamydia pneumoniae
+
+• Haemophilus influenzae
+
 Viruses that infect the respiratory tract may cause pneumonia. Viral
 pneumonia is often mild and goes away on its own within a few weeks. But
 sometimes it is serious enough that you need to get treatment in a
 hospital. If you have viral pneumonia, you are at risk of also getting
 bacterial pneumonia. The different viruses that can cause pneumonia
-include: • Respiratory syncytial virus (RSV) • Some common cold and flu
-viruses • SARS-CoV-2, the virus that causes COVID-19 Fungal pneumonia is
-more common in people who have chronic health problems or weakened
-immune systems. Some of the types include: • Pneumocystis pneumonia
-(PCP) • Coccidioidomycosis, which causes valley fever • Histoplasmosis •
-Cryptococcus Who is at risk for pneumonia? Anyone can get pneumonia, but
-certain factors can increase your risk: • Age; the risk is higher for
-children who are age 2 and under and adults age 65 and older • Exposure
-to certain chemicals, pollutants, or toxic fumes • Lifestyle habits,
-such as smoking, heavy alcohol use, and malnourishment • Being in a
-hospital, especially if you are in the ICU. Being sedated and/or on a
-ventilator raises the risk even more. • Having a lung disease • Having a
-weakened immune system • Have trouble coughing or swallowing, from a
-stroke or other condition • Recently being sick with a cold or the flu
-What are the symptoms of pneumonia? The symptoms of pneumonia can range
-from mild to severe and include: • Fever • Chills • Cough, usually with
-phlegm (a slimy substance from deep in your lungs) • Shortness of breath
-• Chest pain when you breathe or cough • Nausea and/or vomiting •
-Diarrhea The symptoms can vary for different groups. Newborns and
-infants may not show any signs of the infection. Others may vomit and
-have a fever and cough. They might seem sick, with no energy, or be
-restless. Older adults and people who have serious illnesses or weak
-immune systems may have fewer and milder symptoms. They may even have a
-lower than normal temperature. Older adults who have pneumonia sometimes
-have sudden changes in mental awareness. What other problems can
-pneumonia cause? Sometimes pneumonia can cause serious complications
-such as: • Bacteremia, which happens when the bacteria move into the
-bloodstream. It is serious and can lead to septic shock. • Lung
-abscesses, which are collections of pus in cavities of the lungs •
-Pleural disorders, which are conditions that affect the pleura. The
+include:
+
+• Respiratory syncytial virus (RSV)
+
+• Some common cold and flu viruses
+
+• SARS-CoV-2, the virus that causes COVID-19
+
+Fungal pneumonia is more common in people who have chronic health
+problems or weakened immune systems. Some of the types include:
+
+• Pneumocystis pneumonia (PCP)
+
+• Coccidioidomycosis, which causes valley fever
+
+• Histoplasmosis
+
+• Cryptococcus
+
+Who is at risk for pneumonia?
+
+Anyone can get pneumonia, but certain factors can increase your risk:
+
+• Age; the risk is higher for children who are age 2 and under and
+adults age 65 and older
+
+• Exposure to certain chemicals, pollutants, or toxic fumes
+
+• Lifestyle habits, such as smoking, heavy alcohol use, and
+malnourishment
+
+• Being in a hospital, especially if you are in the ICU. Being sedated
+and/or on a ventilator raises the risk even more.
+
+• Having a lung disease
+
+• Having a weakened immune system
+
+• Have trouble coughing or swallowing, from a stroke or other condition
+
+• Recently being sick with a cold or the flu
+
+What are the symptoms of pneumonia?
+
+The symptoms of pneumonia can range from mild to severe and include:
+
+• Fever
+
+• Chills
+
+• Cough, usually with phlegm (a slimy substance from deep in your lungs)
+
+• Shortness of breath
+
+• Chest pain when you breathe or cough
+
+• Nausea and/or vomiting
+
+• Diarrhea
+
+The symptoms can vary for different groups. Newborns and infants may not
+show any signs of the infection. Others may vomit and have a fever and
+cough. They might seem sick, with no energy, or be restless.
+
+Older adults and people who have serious illnesses or weak immune
+systems may have fewer and milder symptoms. They may even have a lower
+than normal temperature. Older adults who have pneumonia sometimes have
+sudden changes in mental awareness.
+
+What other problems can pneumonia cause?
+
+Sometimes pneumonia can cause serious complications such as:
+
+• Bacteremia, which happens when the bacteria move into the bloodstream.
+It is serious and can lead to septic shock.
+
+• Lung abscesses, which are collections of pus in cavities of the lungs
+
+• Pleural disorders, which are conditions that affect the pleura. The
 pleura is the tissue that covers the outside of the lungs and lines the
-inside of your chest cavity. • Kidney failure • Respiratory failure How
-is pneumonia diagnosed? Sometimes pneumonia can be hard to diagnose.
-This is because it can cause some of the same symptoms as a cold or the
-flu. It may take time for you to realize that you have a more serious
-condition. Your health care provider may use many tools to make a
-diagnosis: • A medical history, which includes asking about your
-symptoms • A physical exam, including listening to your lungs with a
-stethoscope • Various tests, such as • A chest x-ray • Blood tests such
-as a complete blood count (CBC) to see if your immune system is actively
-fighting an infection • A Blood culture to find out whether you have a
-bacterial infection that has spread to your bloodstream If you are in
-the hospital, have serious symptoms, are older, or have other health
-problems, you may also have more tests, such as: • Sputum test, which
-checks for bacteria in a sample of your sputum (spit) or phlegm (slimy
-substance from deep in your lungs). • Chest CT scan to see how much of
-your lungs is affected. It may also show if you have complications such
-as lung abscesses or pleural effusions. • Pleural fluid culture, which
-checks for bacteria in a fluid sample that was taken from the pleural
-space • Pulse oximetry or blood oxygen level test, to check how much
-oxygen is in your blood • Bronchoscopy, a procedure used to look inside
-your lungs’ airways What are the treatments for pneumonia? Treatment for
-pneumonia depends on the type of pneumonia, which germ is causing it,
-and how severe it is: • Antibiotics treat bacterial pneumonia and some
-types of fungal pneumonia. They do not work for viral pneumonia. • In
-some cases, your provider may prescribe antiviral medicines for viral
-pneumonia • Antifungal medicines treat other types of fungal pneumonia
+inside of your chest cavity.
+
+• Kidney failure
+
+• Respiratory failure
+
+How is pneumonia diagnosed?
+
+Sometimes pneumonia can be hard to diagnose. This is because it can
+cause some of the same symptoms as a cold or the flu. It may take time
+for you to realize that you have a more serious condition.
+
+Your health care provider may use many tools to make a diagnosis:
+
+• A medical history, which includes asking about your symptoms
+
+• A physical exam, including listening to your lungs with a stethoscope
+
+• Various tests, such as
+
+• A chest x-ray
+
+• Blood tests such as a complete blood count (CBC) to see if your immune
+system is actively fighting an infection
+
+• A Blood culture to find out whether you have a bacterial infection
+that has spread to your bloodstream
+
+If you are in the hospital, have serious symptoms, are older, or have
+other health problems, you may also have more tests, such as:
+
+• Sputum test, which checks for bacteria in a sample of your sputum
+(spit) or phlegm (slimy substance from deep in your lungs).
+
+• Chest CT scan to see how much of your lungs is affected. It may also
+show if you have complications such as lung abscesses or pleural
+effusions.
+
+• Pleural fluid culture, which checks for bacteria in a fluid sample
+that was taken from the pleural space
+
+• Pulse oximetry or blood oxygen level test, to check how much oxygen is
+in your blood
+
+• Bronchoscopy, a procedure used to look inside your lungs’ airways
+
+What are the treatments for pneumonia?
+
+Treatment for pneumonia depends on the type of pneumonia, which germ is
+causing it, and how severe it is:
+
+• Antibiotics treat bacterial pneumonia and some types of fungal
+pneumonia. They do not work for viral pneumonia.
+
+• In some cases, your provider may prescribe antiviral medicines for
+viral pneumonia
+
+• Antifungal medicines treat other types of fungal pneumonia
+
 You may need to be treated in a hospital if your symptoms are severe or
 if you are at risk for complications. While there, you may get
 additional treatments. For example, if your blood oxygen level is low,
-you may receive oxygen therapy. It may take time to recover from
-pneumonia. Some people feel better within a week. For other people, it
-can take a month or more. Can pneumonia be prevented? Vaccines can help
-prevent pneumonia caused by pneumococcal bacteria or the flu virus.
-Having good hygiene, not smoking, and having a healthy lifestyle may
-also help prevent pneumonia. NIH: National Heart, Lung, and Blood
-Institute \|
+you may receive oxygen therapy.
+
+It may take time to recover from pneumonia. Some people feel better
+within a week. For other people, it can take a month or more.
+
+Can pneumonia be prevented?
+
+Vaccines can help prevent pneumonia caused by pneumococcal bacteria or
+the flu virus. Having good hygiene, not smoking, and having a healthy
+lifestyle may also help prevent pneumonia.
+
+NIH: National Heart, Lung, and Blood Institute \|
 
 <br>
 

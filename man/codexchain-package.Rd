@@ -6,7 +6,7 @@
 \alias{codexchain-package}
 \title{codexchain: Access Public Medical Coding Data APIs}
 \description{
-What the package does (one paragraph).
+The goal of codexchain is to provide access to a variety of public medical coding APIs.
 }
 \seealso{
 Useful links:
@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Andrew Bruce \email{andrewbruce.himni@gmail.com}
+\strong{Maintainer}: Andrew Bruce \email{andrewbruce.himni@gmail.com} [copyright holder]
 
 }
 \keyword{internal}

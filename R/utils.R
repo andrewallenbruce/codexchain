@@ -284,10 +284,59 @@ medline_format <- function(param, arg) {
     x <- gsub(" ", "%20", arg)
     paste0(param, x, "&")}}
 
+
+# assign_bmi_icd ----------------------------------------------------------
+#' @param bmi body mass index
+#' @return vector of assigned icd bmi codes
+#' @autoglobal
+#' @noRd
+assign_bmi_icd <- function(bmi) {
+  dplyr::case_when(bmi >= 70 ~ "Z68.45",
+                   bmi <= 19.999 ~ "Z68.1",
+                   bmi >= 20.0 & bmi <= 20.999 ~ "Z68.20",
+                   bmi >= 21.0 & bmi <= 21.999 ~ "Z68.21",
+                   bmi >= 22.0 & bmi <= 22.999 ~ "Z68.22",
+                   bmi >= 23.0 & bmi <= 23.999 ~ "Z68.23",
+                   bmi >= 24.0 & bmi <= 24.999 ~ "Z68.24",
+                   bmi >= 25.0 & bmi <= 25.999 ~ "Z68.25",
+                   bmi >= 26.0 & bmi <= 26.999 ~ "Z68.26",
+                   bmi >= 27.0 & bmi <= 27.999 ~ "Z68.27",
+                   bmi >= 28.0 & bmi <= 28.999 ~ "Z68.28",
+                   bmi >= 29.0 & bmi <= 29.999 ~ "Z68.29",
+                   bmi >= 30.0 & bmi <= 30.999 ~ "Z68.30",
+                   bmi >= 31.0 & bmi <= 31.999 ~ "Z68.31",
+                   bmi >= 32.0 & bmi <= 32.999 ~ "Z68.32",
+                   bmi >= 33.0 & bmi <= 33.999 ~ "Z68.33",
+                   bmi >= 34.0 & bmi <= 34.999 ~ "Z68.34",
+                   bmi >= 35.0 & bmi <= 35.999 ~ "Z68.35",
+                   bmi >= 36.0 & bmi <= 36.999 ~ "Z68.36",
+                   bmi >= 37.0 & bmi <= 37.999 ~ "Z68.37",
+                   bmi >= 38.0 & bmi <= 38.999 ~ "Z68.38",
+                   bmi >= 39.0 & bmi <= 39.999 ~ "Z68.39",
+                   bmi >= 40.0 & bmi <= 44.999 ~ "Z68.41",
+                   bmi >= 45.0 & bmi <= 49.999 ~ "Z68.42",
+                   bmi >= 50.0 & bmi <= 59.999 ~ "Z68.43",
+                   bmi >= 60.0 & bmi <= 69.999 ~ "Z68.44",
+                   TRUE ~ NA)
+}
+
+# assign_bmi_status -------------------------------------------------------
+#' @param bmi body mass index
+#' @return vector of assigned bmi statuses
+#' @autoglobal
+#' @noRd
+assign_bmi_status <- function(bmi) {
+  dplyr::case_when(bmi < 18.54 ~ "Underweight",
+                   bmi >= 18.55 & bmi <= 24.999 ~ "Healthy Weight",
+                   bmi >= 25.04 & bmi <= 29.999 ~ "Overweight",
+                   bmi >= 30 ~ "Obese",
+                   TRUE ~ NA)
+}
+
 #' Calculate Body Mass Index (BMI)
 #' @param wt weight in kg
 #' @param ht height in cm
-#' @return BMI value (kg/m2)
+#' @return vector of BMI values (kg/m2)
 #' @examples
 #' calc_bmi(wt = 70, ht = 160)
 #' @autoglobal

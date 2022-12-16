@@ -90,20 +90,25 @@ codex_icd10(code = "z", field = "code", limit = 10) |> gluedown::md_table()
 ### BMI Coding Example
 
 ```{r results='asis', echo=TRUE}
-NHANES::NHANES |> 
-  janitor::clean_names() |> 
-  dplyr::select(age, weight, height, bmi, bmi_who) |> 
-  dplyr::filter(age > 20) |> 
-  dplyr::slice(1:100) |> 
-  dplyr::arrange(age) |> 
+codex_icd10(term = "bmi adult", 
+            limit = 30) |> 
   gluedown::md_table()
 ```
 
 <br>
 
 ```{r results='asis', echo=TRUE}
-codex_icd10(term = "bmi adult", limit = 30) |> gluedown::md_table()
+NHANES::NHANES |> 
+  janitor::clean_names() |> 
+  dplyr::filter(age >= 20) |> 
+  dplyr::select(id, gender, age, weight, height) |> 
+  dplyr::slice_sample(n = 20) |> 
+  dplyr::mutate(bmi = codexchain:::calc_bmi(wt = weight, ht = height),
+                icd_10_code = codexchain:::assign_bmi_icd(bmi),
+                bmi_status = codexchain:::assign_bmi_status(bmi)) |> 
+  gluedown::md_table()
 ```
+
 <br>
 
 ## NLM's MedlinePlus Connect API
@@ -113,7 +118,7 @@ rx <- codex_medline(code_title = "Chantix 0.5 MG Oral Tablet",
               code_system = "rxcui")
 
 rx |> 
-  dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
+  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
   dplyr::mutate(dplyr::across(everything(), as.character)) |> 
   tidyr::pivot_longer(cols = dplyr::everything()) |> 
   gluedown::md_table()
@@ -127,7 +132,7 @@ sno <- codex_medline(code = "41381004",
               code_system = "snomed")
 
 sno |> 
-  dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
+  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
   dplyr::mutate(dplyr::across(everything(), as.character)) |> 
   tidyr::pivot_longer(cols = dplyr::everything()) |> 
   gluedown::md_table()
