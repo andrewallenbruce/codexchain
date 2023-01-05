@@ -7,7 +7,8 @@ Authors@R:
 Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
 Description: The goal of codexchain is to provide access to a variety of public medical coding APIs.
 License: GPL (>= 3)
-URL: https://github.com/andrewallenbruce/codexchain
+URL: https://github.com/andrewallenbruce/codexchain,
+    https://andrewallenbruce.github.io/codexchain/
 BugReports: https://github.com/andrewallenbruce/codexchain/issues
 Imports: 
     httr2,

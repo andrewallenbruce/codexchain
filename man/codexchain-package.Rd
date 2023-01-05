@@ -12,6 +12,7 @@ The goal of codexchain is to provide access to a variety of public medical codin
 Useful links:
 \itemize{
   \item \url{https://github.com/andrewallenbruce/codexchain}
+  \item \url{https://andrewallenbruce.github.io/codexchain/}
   \item Report bugs at \url{https://github.com/andrewallenbruce/codexchain/issues}
 }
 

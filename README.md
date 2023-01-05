@@ -32,15 +32,9 @@ devtools::install_github("andrewallenbruce/codexchain")
 remotes::install_github("andrewallenbruce/codexchain")
 ```
 
-<br>
-
-## Usage
-
 ``` r
 library(codexchain)
 ```
-
-<br>
 
 ## NLM’s ICD-10-CM 2023 API
 
@@ -204,26 +198,26 @@ NHANES::NHANES |>
 
 |    id | gender | age | weight | height |      bmi | icd_10_code | bmi_status     |
 |------:|:-------|----:|-------:|-------:|---------:|:------------|:---------------|
-| 70689 | male   |  56 |   68.9 |  162.6 | 26.06022 | Z68.26      | Overweight     |
-| 60594 | male   |  20 |   53.0 |  169.7 | 18.40400 | Z68.1       | Underweight    |
-| 62231 | female |  48 |   90.1 |  164.7 | 33.21526 | Z68.33      | Obese          |
-| 59368 | male   |  22 |   71.9 |  162.4 | 27.26195 | Z68.27      | Overweight     |
-| 66205 | female |  28 |  120.0 |  172.2 | 40.46830 | Z68.41      | Obese          |
-| 60803 | male   |  53 |   80.7 |  174.0 | 26.65478 | Z68.26      | Overweight     |
-| 57116 | male   |  24 |   79.3 |  178.1 | 25.00031 | Z68.25      | NA             |
-| 58725 | male   |  49 |  134.8 |  183.4 | 40.07663 | Z68.41      | Obese          |
-| 61326 | female |  57 |   81.4 |  169.3 | 28.39949 | Z68.28      | Overweight     |
-| 63071 | female |  53 |   77.7 |  161.3 | 29.86430 | Z68.29      | Overweight     |
-| 63089 | female |  43 |   82.2 |  164.7 | 30.30293 | Z68.30      | Obese          |
-| 57606 | female |  54 |  126.2 |  176.0 | 40.74122 | Z68.41      | Obese          |
-| 66915 | male   |  51 |  109.4 |  184.4 | 32.17329 | Z68.32      | Obese          |
-| 52948 | male   |  36 |  100.3 |  175.6 | 32.52759 | Z68.32      | Obese          |
-| 65217 | female |  22 |   47.3 |  158.7 | 18.78051 | Z68.1       | Healthy Weight |
-| 55885 | female |  54 |   62.5 |  149.9 | 27.81485 | Z68.27      | Overweight     |
-| 53746 | female |  38 |  119.4 |  171.3 | 40.69018 | Z68.41      | Obese          |
-| 52185 | male   |  33 |   93.4 |  165.4 | 34.14097 | Z68.34      | Obese          |
-| 57543 | female |  28 |   54.6 |  147.4 | 25.13030 | Z68.25      | Overweight     |
-| 61015 | female |  22 |   58.1 |  159.6 | 22.80922 | Z68.22      | Healthy Weight |
+| 59501 | female |  30 |   88.0 |  166.8 | 31.62937 | Z68.31      | Obese          |
+| 69617 | female |  25 |   71.6 |  165.1 | 26.26751 | Z68.26      | Overweight     |
+| 55324 | male   |  46 |  117.4 |  177.8 | 37.13681 | Z68.37      | Obese          |
+| 57058 | male   |  40 |   72.2 |  169.9 | 25.01212 | Z68.25      | NA             |
+| 59895 | female |  47 |   67.7 |  154.0 | 28.54613 | Z68.28      | Overweight     |
+| 71079 | male   |  34 |   68.0 |  174.8 | 22.25492 | Z68.22      | Healthy Weight |
+| 62222 | male   |  32 |   80.1 |  179.0 | 24.99922 | NA          | NA             |
+| 61917 | female |  44 |   54.3 |  171.6 | 18.44018 | Z68.1       | Underweight    |
+| 59826 | female |  67 |   50.2 |  156.5 | 20.49628 | Z68.20      | Healthy Weight |
+| 55822 | female |  54 |   56.2 |  162.1 | 21.38801 | Z68.21      | Healthy Weight |
+| 58319 | male   |  42 |   87.9 |  185.9 | 25.43490 | Z68.25      | Overweight     |
+| 52585 | female |  36 |   58.2 |  164.2 | 21.58622 | Z68.21      | Healthy Weight |
+| 53702 | male   |  38 |   76.2 |  177.2 | 24.26764 | Z68.24      | Healthy Weight |
+| 58234 | male   |  53 |   69.6 |  179.7 | 21.55327 | Z68.21      | Healthy Weight |
+| 68281 | male   |  27 |   63.4 |  168.4 | 22.35657 | Z68.22      | Healthy Weight |
+| 63211 | female |  46 |  112.2 |  165.9 | 40.76619 | Z68.41      | Obese          |
+| 71040 | male   |  63 |   85.1 |  168.8 | 29.86652 | Z68.29      | Overweight     |
+| 66165 | male   |  24 |  129.4 |  184.7 | 37.93154 | Z68.37      | Obese          |
+| 62205 | male   |  28 |   84.8 |  171.4 | 28.86518 | Z68.28      | Overweight     |
+| 60954 | male   |  30 |  129.4 |  181.5 | 39.28086 | Z68.39      | Obese          |
 
 <br>
 
@@ -242,7 +236,7 @@ rx |>
 
 | name                | value                                                                                                                                                                                                                                           |
 |:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| updated             | 2022-12-16 01:22:46                                                                                                                                                                                                                             |
+| updated             | 2023-01-05 17:33:33                                                                                                                                                                                                                             |
 | entry_title         | Varenicline                                                                                                                                                                                                                                     |
 | source              | U.S. National Library of Medicine                                                                                                                                                                                                               |
 | search_description  | , RXNORM, Chantix 0.5 MG Oral Tablet, PAT                                                                                                                                                                                                       |
@@ -264,7 +258,7 @@ sno |>
 
 | name                | value                                                                               |
 |:--------------------|:------------------------------------------------------------------------------------|
-| updated             | 2022-12-16 01:22:46                                                                 |
+| updated             | 2023-01-05 17:33:34                                                                 |
 | entry_title         | Pneumonia                                                                           |
 | source              | U.S. National Library of Medicine                                                   |
 | search_description  | 41381004, SNOMEDCT, Pneumonia due to Pseudomonas, PAT                               |
@@ -462,22 +456,24 @@ NIH: National Heart, Lung, and Blood Institute \|
 ## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 
 ``` r
-codex_cert(hcpcs = "92002", 
+codex_cert(hcpcs = "81595", 
            decision = "Disagree") |> 
   dplyr::select(-type_of_bill, -drg) |> 
            gluedown::md_table()
 ```
 
-| year | claim_control_number | part       | hcpcs_procedure_code | provider_type | review_decision | error_code                 |
-|-----:|---------------------:|:-----------|:---------------------|:--------------|:----------------|:---------------------------|
-| 2021 |              2134770 | 1\. Part B | 92002                | Optometry     | Disagree        | Other                      |
-| 2021 |              2136243 | 1\. Part B | 92002                | Ophthalmology | Disagree        | Insufficient Documentation |
-| 2021 |              2139556 | 1\. Part B | 92002                | Optometry     | Disagree        | Incorrect Coding           |
-| 2021 |              2142814 | 1\. Part B | 92002                | Ophthalmology | Disagree        | Incorrect Coding           |
-| 2021 |              2139587 | 1\. Part B | 92002                | Ophthalmology | Disagree        | Incorrect Coding           |
-| 2021 |              2146877 | 1\. Part B | 92002                | Optometry     | Disagree        | Incorrect Coding           |
-| 2021 |              2145036 | 1\. Part B | 92002                | Ophthalmology | Disagree        | Incorrect Coding           |
-| 2021 |              2145815 | 1\. Part B | 92002                | Optometry     | Disagree        | Incorrect Coding           |
+| year | claim_control_number | part       | hcpcs_procedure_code | provider_type                               | review_decision | error_code                 |
+|-----:|---------------------:|:-----------|:---------------------|:--------------------------------------------|:----------------|:---------------------------|
+| 2021 |              2233505 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2235257 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2250710 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2253897 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2260715 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2261152 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2261632 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2263045 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2264507 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 |              2266057 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
 
 <br>
 

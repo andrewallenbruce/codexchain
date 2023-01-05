@@ -35,16 +35,9 @@ devtools::install_github("andrewallenbruce/codexchain")
 # install.packages("remotes")
 remotes::install_github("andrewallenbruce/codexchain")
 ```
-
-<br>
-
-## Usage
-
 ```{r}
 library(codexchain)
 ```
-
-<br>
 
 ## NLM's ICD-10-CM 2023 API
 
@@ -144,7 +137,7 @@ sno |>
 ## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 
 ```{r results='asis', echo=TRUE}
-codex_cert(hcpcs = "92002", 
+codex_cert(hcpcs = "81595", 
            decision = "Disagree") |> 
   dplyr::select(-type_of_bill, -drg) |> 
            gluedown::md_table()
