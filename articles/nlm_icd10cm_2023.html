@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="codexchain">
-<title>NLM ICD-10-CM 2023 API • codexchain</title>
+<title>ICD-10-CM 2023 API (National Library of Medicine) • codexchain</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Lexend-0.4.4/font.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 <link href="../deps/Roboto-0.4.4/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="NLM ICD-10-CM 2023 API">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="ICD-10-CM 2023 API (National Library of Medicine)">
 <meta property="og:description" content="codexchain">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -44,7 +44,8 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/nlm_icd10cm_2023.html">NLM ICD-10-CM 2023 API</a>
+    <a class="dropdown-item" href="../articles/mcr_ffs_cert.html">Medicare Comprehensive Error Rate Testing (CERT)</a>
+    <a class="dropdown-item" href="../articles/nlm_icd10cm_2023.html">ICD-10-CM 2023 API (National Library of Medicine)</a>
   </div>
 </li>
 <li class="nav-item">
@@ -71,10 +72,10 @@
 
 
 
-
-<div class="row">
+<script src="nlm_icd10cm_2023_files/core-js-2.5.3/shim.min.js"></script><script src="nlm_icd10cm_2023_files/react-17.0.0/react.min.js"></script><script src="nlm_icd10cm_2023_files/react-17.0.0/react-dom.min.js"></script><script src="nlm_icd10cm_2023_files/reactwidget-1.0.0/react-tools.js"></script><script src="nlm_icd10cm_2023_files/htmlwidgets-1.6.0/htmlwidgets.js"></script><link href="nlm_icd10cm_2023_files/reactable-0.4.2/reactable.css" rel="stylesheet">
+<script src="nlm_icd10cm_2023_files/reactable-binding-0.4.2/reactable.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>NLM ICD-10-CM 2023 API</h1>
+      <img src="" class="logo" alt=""><h1>ICD-10-CM 2023 API (National Library of Medicine)</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/codexchain/blob/HEAD/vignettes/articles/nlm_icd10cm_2023.Rmd" class="external-link"><code>vignettes/articles/nlm_icd10cm_2023.Rmd</code></a></small>
@@ -86,474 +87,36 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/andrewallenbruce/codexchain" class="external-link">codexchain</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<blockquote>
-<p><em>Information on Providers That are Missing Digital Contact
-Information in the NPPES System.</em></p>
-</blockquote>
-<p><br></p>
 <p>ICD-10-CM (International Classification of Diseases, 10th Revision,
 Clinical Modification) is a medical coding system for classifying
 diagnoses and reasons for visits in U.S. health care settings.</p>
 <p><br></p>
-<div class="section level3">
-<h3 id="api-data-dictionary">API Data Dictionary<a class="anchor" aria-label="anchor" href="#api-data-dictionary"></a>
-</h3>
-<div id="sgknyfdvmp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#sgknyfdvmp .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D3D3D3;
-  border-right-style: solid;
-  border-right-width: 3px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: solid;
-  border-left-width: 3px;
-  border-left-color: #D3D3D3;
-}
-
-#sgknyfdvmp .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#sgknyfdvmp .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#sgknyfdvmp .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#sgknyfdvmp .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#sgknyfdvmp .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
-}
-
-#sgknyfdvmp .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D5D5D5;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #D5D5D5;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#sgknyfdvmp .gt_col_heading {
-  color: #FFFFFF;
-  background-color: #5F5F5F;
-  font-size: 12px;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#sgknyfdvmp .gt_column_spanner_outer {
-  color: #FFFFFF;
-  background-color: #5F5F5F;
-  font-size: 12px;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#sgknyfdvmp .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#sgknyfdvmp .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#sgknyfdvmp .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #D5D5D5;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#sgknyfdvmp .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D5D5D5;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#sgknyfdvmp .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D5D5D5;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
-  vertical-align: middle;
-}
-
-#sgknyfdvmp .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#sgknyfdvmp .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#sgknyfdvmp .gt_row {
-  padding-top: 7px;
-  padding-bottom: 7px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D5D5D5;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D5D5D5;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D5D5D5;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#sgknyfdvmp .gt_stub {
-  color: #FFFFFF;
-  background-color: #929292;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D5D5D5;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sgknyfdvmp .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#sgknyfdvmp .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#sgknyfdvmp .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sgknyfdvmp .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D5D5D5;
-}
-
-#sgknyfdvmp .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#sgknyfdvmp .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
-}
-
-#sgknyfdvmp .gt_grand_summary_row {
-  color: #FFFFFF;
-  background-color: #5F5F5F;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sgknyfdvmp .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D5D5D5;
-}
-
-#sgknyfdvmp .gt_striped {
-  background-color: #F4F4F4;
-}
-
-#sgknyfdvmp .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D5D5D5;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
-}
-
-#sgknyfdvmp .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#sgknyfdvmp .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sgknyfdvmp .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#sgknyfdvmp .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sgknyfdvmp .gt_left {
-  text-align: left;
-}
-
-#sgknyfdvmp .gt_center {
-  text-align: center;
-}
-
-#sgknyfdvmp .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#sgknyfdvmp .gt_font_normal {
-  font-weight: normal;
-}
-
-#sgknyfdvmp .gt_font_bold {
-  font-weight: bold;
-}
-
-#sgknyfdvmp .gt_font_italic {
-  font-style: italic;
-}
-
-#sgknyfdvmp .gt_super {
-  font-size: 65%;
-}
-
-#sgknyfdvmp .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#sgknyfdvmp .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#sgknyfdvmp .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#sgknyfdvmp .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#sgknyfdvmp .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#sgknyfdvmp .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#sgknyfdvmp .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table">
-<thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Variable">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Description">Description</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>npi</code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">National Provider Identifier</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">The provider's 10-digit National Provider Identifier.</span></div>
-</td>
-</tr>
-<tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>provider_name</code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Name</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Name of the provider. It consists of the legal last name 
-                 followed by the first name, separated by a comma.</span></div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><br></p>
-</div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<p>Returns a complete count of the 71 diagnoses that match the string
+‘tuberc’, displaying both the ICD-10-CM code and its associated term for
+the first 7 terms.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"tuberc"</span>, limit <span class="op">=</span> <span class="fl">500</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">reactable</span><span class="fu">::</span><span class="fu"><a href="https://glin.github.io/reactable/reference/reactable.html" class="external-link">reactable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-316da3771c9c6ff52464" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-316da3771c9c6ff52464">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"icd_10_cm_code":["A15.0","A15.4","A15.5","A15.6","A15.7","A15.8","A15.9","A17.0","A17.1","A17.81","A17.82","A17.83","A17.89","A17.9","A18.01","A18.02","A18.03","A18.09","A18.10","A18.11","A18.12","A18.13","A18.14","A18.15","A18.16","A18.17","A18.18","A18.2","A18.31","A18.32","A18.39","A18.4","A18.50","A18.51","A18.52","A18.53","A18.54","A18.59","A18.6","A18.7","A18.81","A18.82","A18.83","A18.84","A18.85","A18.89","A19.0","A19.1","A19.2","A19.8","A19.9","A30.1","A30.2","B90.0","B90.1","B90.2","B90.8","B90.9","J65","M92.521","M92.522","M92.523","M92.529","O98.011","O98.012","O98.013","O98.019","O98.02","O98.03","P37.0","R76.11","R76.12","Z11.1","Z11.7","Z20.1","Z22.7","Z86.11","Z86.15"],"icd_10_cm_term":["Tuberculosis of lung","Tuberculosis of intrathoracic lymph nodes","Tuberculosis of larynx, trachea and bronchus","Tuberculous pleurisy","Primary respiratory tuberculosis","Other respiratory tuberculosis","Respiratory tuberculosis unspecified","Tuberculous meningitis","Meningeal tuberculoma","Tuberculoma of brain and spinal cord","Tuberculous meningoencephalitis","Tuberculous neuritis","Other tuberculosis of nervous system","Tuberculosis of nervous system, unspecified","Tuberculosis of spine","Tuberculous arthritis of other joints","Tuberculosis of other bones","Other musculoskeletal tuberculosis","Tuberculosis of genitourinary system, unspecified","Tuberculosis of kidney and ureter","Tuberculosis of bladder","Tuberculosis of other urinary organs","Tuberculosis of prostate","Tuberculosis of other male genital organs","Tuberculosis of cervix","Tuberculous female pelvic inflammatory disease","Tuberculosis of other female genital organs","Tuberculous peripheral lymphadenopathy","Tuberculous peritonitis","Tuberculous enteritis","Retroperitoneal tuberculosis","Tuberculosis of skin and subcutaneous tissue","Tuberculosis of eye, unspecified","Tuberculous episcleritis","Tuberculous keratitis","Tuberculous chorioretinitis","Tuberculous iridocyclitis","Other tuberculosis of eye","Tuberculosis of (inner) (middle) ear","Tuberculosis of adrenal glands","Tuberculosis of thyroid gland","Tuberculosis of other endocrine glands","Tuberculosis of digestive tract organs, not elsewhere classified","Tuberculosis of heart","Tuberculosis of spleen","Tuberculosis of other sites","Acute miliary tuberculosis of a single specified site","Acute miliary tuberculosis of multiple sites","Acute miliary tuberculosis, unspecified","Other miliary tuberculosis","Miliary tuberculosis, unspecified","Tuberculoid leprosy","Borderline tuberculoid leprosy","Sequelae of central nervous system tuberculosis","Sequelae of genitourinary tuberculosis","Sequelae of tuberculosis of bones and joints","Sequelae of tuberculosis of other organs","Sequelae of respiratory and unspecified tuberculosis","Pneumoconiosis associated with tuberculosis","Juvenile osteochondrosis of tibia tubercle, right leg","Juvenile osteochondrosis of tibia tubercle, left leg","Juvenile osteochondrosis of tibia tubercle, bilateral","Juvenile osteochondrosis of tibia tubercle, unspecified leg","Tuberculosis complicating pregnancy, first trimester","Tuberculosis complicating pregnancy, second trimester","Tuberculosis complicating pregnancy, third trimester","Tuberculosis complicating pregnancy, unspecified trimester","Tuberculosis complicating childbirth","Tuberculosis complicating the puerperium","Congenital tuberculosis","Nonspecific reaction to tuberculin skin test without active tuberculosis","Nonspecific reaction to cell mediated immunity measurement of gamma interferon antigen response without active tuberculosis","Encounter for screening for respiratory tuberculosis","Encounter for testing for latent tuberculosis infection","Contact with and (suspected) exposure to tuberculosis","Latent tuberculosis","Personal history of tuberculosis","Personal history of latent tuberculosis infection"]},"columns":[{"id":"icd_10_cm_code","name":"icd_10_cm_code","type":"character"},{"id":"icd_10_cm_term","name":"icd_10_cm_term","type":"character"}],"dataKey":"81c5ce7d7f8b99f80108d3e632b7c01a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p>Returns a list of all ICD-10-CM codes beginning with <code>A15</code>
+and their associated terms.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"A15"</span>, limit <span class="op">=</span> <span class="fl">500</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">reactable</span><span class="fu">::</span><span class="fu"><a href="https://glin.github.io/reactable/reference/reactable.html" class="external-link">reactable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5524ee00c0aa78057082" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5524ee00c0aa78057082">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"icd_10_cm_code":["A15.0","A15.4","A15.5","A15.6","A15.7","A15.8","A15.9"],"icd_10_cm_term":["Tuberculosis of lung","Tuberculosis of intrathoracic lymph nodes","Tuberculosis of larynx, trachea and bronchus","Tuberculous pleurisy","Primary respiratory tuberculosis","Other respiratory tuberculosis","Respiratory tuberculosis unspecified"]},"columns":[{"id":"icd_10_cm_code","name":"icd_10_cm_code","type":"character"},{"id":"icd_10_cm_term","name":"icd_10_cm_term","type":"character"}],"dataKey":"3236eebe5914b72fdbd9a839c1a77c18"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p><br></p>
 <div class="section level3">
 <h3 id="related-links">Related Links<a class="anchor" aria-label="anchor" href="#related-links"></a>
 </h3>
 <ul>
-<li><a href="https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information" class="external-link">CMS
-Public Reporting of Missing Digital Contact Information</a></li>
-<li><a href="https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html" class="external-link">Endpoints
-Information</a></li>
-<li><a href="https://data.cms.gov/sites/default/files/2021-12/8eb2b4bf-6e5f-4e05-bcdb-39c07ad8f77a/Missing_Digital_Contact_Info_Methods%20.pdf" class="external-link">Methodology
-&amp; Policy</a></li>
+<li><a href="https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html" class="external-link">NLM
+API for ICD-10-CM</a></li>
 </ul>
 <p><br><br></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
