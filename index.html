@@ -9,7 +9,10 @@
 <title>Access Public Medical Coding Data APIs • codexchain</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Lexend-0.4.4/font.css" rel="stylesheet">
+<link href="deps/JetBrains_Mono-0.4.4/font.css" rel="stylesheet">
+<link href="deps/Roboto-0.4.4/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access Public Medical Coding Data APIs">
 <meta property="og:description" content="The goal of codexchain is to provide access to a variety of public medical coding APIs.">
@@ -37,6 +40,12 @@
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/nlm_icd10cm_2023.html">NLM ICD-10-CM 2023 API</a>
+  </div>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -74,14 +83,17 @@
 <span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/codexchain"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/andrewallenbruce/codexchain" class="external-link">codexchain</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># load library</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/andrewallenbruce/codexchain" class="external-link">codexchain</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="nlms-icd-10-cm-2023-api">NLM’s ICD-10-CM 2023 API<a class="anchor" aria-label="anchor" href="#nlms-icd-10-cm-2023-api"></a>
+<h2 id="national-library-of-medicines-icd-10-cm-2023-api">National Library of Medicine’s <strong>ICD-10-CM 2023</strong> API<a class="anchor" aria-label="anchor" href="#national-library-of-medicines-icd-10-cm-2023-api"></a>
 </h2>
+<p>The <em>International Classification of Diseases, 10th Revision, Clinical Modification</em> is the American modification of the World Health Organization’s ICD-10, a medical coding system for classifying diagnoses and reasons for healthcare visits.</p>
 <p>Return the seven ICD-10-CM codes beginning with “A15”</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"A15"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"A15"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>     <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">icd_10_cm_code</th>
@@ -121,7 +133,9 @@
 <p><br></p>
 <p>Return the first 20 ICD-10-CM codes associated with tuberculosis</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"tuber"</span>, limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"tuber"</span>, </span>
+<span>            limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>            <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">icd_10_cm_code</th>
@@ -213,7 +227,8 @@
 <p><br></p>
 <p>Return the two ICD-10-CM codes associated with pleurisy</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"pleurisy"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"pleurisy"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>           <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">icd_10_cm_code</th>
@@ -233,7 +248,9 @@
 <p><br></p>
 <p>When searching for ICD-10-CM codes by letter, you must set the <code>field</code> param to “code” or it will search for <em>terms</em> containing the letter as well. For example, without <code>field = "code"</code>, the following returns terms containing the letter “Z”:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"Z"</span>, limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"Z"</span>, </span>
+<span>            limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>   <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="18%">
@@ -289,7 +306,10 @@
 <p><br></p>
 <p>With <code>field = "code"</code>, it returns only codes containing “Z”:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, field <span class="op">=</span> <span class="st">"code"</span>, limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, </span>
+<span>            field <span class="op">=</span> <span class="st">"code"</span>, </span>
+<span>            limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>      <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="15%">
@@ -496,203 +516,203 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">59501</td>
-<td align="left">female</td>
-<td align="right">30</td>
-<td align="right">88.0</td>
-<td align="right">166.8</td>
-<td align="right">31.62937</td>
-<td align="left">Z68.31</td>
+<td align="right">61269</td>
+<td align="left">male</td>
+<td align="right">37</td>
+<td align="right">97.2</td>
+<td align="right">169.3</td>
+<td align="right">33.91192</td>
+<td align="left">Z68.33</td>
 <td align="left">Obese</td>
 </tr>
 <tr class="even">
-<td align="right">69617</td>
-<td align="left">female</td>
-<td align="right">25</td>
-<td align="right">71.6</td>
-<td align="right">165.1</td>
-<td align="right">26.26751</td>
-<td align="left">Z68.26</td>
-<td align="left">Overweight</td>
+<td align="right">68429</td>
+<td align="left">male</td>
+<td align="right">27</td>
+<td align="right">112.4</td>
+<td align="right">190.5</td>
+<td align="right">30.97251</td>
+<td align="left">Z68.30</td>
+<td align="left">Obese</td>
 </tr>
 <tr class="odd">
-<td align="right">55324</td>
+<td align="right">52535</td>
 <td align="left">male</td>
-<td align="right">46</td>
-<td align="right">117.4</td>
-<td align="right">177.8</td>
-<td align="right">37.13681</td>
-<td align="left">Z68.37</td>
-<td align="left">Obese</td>
-</tr>
-<tr class="even">
-<td align="right">57058</td>
-<td align="left">male</td>
-<td align="right">40</td>
-<td align="right">72.2</td>
-<td align="right">169.9</td>
-<td align="right">25.01212</td>
+<td align="right">43</td>
+<td align="right">82.6</td>
+<td align="right">180.0</td>
+<td align="right">25.49383</td>
 <td align="left">Z68.25</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">59895</td>
-<td align="left">female</td>
-<td align="right">47</td>
-<td align="right">67.7</td>
-<td align="right">154.0</td>
-<td align="right">28.54613</td>
-<td align="left">Z68.28</td>
 <td align="left">Overweight</td>
 </tr>
 <tr class="even">
-<td align="right">71079</td>
+<td align="right">68592</td>
 <td align="left">male</td>
 <td align="right">34</td>
-<td align="right">68.0</td>
-<td align="right">174.8</td>
-<td align="right">22.25492</td>
+<td align="right">73.5</td>
+<td align="right">172.9</td>
+<td align="right">24.58654</td>
+<td align="left">Z68.24</td>
+<td align="left">Healthy Weight</td>
+</tr>
+<tr class="odd">
+<td align="right">70420</td>
+<td align="left">female</td>
+<td align="right">55</td>
+<td align="right">100.0</td>
+<td align="right">159.4</td>
+<td align="right">39.35713</td>
+<td align="left">Z68.39</td>
+<td align="left">Obese</td>
+</tr>
+<tr class="even">
+<td align="right">66729</td>
+<td align="left">female</td>
+<td align="right">64</td>
+<td align="right">57.8</td>
+<td align="right">161.7</td>
+<td align="right">22.10588</td>
 <td align="left">Z68.22</td>
 <td align="left">Healthy Weight</td>
 </tr>
 <tr class="odd">
-<td align="right">62222</td>
+<td align="right">62720</td>
 <td align="left">male</td>
-<td align="right">32</td>
-<td align="right">80.1</td>
-<td align="right">179.0</td>
-<td align="right">24.99922</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="right">61917</td>
-<td align="left">female</td>
-<td align="right">44</td>
-<td align="right">54.3</td>
-<td align="right">171.6</td>
-<td align="right">18.44018</td>
-<td align="left">Z68.1</td>
-<td align="left">Underweight</td>
-</tr>
-<tr class="odd">
-<td align="right">59826</td>
-<td align="left">female</td>
-<td align="right">67</td>
-<td align="right">50.2</td>
-<td align="right">156.5</td>
-<td align="right">20.49628</td>
-<td align="left">Z68.20</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="even">
-<td align="right">55822</td>
-<td align="left">female</td>
-<td align="right">54</td>
-<td align="right">56.2</td>
-<td align="right">162.1</td>
-<td align="right">21.38801</td>
-<td align="left">Z68.21</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="odd">
-<td align="right">58319</td>
-<td align="left">male</td>
-<td align="right">42</td>
-<td align="right">87.9</td>
-<td align="right">185.9</td>
-<td align="right">25.43490</td>
-<td align="left">Z68.25</td>
+<td align="right">58</td>
+<td align="right">73.8</td>
+<td align="right">168.1</td>
+<td align="right">26.11686</td>
+<td align="left">Z68.26</td>
 <td align="left">Overweight</td>
 </tr>
 <tr class="even">
-<td align="right">52585</td>
+<td align="right">61569</td>
 <td align="left">female</td>
-<td align="right">36</td>
-<td align="right">58.2</td>
-<td align="right">164.2</td>
-<td align="right">21.58622</td>
-<td align="left">Z68.21</td>
+<td align="right">31</td>
+<td align="right">60.5</td>
+<td align="right">158.9</td>
+<td align="right">23.96115</td>
+<td align="left">Z68.23</td>
 <td align="left">Healthy Weight</td>
 </tr>
 <tr class="odd">
-<td align="right">53702</td>
-<td align="left">male</td>
-<td align="right">38</td>
-<td align="right">76.2</td>
-<td align="right">177.2</td>
-<td align="right">24.26764</td>
+<td align="right">62347</td>
+<td align="left">female</td>
+<td align="right">71</td>
+<td align="right">65.7</td>
+<td align="right">165.4</td>
+<td align="right">24.01565</td>
 <td align="left">Z68.24</td>
 <td align="left">Healthy Weight</td>
 </tr>
 <tr class="even">
-<td align="right">58234</td>
+<td align="right">52134</td>
 <td align="left">male</td>
-<td align="right">53</td>
-<td align="right">69.6</td>
-<td align="right">179.7</td>
-<td align="right">21.55327</td>
-<td align="left">Z68.21</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="odd">
-<td align="right">68281</td>
-<td align="left">male</td>
-<td align="right">27</td>
-<td align="right">63.4</td>
-<td align="right">168.4</td>
-<td align="right">22.35657</td>
-<td align="left">Z68.22</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="even">
-<td align="right">63211</td>
-<td align="left">female</td>
-<td align="right">46</td>
-<td align="right">112.2</td>
-<td align="right">165.9</td>
-<td align="right">40.76619</td>
-<td align="left">Z68.41</td>
+<td align="right">61</td>
+<td align="right">168.8</td>
+<td align="right">187.1</td>
+<td align="right">48.21974</td>
+<td align="left">Z68.42</td>
 <td align="left">Obese</td>
 </tr>
 <tr class="odd">
-<td align="right">71040</td>
+<td align="right">69843</td>
 <td align="left">male</td>
-<td align="right">63</td>
-<td align="right">85.1</td>
-<td align="right">168.8</td>
-<td align="right">29.86652</td>
+<td align="right">40</td>
+<td align="right">90.0</td>
+<td align="right">185.2</td>
+<td align="right">26.23980</td>
+<td align="left">Z68.26</td>
+<td align="left">Overweight</td>
+</tr>
+<tr class="even">
+<td align="right">56909</td>
+<td align="left">female</td>
+<td align="right">48</td>
+<td align="right">116.3</td>
+<td align="right">171.2</td>
+<td align="right">39.68005</td>
+<td align="left">Z68.39</td>
+<td align="left">Obese</td>
+</tr>
+<tr class="odd">
+<td align="right">69930</td>
+<td align="left">female</td>
+<td align="right">27</td>
+<td align="right">83.2</td>
+<td align="right">166.6</td>
+<td align="right">29.97598</td>
 <td align="left">Z68.29</td>
 <td align="left">Overweight</td>
 </tr>
 <tr class="even">
-<td align="right">66165</td>
-<td align="left">male</td>
-<td align="right">24</td>
-<td align="right">129.4</td>
-<td align="right">184.7</td>
-<td align="right">37.93154</td>
-<td align="left">Z68.37</td>
-<td align="left">Obese</td>
+<td align="right">71099</td>
+<td align="left">female</td>
+<td align="right">80</td>
+<td align="right">69.7</td>
+<td align="right">159.2</td>
+<td align="right">27.50088</td>
+<td align="left">Z68.27</td>
+<td align="left">Overweight</td>
 </tr>
 <tr class="odd">
-<td align="right">62205</td>
-<td align="left">male</td>
-<td align="right">28</td>
-<td align="right">84.8</td>
-<td align="right">171.4</td>
-<td align="right">28.86518</td>
+<td align="right">52369</td>
+<td align="left">female</td>
+<td align="right">69</td>
+<td align="right">77.1</td>
+<td align="right">163.6</td>
+<td align="right">28.80632</td>
 <td align="left">Z68.28</td>
 <td align="left">Overweight</td>
 </tr>
 <tr class="even">
-<td align="right">60954</td>
+<td align="right">61682</td>
+<td align="left">female</td>
+<td align="right">80</td>
+<td align="right">76.2</td>
+<td align="right">159.3</td>
+<td align="right">30.02779</td>
+<td align="left">Z68.30</td>
+<td align="left">Obese</td>
+</tr>
+<tr class="odd">
+<td align="right">71315</td>
 <td align="left">male</td>
-<td align="right">30</td>
-<td align="right">129.4</td>
-<td align="right">181.5</td>
-<td align="right">39.28086</td>
-<td align="left">Z68.39</td>
+<td align="right">44</td>
+<td align="right">162.2</td>
+<td align="right">200.4</td>
+<td align="right">40.38829</td>
+<td align="left">Z68.41</td>
+<td align="left">Obese</td>
+</tr>
+<tr class="even">
+<td align="right">68908</td>
+<td align="left">female</td>
+<td align="right">59</td>
+<td align="right">78.9</td>
+<td align="right">155.1</td>
+<td align="right">32.79846</td>
+<td align="left">Z68.32</td>
+<td align="left">Obese</td>
+</tr>
+<tr class="odd">
+<td align="right">68875</td>
+<td align="left">male</td>
+<td align="right">52</td>
+<td align="right">89.0</td>
+<td align="right">174.3</td>
+<td align="right">29.29512</td>
+<td align="left">Z68.29</td>
+<td align="left">Overweight</td>
+</tr>
+<tr class="even">
+<td align="right">66053</td>
+<td align="left">female</td>
+<td align="right">65</td>
+<td align="right">75.7</td>
+<td align="right">154.8</td>
+<td align="right">31.59032</td>
+<td align="left">Z68.31</td>
 <td align="left">Obese</td>
 </tr>
 </tbody>
@@ -724,7 +744,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">updated</td>
-<td align="left">2023-01-05 17:33:33</td>
+<td align="left">2023-01-06 09:58:20</td>
 </tr>
 <tr class="even">
 <td align="left">entry_title</td>
@@ -774,7 +794,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">updated</td>
-<td align="left">2023-01-05 17:33:34</td>
+<td align="left">2023-01-06 09:58:20</td>
 </tr>
 <tr class="even">
 <td align="left">entry_title</td>
