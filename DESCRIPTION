@@ -5,20 +5,21 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
-Description: The goal of codexchain is to provide access to a variety of public medical coding APIs.
+Description: The goal of codexchain is to provide access to a variety of
+    public medical coding APIs.
 License: GPL (>= 3)
 URL: https://github.com/andrewallenbruce/codexchain,
     https://andrewallenbruce.github.io/codexchain/
 BugReports: https://github.com/andrewallenbruce/codexchain/issues
 Imports: 
-    httr2,
-    htm2txt,
-    tibble,
     attempt,
     curl,
+    htm2txt,
+    httr2,
     janitor,
     lubridate,
-    purrr
+    purrr,
+    tibble
 Suggests: 
     covr,
     dplyr,
@@ -29,11 +30,10 @@ Suggests:
     roxyglobals (>= 0.2.1),
     stringr,
     testthat (>= 3.0.0)
-Config/testthat/edition: 3
-Encoding: UTF-8
-Roxygen: list(
-    markdown = TRUE,
-    roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
-RoxygenNote: 7.2.3
 Remotes: 
     anthonynorth/roxyglobals
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list( markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
+RoxygenNote: 7.2.3
