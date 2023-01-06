@@ -22,6 +22,8 @@ Imports:
 Suggests: 
     covr,
     dplyr,
+    gt,
+    gtExtras,
     httptest2,
     rmarkdown,
     roxyglobals (>= 0.2.1),
