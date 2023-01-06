@@ -33,15 +33,22 @@ remotes::install_github("andrewallenbruce/codexchain")
 ```
 
 ``` r
+# load library
 library(codexchain)
 ```
 
-## NLM’s ICD-10-CM 2023 API
+## National Library of Medicine’s **ICD-10-CM 2023** API
+
+The *International Classification of Diseases, 10th Revision, Clinical
+Modification* is the American modification of the World Health
+Organization’s ICD-10, a medical coding system for classifying diagnoses
+and reasons for healthcare visits.
 
 Return the seven ICD-10-CM codes beginning with “A15”
 
 ``` r
-codex_icd10(code = "A15") |> gluedown::md_table()
+codex_icd10(code = "A15") |> 
+     gluedown::md_table()
 ```
 
 | icd_10_cm_code | icd_10_cm_term                               |
@@ -59,7 +66,9 @@ codex_icd10(code = "A15") |> gluedown::md_table()
 Return the first 20 ICD-10-CM codes associated with tuberculosis
 
 ``` r
-codex_icd10(term = "tuber", limit = 20) |> gluedown::md_table()
+codex_icd10(term = "tuber", 
+            limit = 20) |> 
+            gluedown::md_table()
 ```
 
 | icd_10_cm_code | icd_10_cm_term                                    |
@@ -90,7 +99,8 @@ codex_icd10(term = "tuber", limit = 20) |> gluedown::md_table()
 Return the two ICD-10-CM codes associated with pleurisy
 
 ``` r
-codex_icd10(term = "pleurisy") |> gluedown::md_table()
+codex_icd10(term = "pleurisy") |> 
+           gluedown::md_table()
 ```
 
 | icd_10_cm_code | icd_10_cm_term       |
@@ -106,7 +116,9 @@ well. For example, without `field = "code"`, the following returns terms
 containing the letter “Z”:
 
 ``` r
-codex_icd10(code = "Z", limit = 10) |> gluedown::md_table()
+codex_icd10(code = "Z", 
+            limit = 10) |> 
+   gluedown::md_table()
 ```
 
 | icd_10_cm_code | icd_10_cm_term                                                        |
@@ -127,7 +139,10 @@ codex_icd10(code = "Z", limit = 10) |> gluedown::md_table()
 With `field = "code"`, it returns only codes containing “Z”:
 
 ``` r
-codex_icd10(code = "z", field = "code", limit = 10) |> gluedown::md_table()
+codex_icd10(code = "z", 
+            field = "code", 
+            limit = 10) |> 
+      gluedown::md_table()
 ```
 
 | icd_10_cm_code | icd_10_cm_term                                                                           |
@@ -198,26 +213,26 @@ NHANES::NHANES |>
 
 |    id | gender | age | weight | height |      bmi | icd_10_code | bmi_status     |
 |------:|:-------|----:|-------:|-------:|---------:|:------------|:---------------|
-| 59501 | female |  30 |   88.0 |  166.8 | 31.62937 | Z68.31      | Obese          |
-| 69617 | female |  25 |   71.6 |  165.1 | 26.26751 | Z68.26      | Overweight     |
-| 55324 | male   |  46 |  117.4 |  177.8 | 37.13681 | Z68.37      | Obese          |
-| 57058 | male   |  40 |   72.2 |  169.9 | 25.01212 | Z68.25      | NA             |
-| 59895 | female |  47 |   67.7 |  154.0 | 28.54613 | Z68.28      | Overweight     |
-| 71079 | male   |  34 |   68.0 |  174.8 | 22.25492 | Z68.22      | Healthy Weight |
-| 62222 | male   |  32 |   80.1 |  179.0 | 24.99922 | NA          | NA             |
-| 61917 | female |  44 |   54.3 |  171.6 | 18.44018 | Z68.1       | Underweight    |
-| 59826 | female |  67 |   50.2 |  156.5 | 20.49628 | Z68.20      | Healthy Weight |
-| 55822 | female |  54 |   56.2 |  162.1 | 21.38801 | Z68.21      | Healthy Weight |
-| 58319 | male   |  42 |   87.9 |  185.9 | 25.43490 | Z68.25      | Overweight     |
-| 52585 | female |  36 |   58.2 |  164.2 | 21.58622 | Z68.21      | Healthy Weight |
-| 53702 | male   |  38 |   76.2 |  177.2 | 24.26764 | Z68.24      | Healthy Weight |
-| 58234 | male   |  53 |   69.6 |  179.7 | 21.55327 | Z68.21      | Healthy Weight |
-| 68281 | male   |  27 |   63.4 |  168.4 | 22.35657 | Z68.22      | Healthy Weight |
-| 63211 | female |  46 |  112.2 |  165.9 | 40.76619 | Z68.41      | Obese          |
-| 71040 | male   |  63 |   85.1 |  168.8 | 29.86652 | Z68.29      | Overweight     |
-| 66165 | male   |  24 |  129.4 |  184.7 | 37.93154 | Z68.37      | Obese          |
-| 62205 | male   |  28 |   84.8 |  171.4 | 28.86518 | Z68.28      | Overweight     |
-| 60954 | male   |  30 |  129.4 |  181.5 | 39.28086 | Z68.39      | Obese          |
+| 61269 | male   |  37 |   97.2 |  169.3 | 33.91192 | Z68.33      | Obese          |
+| 68429 | male   |  27 |  112.4 |  190.5 | 30.97251 | Z68.30      | Obese          |
+| 52535 | male   |  43 |   82.6 |  180.0 | 25.49383 | Z68.25      | Overweight     |
+| 68592 | male   |  34 |   73.5 |  172.9 | 24.58654 | Z68.24      | Healthy Weight |
+| 70420 | female |  55 |  100.0 |  159.4 | 39.35713 | Z68.39      | Obese          |
+| 66729 | female |  64 |   57.8 |  161.7 | 22.10588 | Z68.22      | Healthy Weight |
+| 62720 | male   |  58 |   73.8 |  168.1 | 26.11686 | Z68.26      | Overweight     |
+| 61569 | female |  31 |   60.5 |  158.9 | 23.96115 | Z68.23      | Healthy Weight |
+| 62347 | female |  71 |   65.7 |  165.4 | 24.01565 | Z68.24      | Healthy Weight |
+| 52134 | male   |  61 |  168.8 |  187.1 | 48.21974 | Z68.42      | Obese          |
+| 69843 | male   |  40 |   90.0 |  185.2 | 26.23980 | Z68.26      | Overweight     |
+| 56909 | female |  48 |  116.3 |  171.2 | 39.68005 | Z68.39      | Obese          |
+| 69930 | female |  27 |   83.2 |  166.6 | 29.97598 | Z68.29      | Overweight     |
+| 71099 | female |  80 |   69.7 |  159.2 | 27.50088 | Z68.27      | Overweight     |
+| 52369 | female |  69 |   77.1 |  163.6 | 28.80632 | Z68.28      | Overweight     |
+| 61682 | female |  80 |   76.2 |  159.3 | 30.02779 | Z68.30      | Obese          |
+| 71315 | male   |  44 |  162.2 |  200.4 | 40.38829 | Z68.41      | Obese          |
+| 68908 | female |  59 |   78.9 |  155.1 | 32.79846 | Z68.32      | Obese          |
+| 68875 | male   |  52 |   89.0 |  174.3 | 29.29512 | Z68.29      | Overweight     |
+| 66053 | female |  65 |   75.7 |  154.8 | 31.59032 | Z68.31      | Obese          |
 
 <br>
 
@@ -236,7 +251,7 @@ rx |>
 
 | name                | value                                                                                                                                                                                                                                           |
 |:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| updated             | 2023-01-05 17:33:33                                                                                                                                                                                                                             |
+| updated             | 2023-01-06 09:58:20                                                                                                                                                                                                                             |
 | entry_title         | Varenicline                                                                                                                                                                                                                                     |
 | source              | U.S. National Library of Medicine                                                                                                                                                                                                               |
 | search_description  | , RXNORM, Chantix 0.5 MG Oral Tablet, PAT                                                                                                                                                                                                       |
@@ -258,7 +273,7 @@ sno |>
 
 | name                | value                                                                               |
 |:--------------------|:------------------------------------------------------------------------------------|
-| updated             | 2023-01-05 17:33:34                                                                 |
+| updated             | 2023-01-06 09:58:20                                                                 |
 | entry_title         | Pneumonia                                                                           |
 | source              | U.S. National Library of Medicine                                                   |
 | search_description  | 41381004, SNOMEDCT, Pneumonia due to Pseudomonas, PAT                               |

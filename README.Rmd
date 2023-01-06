@@ -36,15 +36,19 @@ devtools::install_github("andrewallenbruce/codexchain")
 remotes::install_github("andrewallenbruce/codexchain")
 ```
 ```{r}
+# load library
 library(codexchain)
 ```
 
-## NLM's ICD-10-CM 2023 API
+## National Library of Medicine's **ICD-10-CM 2023** API
+
+The *International Classification of Diseases, 10th Revision, Clinical Modification* is the American modification of the World Health Organization's ICD-10, a medical coding system for classifying diagnoses and reasons for healthcare visits.
 
 Return the seven ICD-10-CM codes beginning with "A15"
 
 ```{r results='asis', echo=TRUE}
-codex_icd10(code = "A15") |> gluedown::md_table()
+codex_icd10(code = "A15") |> 
+     gluedown::md_table()
 ```
 
 <br>
@@ -52,14 +56,17 @@ codex_icd10(code = "A15") |> gluedown::md_table()
 Return the first 20 ICD-10-CM codes associated with tuberculosis
 
 ```{r results='asis', echo=TRUE}
-codex_icd10(term = "tuber", limit = 20) |> gluedown::md_table()
+codex_icd10(term = "tuber", 
+            limit = 20) |> 
+            gluedown::md_table()
 ```
 <br>
 
 Return the two ICD-10-CM codes associated with pleurisy
 
 ```{r results='asis', echo=TRUE}
-codex_icd10(term = "pleurisy") |> gluedown::md_table()
+codex_icd10(term = "pleurisy") |> 
+           gluedown::md_table()
 ```
 
 <br>
@@ -67,7 +74,9 @@ codex_icd10(term = "pleurisy") |> gluedown::md_table()
 When searching for ICD-10-CM codes by letter, you must set the `field` param to "code" or it will search for *terms* containing the letter as well. For example, without `field = "code"`, the following returns terms containing the letter "Z":
 
 ```{r results='asis', echo=TRUE}
-codex_icd10(code = "Z", limit = 10) |> gluedown::md_table()
+codex_icd10(code = "Z", 
+            limit = 10) |> 
+   gluedown::md_table()
 ```
 
 <br>
@@ -75,7 +84,10 @@ codex_icd10(code = "Z", limit = 10) |> gluedown::md_table()
 With `field = "code"`, it returns only codes containing "Z":
 
 ```{r results='asis', echo=TRUE}
-codex_icd10(code = "z", field = "code", limit = 10) |> gluedown::md_table()
+codex_icd10(code = "z", 
+            field = "code", 
+            limit = 10) |> 
+      gluedown::md_table()
 ```
 
 <br>

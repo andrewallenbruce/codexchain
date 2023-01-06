@@ -23,6 +23,7 @@ Suggests:
     covr,
     dplyr,
     httptest2,
+    rmarkdown,
     roxyglobals (>= 0.2.1),
     stringr,
     testthat (>= 3.0.0)
