@@ -1,5 +1,5 @@
 ---
-title: "NLM ICD-10-CM 2023 API"
+title: "ICD-10-CM 2023 API (National Library of Medicine)"
 output: html_document
 ---
 
@@ -24,46 +24,31 @@ library(codexchain)
 
 <br>
 
-> *Information on Providers That are Missing Digital Contact Information in the NPPES System.*
-
-<br>
-
 ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical Modification) is a medical coding system for classifying diagnoses and reasons for visits in U.S. health care settings.
 
 <br>
 
-### API Data Dictionary
+## Examples
 
-```{r echo=FALSE}
-dd <- tibble::tibble(
-  Variable = c("`npi`", "`provider_name`"),
-  Description = c("National Provider Identifier", "Provider Name"),
-  Definition = c("The provider's 10-digit National Provider Identifier.", 
-                 "Name of the provider. It consists of the legal last name 
-                 followed by the first name, separated by a comma."))
-dd |> 
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, 
-                  color = "gray", 
-                  add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "solid")
+Returns a complete count of the 71 diagnoses that match the string 'tuberc', displaying both the ICD-10-CM code and its associated term for the first 7 terms.
+
+```{r}
+codex_icd10(term = "tuberc", limit = 500) |> 
+  reactable::reactable()
+```
+
+
+Returns a list of all ICD-10-CM codes beginning with `A15` and their associated terms.
+
+```{r}
+codex_icd10(code = "A15", limit = 500) |> 
+  reactable::reactable()
 ```
 
 <br>
 
 ### Related Links
 
-   - [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
-   - [Endpoints Information](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html)
-   - [Methodology & Policy](https://data.cms.gov/sites/default/files/2021-12/8eb2b4bf-6e5f-4e05-bcdb-39c07ad8f77a/Missing_Digital_Contact_Info_Methods%20.pdf)
+   - [NLM API for ICD-10-CM](https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html)
 
 <br><br>
