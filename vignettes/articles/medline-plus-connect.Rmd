@@ -1,0 +1,57 @@
+---
+title: "Medline Plus Connect API"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(codexchain)
+```
+
+
+
+```{r results='asis', echo=TRUE}
+rx <- codex_medline(code_title = "Chantix 0.5 MG Oral Tablet", 
+              code_system = "rxcui")
+
+rx |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+
+
+```{r echo=TRUE}
+sno <- codex_medline(code = "41381004", 
+              code_title = "Pneumonia due to Pseudomonas", 
+              code_system = "snomed")
+
+sno_gt <- sno |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything())
+
+sno_gt |> 
+  gt::gt() |> 
+  gtExtras::gt_theme_538() |> 
+  gt::tab_options(
+    table.width = gt::pct(100),
+    table.layout = "auto") |> 
+  gt::tab_style(
+    style = gt::cell_text(whitespace = "pre-wrap",
+                          size = "medium",
+                          weight = "normal",
+                          style = "normal",
+                          stretch = "ultra-condensed",
+                          align = "left",
+                          v_align = "top"),
+    locations = gt::cells_body(columns = value, rows = 7))
+```
+
+
+<br>

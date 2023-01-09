@@ -21,5 +21,8 @@ utils::globalVariables(c(
   "mins", # <days_today>
   ":=", # <days_today>
   "hrs", # <days_today>
+  "kg", # <bmi_adult>
+  "cm", # <bmi_adult>
+  "m", # <bmi_adult>
   NULL
 ))

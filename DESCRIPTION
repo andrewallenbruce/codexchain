@@ -14,8 +14,8 @@ BugReports: https://github.com/andrewallenbruce/codexchain/issues
 Imports: 
     attempt,
     curl,
-    htm2txt,
     httr2,
+    units,
     janitor,
     lubridate,
     purrr,

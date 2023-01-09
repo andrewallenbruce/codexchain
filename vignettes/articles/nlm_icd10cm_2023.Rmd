@@ -18,25 +18,47 @@ knitr::opts_chunk$set(
 options(knitr.table.format = "html")
 ```
 
-```{r setup}
+```{r}
 library(codexchain)
+library(reactable)
 ```
 
 <br>
 
-ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical Modification) is a medical coding system for classifying diagnoses and reasons for visits in U.S. health care settings.
+> **Note**  
+> *ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical Modification) is a medical coding system for classifying diagnoses and reasons for visits in U.S. health care settings.*
+
+> *ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical Modification) is a medical coding system for classifying diagnoses and reasons for visits in U.S. health care settings.*
 
 <br>
 
 ## Examples
 
-Returns a complete count of the 71 diagnoses that match the string 'tuberc', displaying both the ICD-10-CM code and its associated term for the first 7 terms.
+Returns a complete count of the 71 diagnoses that match the string `tuberc`, displaying both the ICD-10-CM code and its associated term for the first 7 terms.
 
 ```{r}
 codex_icd10(term = "tuberc", limit = 500) |> 
-  reactable::reactable()
+  reactable::reactable(
+    defaultColDef = colDef(
+    header = function(value) gsub("_", " ", value, fixed = TRUE),
+    cell = function(value) format(value, nsmall = 1),
+    align = "center",
+    minWidth = 70,
+    headerStyle = list(background = "#f7f7f8")
+  ),
+  columns = list(
+    icd_10_cm_code = colDef(name = "ICD-10-CM CODE", width = 110),
+    icd_10_cm_term = colDef(name = "ICD-10-CM TERM", align = "left")
+  ),
+  bordered = TRUE,
+  highlight = TRUE,
+  searchable = TRUE,
+  defaultPageSize = 10,
+  showPageSizeOptions = TRUE
+)
 ```
 
+<br>
 
 Returns a list of all ICD-10-CM codes beginning with `A15` and their associated terms.
 
@@ -44,6 +66,69 @@ Returns a list of all ICD-10-CM codes beginning with `A15` and their associated 
 codex_icd10(code = "A15", limit = 500) |> 
   reactable::reactable()
 ```
+
+<br>
+
+Return the two ICD-10-CM codes associated with pleurisy
+
+```{r results='asis', echo=TRUE}
+codex_icd10(term = "pleurisy") |> 
+           gluedown::md_table()
+```
+
+<br>
+
+When searching for ICD-10-CM codes by letter, you must set the `field` param to "code" or it will search for *terms* containing the letter as well. For example, without `field = "code"`, the following returns terms containing the letter "Z":
+
+```{r results='asis', echo=TRUE}
+codex_icd10(code = "Z", 
+            limit = 10) |> 
+   gluedown::md_table()
+```
+
+<br>
+
+With `field = "code"`, it returns only codes containing "Z":
+
+```{r results='asis', echo=TRUE}
+codex_icd10(code = "z", 
+            field = "code", 
+            limit = 10) |> 
+      gluedown::md_table()
+```
+
+<br>
+
+### BMI Coding Example
+
+```{r results='asis', echo=TRUE}
+codex_icd10(term = "bmi adult", 
+            limit = 30) |> 
+  gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+nh_sample <- NHANES::NHANES |> 
+  janitor::clean_names() |> 
+  dplyr::filter(age >= 20) |> 
+  dplyr::select(id, gender, age, weight, height) |> 
+  dplyr::distinct(id, .keep_all = TRUE)
+
+
+bmi <- nh_sample |> 
+  dplyr::mutate(weight = units::set_units(weight, kg),
+                height = units::set_units(height, cm),
+                bmi_adult  = bmi_adult(weight, height))
+
+bmi |> dplyr::mutate(icd_10_code = assign_bmi_icd(bmi_adult),
+                     bmi_status = assign_bmi_status(bmi_adult)) |> 
+  dplyr::slice_max(order_by = id, prop = 0.15) |> 
+  gluedown::md_table()
+```
+
+
 
 <br>
 

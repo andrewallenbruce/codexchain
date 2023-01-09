@@ -69,7 +69,8 @@ codex_medline <- function(code = NULL,
                                               collapse = ", ", na.rm = TRUE),
     results_description = res$feed$subtitle$`_value`[[1]],
     entry_link = res$feed$entry$link[[1]]$href,
-    entry_summary = htm2txt::htm2txt(res$feed$entry$summary$`_value`))
+    entry_summary = res$feed$entry$summary$`_value`)
+    #entry_summary = htm2txt::htm2txt(res$feed$entry$summary$`_value`))
 
   return(results)
 }

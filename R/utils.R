@@ -291,33 +291,34 @@ medline_format <- function(param, arg) {
 #' @autoglobal
 #' @noRd
 assign_bmi_icd <- function(bmi) {
+  bmi <- as.numeric(bmi)
   dplyr::case_when(bmi >= 70 ~ "Z68.45",
-                   bmi <= 19.999 ~ "Z68.1",
-                   bmi >= 20.0 & bmi <= 20.999 ~ "Z68.20",
-                   bmi >= 21.0 & bmi <= 21.999 ~ "Z68.21",
-                   bmi >= 22.0 & bmi <= 22.999 ~ "Z68.22",
-                   bmi >= 23.0 & bmi <= 23.999 ~ "Z68.23",
-                   bmi >= 24.0 & bmi <= 24.999 ~ "Z68.24",
-                   bmi >= 25.0 & bmi <= 25.999 ~ "Z68.25",
-                   bmi >= 26.0 & bmi <= 26.999 ~ "Z68.26",
-                   bmi >= 27.0 & bmi <= 27.999 ~ "Z68.27",
-                   bmi >= 28.0 & bmi <= 28.999 ~ "Z68.28",
-                   bmi >= 29.0 & bmi <= 29.999 ~ "Z68.29",
-                   bmi >= 30.0 & bmi <= 30.999 ~ "Z68.30",
-                   bmi >= 31.0 & bmi <= 31.999 ~ "Z68.31",
-                   bmi >= 32.0 & bmi <= 32.999 ~ "Z68.32",
-                   bmi >= 33.0 & bmi <= 33.999 ~ "Z68.33",
-                   bmi >= 34.0 & bmi <= 34.999 ~ "Z68.34",
-                   bmi >= 35.0 & bmi <= 35.999 ~ "Z68.35",
-                   bmi >= 36.0 & bmi <= 36.999 ~ "Z68.36",
-                   bmi >= 37.0 & bmi <= 37.999 ~ "Z68.37",
-                   bmi >= 38.0 & bmi <= 38.999 ~ "Z68.38",
-                   bmi >= 39.0 & bmi <= 39.999 ~ "Z68.39",
-                   bmi >= 40.0 & bmi <= 44.999 ~ "Z68.41",
-                   bmi >= 45.0 & bmi <= 49.999 ~ "Z68.42",
-                   bmi >= 50.0 & bmi <= 59.999 ~ "Z68.43",
-                   bmi >= 60.0 & bmi <= 69.999 ~ "Z68.44",
-                   TRUE ~ NA)
+                   bmi <= 19.99999 ~ "Z68.1",
+                   bmi >= 20.0 & bmi <= 20.99999 ~ "Z68.20",
+                   bmi >= 21.0 & bmi <= 21.99999 ~ "Z68.21",
+                   bmi >= 22.0 & bmi <= 22.99999 ~ "Z68.22",
+                   bmi >= 23.0 & bmi <= 23.99999 ~ "Z68.23",
+                   bmi >= 24.0 & bmi <= 24.99999 ~ "Z68.24",
+                   bmi >= 25.0 & bmi <= 25.99999 ~ "Z68.25",
+                   bmi >= 26.0 & bmi <= 26.99999 ~ "Z68.26",
+                   bmi >= 27.0 & bmi <= 27.99999 ~ "Z68.27",
+                   bmi >= 28.0 & bmi <= 28.99999 ~ "Z68.28",
+                   bmi >= 29.0 & bmi <= 29.99999 ~ "Z68.29",
+                   bmi >= 30.0 & bmi <= 30.99999 ~ "Z68.30",
+                   bmi >= 31.0 & bmi <= 31.99999 ~ "Z68.31",
+                   bmi >= 32.0 & bmi <= 32.99999 ~ "Z68.32",
+                   bmi >= 33.0 & bmi <= 33.99999 ~ "Z68.33",
+                   bmi >= 34.0 & bmi <= 34.99999 ~ "Z68.34",
+                   bmi >= 35.0 & bmi <= 35.99999 ~ "Z68.35",
+                   bmi >= 36.0 & bmi <= 36.99999 ~ "Z68.36",
+                   bmi >= 37.0 & bmi <= 37.99999 ~ "Z68.37",
+                   bmi >= 38.0 & bmi <= 38.99999 ~ "Z68.38",
+                   bmi >= 39.0 & bmi <= 39.99999 ~ "Z68.39",
+                   bmi >= 40.0 & bmi <= 44.99999 ~ "Z68.41",
+                   bmi >= 45.0 & bmi <= 49.99999 ~ "Z68.42",
+                   bmi >= 50.0 & bmi <= 59.99999 ~ "Z68.43",
+                   bmi >= 60.0 & bmi <= 69.99999 ~ "Z68.44",
+                   TRUE ~ "ERROR")
 }
 
 # assign_bmi_status -------------------------------------------------------
@@ -326,11 +327,35 @@ assign_bmi_icd <- function(bmi) {
 #' @autoglobal
 #' @noRd
 assign_bmi_status <- function(bmi) {
-  dplyr::case_when(bmi < 18.54 ~ "Underweight",
-                   bmi >= 18.55 & bmi <= 24.999 ~ "Healthy Weight",
-                   bmi >= 25.04 & bmi <= 29.999 ~ "Overweight",
+  bmi <- as.numeric(bmi)
+  dplyr::case_when(bmi < 18.55 ~ "Underweight",
+                   bmi >= 18.55 & bmi <= 24.99999 ~ "Healthy Weight",
+                   bmi >= 25.04 & bmi <= 29.99999 ~ "Overweight",
                    bmi >= 30 ~ "Obese",
-                   TRUE ~ NA)
+                   TRUE ~ "ERROR")
+}
+
+#' Calculate Body Mass Index (BMI) for Adults
+#' @param weight weight in kg
+#' @param height height in cm
+#' @return vector of BMI values (kg/m2)
+#' @examples
+#' bmi_adult(70, 160)
+#' @autoglobal
+#' @noRd
+bmi_adult <- function(weight, height) {
+
+  weight <- units::set_units(weight, kg)
+  height <- units::set_units(height, cm)
+
+  units(height) <- units::make_units(m)
+
+  bmi <- weight / (height ^ 2)
+
+  units(bmi) <- units::make_units(kg/m^2)
+
+  return(bmi)
+
 }
 
 #' Calculate Body Mass Index (BMI)
@@ -341,7 +366,9 @@ assign_bmi_status <- function(bmi) {
 #' calc_bmi(wt = 70, ht = 160)
 #' @autoglobal
 #' @noRd
-calc_bmi <- function(wt, ht) {wt / (ht / 100) ^ 2}
+calc_bmi <- function(wt, ht) {
+  wt / (ht / 100) ^ 2
+  }
 
 #' Convert Inches (in) to Centimeters (cm)
 #' @param inch inches
