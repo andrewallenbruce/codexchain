@@ -23,6 +23,7 @@ Imports:
 Suggests: 
     covr,
     dplyr,
+    gluedown,
     gt,
     gtExtras,
     httptest2,
