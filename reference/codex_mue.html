@@ -62,9 +62,67 @@ Medically Unlikely Edits (MUEs) API.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">codex_mue</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">codex_mue</span><span class="op">(</span></span>
+<span>  category <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcscpt_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mue_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mue_rationale <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+    <p>Centers for Medicare &amp; Medicaid Services</p>
+    </div>
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>category</dt>
+<dd><p>Practitioner Services, Outpatient Hospital Services, DME Services</p></dd>
+
+
+<dt>hcpcscpt_code</dt>
+<dd><p>HCPCS code</p></dd>
+
+
+<dt>mue_value</dt>
+<dd><p>integer. MUEs define the maximum units of service (UOS)
+that a provider would report for each HCPCS / CPT code under most
+circumstances for a single beneficiary on a single date of service.</p></dd>
+
+
+<dt>mue_rationale</dt>
+<dd><p>Choices:</p><ul><li><p>"Anatomic Consideration"</p></li>
+<li><p>"Clinical: Medicare Data"</p></li>
+<li><p>"Code Descriptor / CPT Instruction"</p></li>
+<li><p>"Nature of Service / Procedure"</p></li>
+<li><p>"CMS Policy"</p></li>
+<li><p>"Nature of Equipment"</p></li>
+<li><p>"Inpatient Procedure"</p></li>
+<li><p>"Nature of Analyte"</p></li>
+<li><p>"CMS NCCI Policy"</p></li>
+<li><p>"Prescribing Information"</p></li>
+<li><p>"Clinical: CMS Workgroup"</p></li>
+<li><p>"Drug Discontinued"</p></li>
+<li><p>"Clinical: Medicaid Data"</p></li>
+<li><p>"Clinical: Society Comment"</p></li>
+<li><p>"Nature of Service/Procedure"</p></li>
+<li><p>NA</p></li>
+<li><p>"Clinical: Data"</p></li>
+<li><p>"does NOT appear on published file"</p></li>
+</ul></dd>
+
+
+<dt>clean_names</dt>
+<dd><p>Clean column names with janitor's
+<code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
+
+
+<dt>lowercase</dt>
+<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
@@ -72,44 +130,41 @@ Medically Unlikely Edits (MUEs) API.</p>
 <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
     </div>
     <div class="section level2">
-    <h2 id="ncci-medically-unlikely-edits-mues-">NCCI Medically Unlikely Edits (MUEs)<a class="anchor" aria-label="anchor" href="#ncci-medically-unlikely-edits-mues-"></a></h2>
-    <p>Medically Unlikely Edits (MUEs) define for each HCPCS / CPT code the
-maximum units of service (UOS) that a provider would report under most
-circumstances for a single beneficiary on a single date of service.
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Medically Unlikely Edits (MUEs) define for each HCPCS / CPT code
+the maximum units of service (UOS) that a provider would report under
+most circumstances for a single beneficiary on a single date of service.
 Practitioner services also refers to ambulatory surgical centers. DME
-refers to provider claims for durable medical equipment.</p>
-<p>The CMS National Correct Coding Initiative (NCCI) promotes national
-correct coding methodologies and reduces improper coding which may
-result in inappropriate payments of Medicare Part B claims and Medicaid
-claims. NCCI procedure-to-procedure (PTP) edits define pairs of
-Healthcare Common Procedure Coding System (HCPCS)/Current Procedural
-Terminology (CPT) codes that should not be reported together for a
-variety of reasons.</p>
-<p>The purpose of the PTP edits is to prevent improper payments when
-incorrect code combinations are reported. The edits in this dataset
-are active for the dates indicated within. This file should NOT be used
-by state Medicaid programs as their edit file. For more information,
-visit https://www.medicaid.gov/medicaid/program-integrity/ncci/index.html.</p><div class="section">
-<h3 id="data-source">Data Source<a class="anchor" aria-label="anchor" href="#data-source"></a></h3>
-
-
-<p>Centers for Medicare &amp; Medicaid Services</p>
-</div>
-
-<div class="section">
+refers to provider claims for durable medical equipment. The CMS National
+Correct Coding Initiative (NCCI) promotes national correct coding
+methodologies and reduces improper coding which may result in
+inappropriate payments of Medicare Part B claims and Medicaid claims.
+NCCI procedure-to-procedure (PTP) edits define pairs of Healthcare Common
+Procedure Coding System (HCPCS)/Current Procedural Terminology (CPT)
+codes that should not be reported together for a variety of reasons. The
+purpose of the PTP edits is to prevent improper payments when incorrect
+code combinations are reported. The edits in this dataset are active for
+the dates indicated within. This file should NOT be used by state
+Medicaid programs as their edit file. For more information, visit
+https://www.medicaid.gov/medicaid/program-integrity/ncci/index.html.</p><div class="section">
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
 
 <ul><li><p><a href="https://data.medicaid.gov/dataset/552def06-89ab-5f6f-a6de-90b27a792127" class="external-link">CMS' NCCI Medically Unlikely Edits (MUEs) API</a></p></li>
 </ul></div>
 
     </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>Update Frequency: <strong>Quarterly</strong></p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Returns the first 10,000 results</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">codex_mue</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_mue</span><span class="op">(</span>category <span class="op">=</span> <span class="st">"Practitioner Services"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_mue</span><span class="op">(</span>hcpcscpt_code <span class="op">=</span> <span class="st">"G0121"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_mue</span><span class="op">(</span>mue_value <span class="op">=</span> <span class="st">"1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_mue</span><span class="op">(</span>mue_rationale <span class="op">=</span> <span class="st">"Anatomic Consideration"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

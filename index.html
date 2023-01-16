@@ -369,10 +369,11 @@
 </tr>
 </tbody>
 </table>
-<p><br></p>
-<div class="section level3">
-<h3 id="bmi-coding-example">BMI Coding Example<a class="anchor" aria-label="anchor" href="#bmi-coding-example"></a>
-</h3>
+<p><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="bmi-coding-example">BMI Coding Example<a class="anchor" aria-label="anchor" href="#bmi-coding-example"></a>
+</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/codex_icd10.html">codex_icd10</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"bmi adult"</span>, </span>
 <span>            limit <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -491,254 +492,203 @@
 </table>
 <p><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">NHANES</span><span class="fu">::</span><span class="va">NHANES</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu">NHANES</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/NHANES/man/NHANES.html" class="external-link">NHANES</a></span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">gender</span>, <span class="va">age</span>, <span class="va">weight</span>, <span class="va">height</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>bmi <span class="op">=</span> <span class="fu">codexchain</span><span class="fu">:::</span><span class="fu">calc_bmi</span><span class="op">(</span>wt <span class="op">=</span> <span class="va">weight</span>, ht <span class="op">=</span> <span class="va">height</span><span class="op">)</span>,</span>
-<span>                icd_10_code <span class="op">=</span> <span class="fu">codexchain</span><span class="fu">:::</span><span class="fu">assign_bmi_icd</span><span class="op">(</span><span class="va">bmi</span><span class="op">)</span>,</span>
-<span>                bmi_status <span class="op">=</span> <span class="fu">codexchain</span><span class="fu">:::</span><span class="fu">assign_bmi_status</span><span class="op">(</span><span class="va">bmi</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">weight</span>, <span class="va">height</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    weight <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">weight</span>, <span class="va">kg</span><span class="op">)</span>,</span>
+<span>    height <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">height</span>, <span class="va">cm</span><span class="op">)</span>,</span>
+<span>    body_mass_index <span class="op">=</span> <span class="fu"><a href="reference/bmi_adult.html">bmi_adult</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">weight</span>, height <span class="op">=</span> <span class="va">height</span><span class="op">)</span>,</span>
+<span>    icd_10_code <span class="op">=</span> <span class="fu"><a href="reference/assign_bmi_icd.html">assign_bmi_icd</a></span><span class="op">(</span><span class="va">body_mass_index</span><span class="op">)</span>,</span>
+<span>    bmi_status <span class="op">=</span> <span class="fu"><a href="reference/assign_bmi_status.html">assign_bmi_status</a></span><span class="op">(</span><span class="va">body_mass_index</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="9%">
-<col width="10%">
 <col width="6%">
-<col width="10%">
-<col width="10%">
-<col width="13%">
-<col width="17%">
-<col width="21%">
+<col width="16%">
+<col width="16%">
+<col width="25%">
+<col width="15%">
+<col width="19%">
 </colgroup>
 <thead><tr class="header">
-<th align="right">id</th>
-<th align="left">gender</th>
 <th align="right">age</th>
 <th align="right">weight</th>
 <th align="right">height</th>
-<th align="right">bmi</th>
+<th align="right">body_mass_index</th>
 <th align="left">icd_10_code</th>
 <th align="left">bmi_status</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">61269</td>
-<td align="left">male</td>
-<td align="right">37</td>
-<td align="right">97.2</td>
-<td align="right">169.3</td>
-<td align="right">33.91192</td>
-<td align="left">Z68.33</td>
+<td align="right">62</td>
+<td align="right">99.0 [kg]</td>
+<td align="right">166.1 [cm]</td>
+<td align="right">35.88359 [kg/m^2]</td>
+<td align="left">Z68.35</td>
 <td align="left">Obese</td>
 </tr>
 <tr class="even">
-<td align="right">68429</td>
-<td align="left">male</td>
-<td align="right">27</td>
-<td align="right">112.4</td>
-<td align="right">190.5</td>
-<td align="right">30.97251</td>
-<td align="left">Z68.30</td>
+<td align="right">79</td>
+<td align="right">103.6 [kg]</td>
+<td align="right">172.6 [cm]</td>
+<td align="right">34.77588 [kg/m^2]</td>
+<td align="left">Z68.34</td>
 <td align="left">Obese</td>
 </tr>
 <tr class="odd">
-<td align="right">52535</td>
-<td align="left">male</td>
-<td align="right">43</td>
-<td align="right">82.6</td>
-<td align="right">180.0</td>
-<td align="right">25.49383</td>
-<td align="left">Z68.25</td>
-<td align="left">Overweight</td>
-</tr>
-<tr class="even">
-<td align="right">68592</td>
-<td align="left">male</td>
-<td align="right">34</td>
-<td align="right">73.5</td>
-<td align="right">172.9</td>
-<td align="right">24.58654</td>
-<td align="left">Z68.24</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="odd">
-<td align="right">70420</td>
-<td align="left">female</td>
-<td align="right">55</td>
-<td align="right">100.0</td>
-<td align="right">159.4</td>
-<td align="right">39.35713</td>
-<td align="left">Z68.39</td>
-<td align="left">Obese</td>
-</tr>
-<tr class="even">
-<td align="right">66729</td>
-<td align="left">female</td>
-<td align="right">64</td>
-<td align="right">57.8</td>
-<td align="right">161.7</td>
-<td align="right">22.10588</td>
-<td align="left">Z68.22</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="odd">
-<td align="right">62720</td>
-<td align="left">male</td>
-<td align="right">58</td>
-<td align="right">73.8</td>
-<td align="right">168.1</td>
-<td align="right">26.11686</td>
-<td align="left">Z68.26</td>
-<td align="left">Overweight</td>
-</tr>
-<tr class="even">
-<td align="right">61569</td>
-<td align="left">female</td>
-<td align="right">31</td>
-<td align="right">60.5</td>
-<td align="right">158.9</td>
-<td align="right">23.96115</td>
-<td align="left">Z68.23</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="odd">
-<td align="right">62347</td>
-<td align="left">female</td>
-<td align="right">71</td>
-<td align="right">65.7</td>
-<td align="right">165.4</td>
-<td align="right">24.01565</td>
-<td align="left">Z68.24</td>
-<td align="left">Healthy Weight</td>
-</tr>
-<tr class="even">
-<td align="right">52134</td>
-<td align="left">male</td>
-<td align="right">61</td>
-<td align="right">168.8</td>
-<td align="right">187.1</td>
-<td align="right">48.21974</td>
-<td align="left">Z68.42</td>
-<td align="left">Obese</td>
-</tr>
-<tr class="odd">
-<td align="right">69843</td>
-<td align="left">male</td>
-<td align="right">40</td>
-<td align="right">90.0</td>
-<td align="right">185.2</td>
-<td align="right">26.23980</td>
-<td align="left">Z68.26</td>
-<td align="left">Overweight</td>
-</tr>
-<tr class="even">
-<td align="right">56909</td>
-<td align="left">female</td>
-<td align="right">48</td>
-<td align="right">116.3</td>
-<td align="right">171.2</td>
-<td align="right">39.68005</td>
-<td align="left">Z68.39</td>
-<td align="left">Obese</td>
-</tr>
-<tr class="odd">
-<td align="right">69930</td>
-<td align="left">female</td>
-<td align="right">27</td>
-<td align="right">83.2</td>
-<td align="right">166.6</td>
-<td align="right">29.97598</td>
-<td align="left">Z68.29</td>
-<td align="left">Overweight</td>
-</tr>
-<tr class="even">
-<td align="right">71099</td>
-<td align="left">female</td>
-<td align="right">80</td>
-<td align="right">69.7</td>
-<td align="right">159.2</td>
-<td align="right">27.50088</td>
-<td align="left">Z68.27</td>
-<td align="left">Overweight</td>
-</tr>
-<tr class="odd">
-<td align="right">52369</td>
-<td align="left">female</td>
-<td align="right">69</td>
-<td align="right">77.1</td>
-<td align="right">163.6</td>
-<td align="right">28.80632</td>
+<td align="right">47</td>
+<td align="right">87.6 [kg]</td>
+<td align="right">174.7 [cm]</td>
+<td align="right">28.70241 [kg/m^2]</td>
 <td align="left">Z68.28</td>
 <td align="left">Overweight</td>
 </tr>
 <tr class="even">
-<td align="right">61682</td>
-<td align="left">female</td>
-<td align="right">80</td>
-<td align="right">76.2</td>
-<td align="right">159.3</td>
-<td align="right">30.02779</td>
-<td align="left">Z68.30</td>
-<td align="left">Obese</td>
+<td align="right">68</td>
+<td align="right">72.7 [kg]</td>
+<td align="right">159.2 [cm]</td>
+<td align="right">28.68457 [kg/m^2]</td>
+<td align="left">Z68.28</td>
+<td align="left">Overweight</td>
 </tr>
 <tr class="odd">
-<td align="right">71315</td>
-<td align="left">male</td>
-<td align="right">44</td>
-<td align="right">162.2</td>
-<td align="right">200.4</td>
-<td align="right">40.38829</td>
-<td align="left">Z68.41</td>
-<td align="left">Obese</td>
+<td align="right">52</td>
+<td align="right">58.7 [kg]</td>
+<td align="right">146.4 [cm]</td>
+<td align="right">27.38772 [kg/m^2]</td>
+<td align="left">Z68.27</td>
+<td align="left">Overweight</td>
 </tr>
 <tr class="even">
-<td align="right">68908</td>
-<td align="left">female</td>
-<td align="right">59</td>
-<td align="right">78.9</td>
-<td align="right">155.1</td>
-<td align="right">32.79846</td>
+<td align="right">53</td>
+<td align="right">87.5 [kg]</td>
+<td align="right">163.7 [cm]</td>
+<td align="right">32.65207 [kg/m^2]</td>
 <td align="left">Z68.32</td>
 <td align="left">Obese</td>
 </tr>
 <tr class="odd">
-<td align="right">68875</td>
-<td align="left">male</td>
-<td align="right">52</td>
-<td align="right">89.0</td>
-<td align="right">174.3</td>
-<td align="right">29.29512</td>
-<td align="left">Z68.29</td>
+<td align="right">61</td>
+<td align="right">71.5 [kg]</td>
+<td align="right">160.6 [cm]</td>
+<td align="right">27.72139 [kg/m^2]</td>
+<td align="left">Z68.27</td>
 <td align="left">Overweight</td>
 </tr>
 <tr class="even">
-<td align="right">66053</td>
-<td align="left">female</td>
-<td align="right">65</td>
-<td align="right">75.7</td>
-<td align="right">154.8</td>
-<td align="right">31.59032</td>
+<td align="right">73</td>
+<td align="right">66.8 [kg]</td>
+<td align="right">157.3 [cm]</td>
+<td align="right">26.99722 [kg/m^2]</td>
+<td align="left">Z68.26</td>
+<td align="left">Overweight</td>
+</tr>
+<tr class="odd">
+<td align="right">49</td>
+<td align="right">74.6 [kg]</td>
+<td align="right">177.1 [cm]</td>
+<td align="right">23.78492 [kg/m^2]</td>
+<td align="left">Z68.23</td>
+<td align="left">Healthy Weight</td>
+</tr>
+<tr class="even">
+<td align="right">59</td>
+<td align="right">95.4 [kg]</td>
+<td align="right">173.7 [cm]</td>
+<td align="right">31.61904 [kg/m^2]</td>
 <td align="left">Z68.31</td>
 <td align="left">Obese</td>
 </tr>
+<tr class="odd">
+<td align="right">24</td>
+<td align="right">66.8 [kg]</td>
+<td align="right">164.4 [cm]</td>
+<td align="right">24.71570 [kg/m^2]</td>
+<td align="left">Z68.24</td>
+<td align="left">Healthy Weight</td>
+</tr>
+<tr class="even">
+<td align="right">57</td>
+<td align="right">81.1 [kg]</td>
+<td align="right">165.9 [cm]</td>
+<td align="right">29.46647 [kg/m^2]</td>
+<td align="left">Z68.29</td>
+<td align="left">Overweight</td>
+</tr>
+<tr class="odd">
+<td align="right">52</td>
+<td align="right">83.9 [kg]</td>
+<td align="right">170.4 [cm]</td>
+<td align="right">28.89501 [kg/m^2]</td>
+<td align="left">Z68.28</td>
+<td align="left">Overweight</td>
+</tr>
+<tr class="even">
+<td align="right">31</td>
+<td align="right">136.3 [kg]</td>
+<td align="right">180.9 [cm]</td>
+<td align="right">41.65036 [kg/m^2]</td>
+<td align="left">Z68.41</td>
+<td align="left">Obese</td>
+</tr>
+<tr class="odd">
+<td align="right">70</td>
+<td align="right">84.0 [kg]</td>
+<td align="right">180.5 [cm]</td>
+<td align="right">25.78249 [kg/m^2]</td>
+<td align="left">Z68.25</td>
+<td align="left">Overweight</td>
+</tr>
+<tr class="even">
+<td align="right">52</td>
+<td align="right">39.3 [kg]</td>
+<td align="right">144.3 [cm]</td>
+<td align="right">18.87382 [kg/m^2]</td>
+<td align="left">Z68.1</td>
+<td align="left">Healthy Weight</td>
+</tr>
+<tr class="odd">
+<td align="right">76</td>
+<td align="right">69.4 [kg]</td>
+<td align="right">150.5 [cm]</td>
+<td align="right">30.63984 [kg/m^2]</td>
+<td align="left">Z68.30</td>
+<td align="left">Obese</td>
+</tr>
+<tr class="even">
+<td align="right">32</td>
+<td align="right">87.2 [kg]</td>
+<td align="right">177.1 [cm]</td>
+<td align="right">27.80221 [kg/m^2]</td>
+<td align="left">Z68.27</td>
+<td align="left">Overweight</td>
+</tr>
+<tr class="odd">
+<td align="right">52</td>
+<td align="right">55.8 [kg]</td>
+<td align="right">160.7 [cm]</td>
+<td align="right">21.60740 [kg/m^2]</td>
+<td align="left">Z68.21</td>
+<td align="left">Healthy Weight</td>
+</tr>
 </tbody>
 </table>
-<p><br></p>
-</div>
+<p><br><br></p>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="nlms-medlineplus-connect-api">NLM’s MedlinePlus Connect API<a class="anchor" aria-label="anchor" href="#nlms-medlineplus-connect-api"></a>
 </h2>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/codex_medline.html">codex_medline</a></span><span class="op">(</span>code_title <span class="op">=</span> <span class="st">"Chantix 0.5 MG Oral Tablet"</span>, </span>
-<span>              code_system <span class="op">=</span> <span class="st">"rxcui"</span><span class="op">)</span></span>
+<span>                    code_system <span class="op">=</span> <span class="st">"rxcui"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">rx</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="co">#dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |&gt; </span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">rx</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>      <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>      <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="8%">
@@ -751,7 +701,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">updated</td>
-<td align="left">2023-01-06 09:58:20</td>
+<td align="left">2023-01-16 16:23:23</td>
 </tr>
 <tr class="even">
 <td align="left">entry_title</td>
@@ -779,150 +729,30 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sno</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/codex_medline.html">codex_medline</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"41381004"</span>, </span>
-<span>              code_title <span class="op">=</span> <span class="st">"Pneumonia due to Pseudomonas"</span>, </span>
-<span>              code_system <span class="op">=</span> <span class="st">"snomed"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">sno</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="co">#dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |&gt; </span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="19%">
-<col width="80%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">name</th>
-<th align="left">value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">updated</td>
-<td align="left">2023-01-06 09:58:20</td>
-</tr>
-<tr class="even">
-<td align="left">entry_title</td>
-<td align="left">Pneumonia</td>
-</tr>
-<tr class="odd">
-<td align="left">source</td>
-<td align="left">U.S. National Library of Medicine</td>
-</tr>
-<tr class="even">
-<td align="left">search_description</td>
-<td align="left">41381004, SNOMEDCT, Pneumonia due to Pseudomonas, PAT</td>
-</tr>
-<tr class="odd">
-<td align="left">results_description</td>
-<td align="left">MedlinePlus Connect results for SNOMED CT 41381004</td>
-</tr>
-<tr class="even">
-<td align="left">entry_link</td>
-<td align="left"><a href="https://medlineplus.gov/pneumonia.html?utm_source=mplusconnect&amp;utm_medium=service" class="external-link uri">https://medlineplus.gov/pneumonia.html?utm_source=mplusconnect&amp;utm_medium=service</a></td>
-</tr>
-<tr class="odd">
-<td align="left">entry_summary</td>
-<td align="left">What is pneumonia?</td>
-</tr>
-</tbody>
-</table>
-<p>Pneumonia is an infection in one or both of the lungs. It causes the air sacs of the lungs to fill up with fluid or pus. It can range from mild to severe, depending on the type of germ causing the infection, your age, and your overall health.</p>
-<p>What causes pneumonia?</p>
-<p>Bacterial, viral, and fungal infections can cause pneumonia.</p>
-<p>Bacteria are the most common cause. Bacterial pneumonia can occur on its own. It can also develop after you’ve had certain viral infections such as a cold or the flu. Several different types of bacteria can cause pneumonia, including:</p>
-<p>• Streptococcus pneumoniae</p>
-<p>• Legionella pneumophila; this pneumonia is often called Legionnaires’ disease</p>
-<p>• Mycoplasma pneumoniae</p>
-<p>• Chlamydia pneumoniae</p>
-<p>• Haemophilus influenzae</p>
-<p>Viruses that infect the respiratory tract may cause pneumonia. Viral pneumonia is often mild and goes away on its own within a few weeks. But sometimes it is serious enough that you need to get treatment in a hospital. If you have viral pneumonia, you are at risk of also getting bacterial pneumonia. The different viruses that can cause pneumonia include:</p>
-<p>• Respiratory syncytial virus (RSV)</p>
-<p>• Some common cold and flu viruses</p>
-<p>• SARS-CoV-2, the virus that causes COVID-19</p>
-<p>Fungal pneumonia is more common in people who have chronic health problems or weakened immune systems. Some of the types include:</p>
-<p>• Pneumocystis pneumonia (PCP)</p>
-<p>• Coccidioidomycosis, which causes valley fever</p>
-<p>• Histoplasmosis</p>
-<p>• Cryptococcus</p>
-<p>Who is at risk for pneumonia?</p>
-<p>Anyone can get pneumonia, but certain factors can increase your risk:</p>
-<p>• Age; the risk is higher for children who are age 2 and under and adults age 65 and older</p>
-<p>• Exposure to certain chemicals, pollutants, or toxic fumes</p>
-<p>• Lifestyle habits, such as smoking, heavy alcohol use, and malnourishment</p>
-<p>• Being in a hospital, especially if you are in the ICU. Being sedated and/or on a ventilator raises the risk even more.</p>
-<p>• Having a lung disease</p>
-<p>• Having a weakened immune system</p>
-<p>• Have trouble coughing or swallowing, from a stroke or other condition</p>
-<p>• Recently being sick with a cold or the flu</p>
-<p>What are the symptoms of pneumonia?</p>
-<p>The symptoms of pneumonia can range from mild to severe and include:</p>
-<p>• Fever</p>
-<p>• Chills</p>
-<p>• Cough, usually with phlegm (a slimy substance from deep in your lungs)</p>
-<p>• Shortness of breath</p>
-<p>• Chest pain when you breathe or cough</p>
-<p>• Nausea and/or vomiting</p>
-<p>• Diarrhea</p>
-<p>The symptoms can vary for different groups. Newborns and infants may not show any signs of the infection. Others may vomit and have a fever and cough. They might seem sick, with no energy, or be restless.</p>
-<p>Older adults and people who have serious illnesses or weak immune systems may have fewer and milder symptoms. They may even have a lower than normal temperature. Older adults who have pneumonia sometimes have sudden changes in mental awareness.</p>
-<p>What other problems can pneumonia cause?</p>
-<p>Sometimes pneumonia can cause serious complications such as:</p>
-<p>• Bacteremia, which happens when the bacteria move into the bloodstream. It is serious and can lead to septic shock.</p>
-<p>• Lung abscesses, which are collections of pus in cavities of the lungs</p>
-<p>• Pleural disorders, which are conditions that affect the pleura. The pleura is the tissue that covers the outside of the lungs and lines the inside of your chest cavity.</p>
-<p>• Kidney failure</p>
-<p>• Respiratory failure</p>
-<p>How is pneumonia diagnosed?</p>
-<p>Sometimes pneumonia can be hard to diagnose. This is because it can cause some of the same symptoms as a cold or the flu. It may take time for you to realize that you have a more serious condition.</p>
-<p>Your health care provider may use many tools to make a diagnosis:</p>
-<p>• A medical history, which includes asking about your symptoms</p>
-<p>• A physical exam, including listening to your lungs with a stethoscope</p>
-<p>• Various tests, such as</p>
-<p>• A chest x-ray</p>
-<p>• Blood tests such as a complete blood count (CBC) to see if your immune system is actively fighting an infection</p>
-<p>• A Blood culture to find out whether you have a bacterial infection that has spread to your bloodstream</p>
-<p>If you are in the hospital, have serious symptoms, are older, or have other health problems, you may also have more tests, such as:</p>
-<p>• Sputum test, which checks for bacteria in a sample of your sputum (spit) or phlegm (slimy substance from deep in your lungs).</p>
-<p>• Chest CT scan to see how much of your lungs is affected. It may also show if you have complications such as lung abscesses or pleural effusions.</p>
-<p>• Pleural fluid culture, which checks for bacteria in a fluid sample that was taken from the pleural space</p>
-<p>• Pulse oximetry or blood oxygen level test, to check how much oxygen is in your blood</p>
-<p>• Bronchoscopy, a procedure used to look inside your lungs’ airways</p>
-<p>What are the treatments for pneumonia?</p>
-<p>Treatment for pneumonia depends on the type of pneumonia, which germ is causing it, and how severe it is:</p>
-<p>• Antibiotics treat bacterial pneumonia and some types of fungal pneumonia. They do not work for viral pneumonia.</p>
-<p>• In some cases, your provider may prescribe antiviral medicines for viral pneumonia</p>
-<p>• Antifungal medicines treat other types of fungal pneumonia</p>
-<p>You may need to be treated in a hospital if your symptoms are severe or if you are at risk for complications. While there, you may get additional treatments. For example, if your blood oxygen level is low, you may receive oxygen therapy.</p>
-<p>It may take time to recover from pneumonia. Some people feel better within a week. For other people, it can take a month or more.</p>
-<p>Can pneumonia be prevented?</p>
-<p>Vaccines can help prevent pneumonia caused by pneumococcal bacteria or the flu virus. Having good hygiene, not smoking, and having a healthy lifestyle may also help prevent pneumonia.</p>
-<p>NIH: National Heart, Lung, and Blood Institute |</p>
-<p><br></p>
+<p><br><br></p>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="medicare-fee-for-service-comprehensive-error-rate-testing-api">Medicare Fee-for-Service Comprehensive Error Rate Testing API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-comprehensive-error-rate-testing-api"></a>
 </h2>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/codex_cert.html">codex_cert</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"81595"</span>, </span>
 <span>           decision <span class="op">=</span> <span class="st">"Disagree"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">type_of_bill</span>, <span class="op">-</span><span class="va">drg</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>           <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">type_of_bill</span>, </span>
+<span>                <span class="op">-</span><span class="va">drg</span>, </span>
+<span>                <span class="op">-</span><span class="va">claim_control_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="3%">
-<col width="14%">
-<col width="7%">
-<col width="14%">
-<col width="29%">
-<col width="11%">
-<col width="18%">
+<col width="4%">
+<col width="9%">
+<col width="16%">
+<col width="34%">
+<col width="13%">
+<col width="21%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">year</th>
-<th align="right">claim_control_number</th>
 <th align="left">part</th>
 <th align="left">hcpcs_procedure_code</th>
 <th align="left">provider_type</th>
@@ -932,7 +762,6 @@
 <tbody>
 <tr class="odd">
 <td align="right">2021</td>
-<td align="right">2233505</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -941,7 +770,6 @@
 </tr>
 <tr class="even">
 <td align="right">2021</td>
-<td align="right">2235257</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -950,7 +778,6 @@
 </tr>
 <tr class="odd">
 <td align="right">2021</td>
-<td align="right">2250710</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -959,7 +786,6 @@
 </tr>
 <tr class="even">
 <td align="right">2021</td>
-<td align="right">2253897</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -968,7 +794,6 @@
 </tr>
 <tr class="odd">
 <td align="right">2021</td>
-<td align="right">2260715</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -977,7 +802,6 @@
 </tr>
 <tr class="even">
 <td align="right">2021</td>
-<td align="right">2261152</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -986,7 +810,6 @@
 </tr>
 <tr class="odd">
 <td align="right">2021</td>
-<td align="right">2261632</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -995,7 +818,6 @@
 </tr>
 <tr class="even">
 <td align="right">2021</td>
-<td align="right">2263045</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -1004,7 +826,6 @@
 </tr>
 <tr class="odd">
 <td align="right">2021</td>
-<td align="right">2264507</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -1013,7 +834,6 @@
 </tr>
 <tr class="even">
 <td align="right">2021</td>
-<td align="right">2266057</td>
 <td align="left">1. Part B</td>
 <td align="left">81595</td>
 <td align="left">Clinical Laboratory (Billing Independently)</td>
@@ -1022,15 +842,16 @@
 </tr>
 </tbody>
 </table>
-<p><br></p>
+<p><br><br></p>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="ncci-procedure-to-procedure-edits-ptp-api">NCCI Procedure-to-Procedure Edits (PTP) API<a class="anchor" aria-label="anchor" href="#ncci-procedure-to-procedure-edits-ptp-api"></a>
 </h2>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span>column_1 <span class="op">=</span> <span class="st">"29000"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -1117,10 +938,371 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span>explain <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span>column_2 <span class="op">=</span> <span class="st">"L1951"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="10%">
+<col width="7%">
+<col width="7%">
+<col width="11%">
+<col width="11%">
+<col width="14%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">quarter_begin_date</th>
+<th align="left">category</th>
+<th align="left">column_1</th>
+<th align="left">column_2</th>
+<th align="left">effective_date</th>
+<th align="left">deletion_date</th>
+<th align="left">modifier_indicator</th>
+<th align="left">ptp_edit_rationale</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29305</td>
+<td align="left">L1951</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29325</td>
+<td align="left">L1951</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29345</td>
+<td align="left">L1951</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29355</td>
+<td align="left">L1951</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29358</td>
+<td align="left">L1951</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29365</td>
+<td align="left">L1951</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span>category <span class="op">=</span> <span class="st">"DME Services"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="10%">
+<col width="7%">
+<col width="7%">
+<col width="11%">
+<col width="11%">
+<col width="14%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">quarter_begin_date</th>
+<th align="left">category</th>
+<th align="left">column_1</th>
+<th align="left">column_2</th>
+<th align="left">effective_date</th>
+<th align="left">deletion_date</th>
+<th align="left">modifier_indicator</th>
+<th align="left">ptp_edit_rationale</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29010</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29015</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29020</td>
+<td align="left">2013-04-01</td>
+<td align="left">2014-12-31</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29025</td>
+<td align="left">2013-04-01</td>
+<td align="left">2014-12-31</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29035</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29040</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span>modifier_indicator <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="10%">
+<col width="7%">
+<col width="7%">
+<col width="11%">
+<col width="11%">
+<col width="14%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">quarter_begin_date</th>
+<th align="left">category</th>
+<th align="left">column_1</th>
+<th align="left">column_2</th>
+<th align="left">effective_date</th>
+<th align="left">deletion_date</th>
+<th align="left">modifier_indicator</th>
+<th align="left">ptp_edit_rationale</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29010</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29015</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29020</td>
+<td align="left">2013-04-01</td>
+<td align="left">2014-12-31</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29025</td>
+<td align="left">2013-04-01</td>
+<td align="left">2014-12-31</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29035</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">29000</td>
+<td align="left">29040</td>
+<td align="left">2013-04-01</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="left">Mutually exclusive procedures</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span>column_1 <span class="op">=</span> <span class="st">"29000"</span>, modifier_indicator <span class="op">=</span> <span class="st">"1"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="11%">
+<col width="17%">
+<col width="5%">
+<col width="5%">
+<col width="9%">
+<col width="8%">
+<col width="11%">
+<col width="28%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">quarter_begin_date</th>
+<th align="left">category</th>
+<th align="left">column_1</th>
+<th align="left">column_2</th>
+<th align="left">effective_date</th>
+<th align="left">deletion_date</th>
+<th align="left">modifier_indicator</th>
+<th align="left">ptp_edit_rationale</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">Outpatient Hospital Services</td>
+<td align="left">29000</td>
+<td align="left">0213T</td>
+<td align="left">2010-10-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Misuse of column two code with column one code</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">Outpatient Hospital Services</td>
+<td align="left">29000</td>
+<td align="left">0214T</td>
+<td align="left">2015-10-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Misuse of column two code with column one code</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">Outpatient Hospital Services</td>
+<td align="left">29000</td>
+<td align="left">0215T</td>
+<td align="left">2015-10-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Misuse of column two code with column one code</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">Outpatient Hospital Services</td>
+<td align="left">29000</td>
+<td align="left">0216T</td>
+<td align="left">2010-10-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Misuse of column two code with column one code</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">Outpatient Hospital Services</td>
+<td align="left">29000</td>
+<td align="left">0217T</td>
+<td align="left">2015-10-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Misuse of column two code with column one code</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">Outpatient Hospital Services</td>
+<td align="left">29000</td>
+<td align="left">0218T</td>
+<td align="left">2015-10-01</td>
+<td align="left">NA</td>
+<td align="left">1</td>
+<td align="left">Misuse of column two code with column one code</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_ptp.html">codex_ptp</a></span><span class="op">(</span>ptp_edit_rationale <span class="op">=</span> <span class="st">"Mutually exclusive procedures"</span>, </span>
+<span>          explain <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
@@ -1206,22 +1388,25 @@
 </tr>
 </tbody>
 </table>
-<p><br></p>
+<p><br><br></p>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="ncci-medically-unlikely-edits-mues-api">NCCI Medically Unlikely Edits (MUEs) API<a class="anchor" aria-label="anchor" href="#ncci-medically-unlikely-edits-mues-api"></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_mue.html">codex_mue</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>     <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>     <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_mue.html">codex_mue</a></span><span class="op">(</span>category <span class="op">=</span> <span class="st">"Practitioner Services"</span>, </span>
+<span>          hcpcscpt_code <span class="op">=</span> <span class="st">"G0121"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">quarter_begin_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="19%">
-<col width="28%">
-<col width="11%">
-<col width="10%">
-<col width="29%">
+<col width="22%">
+<col width="25%">
+<col width="13%">
+<col width="12%">
+<col width="26%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">quarter_begin_date</th>
@@ -1232,7 +1417,133 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2018-01-01</td>
+<td align="left">2022-10-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2022-07-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-04-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2022-01-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2021-10-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2021-07-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2021-04-01</td>
+<td align="left">practitioner services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2021-01-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2020-10-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2020-07-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2020-04-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2020-01-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-10-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2019-07-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-04-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2019-01-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-10-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="even">
+<td align="left">2018-07-01</td>
+<td align="left">Practitioner Services</td>
+<td align="left">G0121</td>
+<td align="right">1</td>
+<td align="left">Anatomic Consideration</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-04-01</td>
 <td align="left">Practitioner Services</td>
 <td align="left">G0121</td>
 <td align="right">1</td>
@@ -1241,41 +1552,510 @@
 <tr class="even">
 <td align="left">2018-01-01</td>
 <td align="left">Practitioner Services</td>
-<td align="left">90660</td>
+<td align="left">G0121</td>
 <td align="right">1</td>
-<td align="left">Clinical: Medicare Data</td>
-</tr>
-<tr class="odd">
-<td align="left">2018-01-01</td>
-<td align="left">Practitioner Services</td>
-<td align="left">J9060</td>
-<td align="right">24</td>
-<td align="left">Prescribing Information</td>
-</tr>
-<tr class="even">
-<td align="left">2018-01-01</td>
-<td align="left">Outpatient Hospital Services</td>
-<td align="left">61781</td>
-<td align="right">1</td>
-<td align="left">Nature of Service / Procedure</td>
-</tr>
-<tr class="odd">
-<td align="left">2018-01-01</td>
-<td align="left">Outpatient Hospital Services</td>
-<td align="left">64913</td>
-<td align="right">3</td>
-<td align="left">CMS NCCI Policy</td>
-</tr>
-<tr class="even">
-<td align="left">2018-01-01</td>
-<td align="left">Outpatient Hospital Services</td>
-<td align="left">95146</td>
-<td align="right">10</td>
-<td align="left">Clinical: Medicare Data</td>
+<td align="left">Anatomic Consideration</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/codex_mue.html">codex_mue</a></span><span class="op">(</span>category <span class="op">=</span> <span class="st">"DME Services"</span>, </span>
+<span>          mue_value <span class="op">=</span> <span class="st">"2"</span>, </span>
+<span>          mue_rationale <span class="op">=</span> <span class="st">"Code Descriptor / CPT Instruction"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">quarter_begin_date</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2022-10-01"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">quarter_begin_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="21%">
+<col width="15%">
+<col width="13%">
+<col width="11%">
+<col width="38%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">quarter_begin_date</th>
+<th align="left">category</th>
+<th align="left">hcpcs_code</th>
+<th align="right">mue_value</th>
+<th align="left">mue_rationale</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">A4635</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">A4636</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0111</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0113</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0116</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0117</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0154</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0157</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0159</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0175</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0310</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0952</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0959</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0960</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0961</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0973</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E0974</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E1020</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2205</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2206</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2207</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2211</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2212</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2213</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2216</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2218</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2220</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2224</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2227</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2228</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2358</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2359</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2361</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2363</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2365</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2368</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2369</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2370</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2371</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2381</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2382</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2383</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2386</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2388</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2390</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">E2619</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0051</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0065</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0069</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0070</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0071</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0072</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0077</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">K0733</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L1070</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L1080</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L1100</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L1110</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L2182</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L2184</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L2186</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L3600</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L3610</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L3620</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L3630</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L5280</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-01</td>
+<td align="left">DME Services</td>
+<td align="left">L5341</td>
+<td align="right">2</td>
+<td align="left">Code Descriptor / CPT Instruction</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

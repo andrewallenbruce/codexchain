@@ -64,74 +64,61 @@ to Procedure Edits (PTP) API.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">codex_ptp</span><span class="op">(</span></span>
 <span>  category <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  comprehensive <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  component <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  mod <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  reason <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  offset <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  count <span class="op">=</span> <span class="st">"true"</span>,</span>
-<span>  results <span class="op">=</span> <span class="st">"true"</span>,</span>
-<span>  schema <span class="op">=</span> <span class="st">"true"</span>,</span>
-<span>  keys <span class="op">=</span> <span class="st">"true"</span>,</span>
-<span>  format <span class="op">=</span> <span class="st">"json"</span>,</span>
-<span>  rowIds <span class="op">=</span> <span class="st">"true"</span>,</span>
+<span>  column_1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  column_2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  modifier_indicator <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ptp_edit_rationale <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  explain <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
+    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+    <p>Centers for Medicare &amp; Medicaid Services</p>
+    </div>
+    <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>category</dt>
-<dd><p>definition</p></dd>
+<dd><p>Practitioner Services, Outpatient Hospital Services, DME Services</p></dd>
 
 
-<dt>comprehensive</dt>
-<dd><p>definition</p></dd>
+<dt>column_1</dt>
+<dd><p>HCPCS comprehensive code</p></dd>
 
 
-<dt>component</dt>
-<dd><p>definition</p></dd>
+<dt>column_2</dt>
+<dd><p>HCPCS component code</p></dd>
 
 
-<dt>mod</dt>
-<dd><p>definition</p></dd>
+<dt>modifier_indicator</dt>
+<dd><p><code>0</code> (Allowed), <code>1</code> (Not Allowed), <code>9</code> (Use Not Specified)</p></dd>
 
 
-<dt>reason</dt>
-<dd><p>definition</p></dd>
+<dt>ptp_edit_rationale</dt>
+<dd><p>Choices:</p><ul><li><p>"Misuse of column two code with column one code"</p></li>
+<li><p>"Standards of medical / surgical practice"</p></li>
+<li><p>"CPT Manual or CMS manual coding instructions"</p></li>
+<li><p>"Standard preparation / monitoring services for anesthesia"</p></li>
+<li><p>"Mutually exclusive procedures"</p></li>
+<li><p>"More extensive procedure"</p></li>
+<li><p>"HCPCS/CPT procedure code definition"</p></li>
+<li><p>"CPT \"separate procedure\" definition"</p></li>
+<li><p>"Anesthesia service included in surgical procedure"</p></li>
+<li><p>"Sequential procedure"</p></li>
+<li><p>"Laboratory panel"</p></li>
+<li><p>"Gender-specific (formerly Designation of sex) procedures"</p></li>
+</ul></dd>
 
 
-<dt>limit</dt>
-<dd><p>definition</p></dd>
+<dt>clean_names</dt>
+<dd><p>Clean column names with janitor's
+<code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
 
 
-<dt>offset</dt>
-<dd><p>definition</p></dd>
-
-
-<dt>count</dt>
-<dd><p>definition</p></dd>
-
-
-<dt>results</dt>
-<dd><p>definition</p></dd>
-
-
-<dt>schema</dt>
-<dd><p>definition</p></dd>
-
-
-<dt>keys</dt>
-<dd><p>definition</p></dd>
-
-
-<dt>format</dt>
-<dd><p>definition</p></dd>
-
-
-<dt>rowIds</dt>
-<dd><p>definition</p></dd>
+<dt>lowercase</dt>
+<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
 
 
 <dt>explain</dt>
@@ -146,44 +133,36 @@ default is <code>FALSE</code>.</p></dd>
 <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
     </div>
     <div class="section level2">
-    <h2 id="ncci-procedure-to-procedure-edits-ptp-">NCCI Procedure to Procedure Edits (PTP)<a class="anchor" aria-label="anchor" href="#ncci-procedure-to-procedure-edits-ptp-"></a></h2>
-    <p>The CMS National Correct Coding Initiative (NCCI) promotes national
-correct coding methodologies and reduces improper coding which may result
-in inappropriate payments of Medicare Part B claims and Medicaid claims.
-NCCI procedure-to-procedure (PTP) edits define pairs of Healthcare Common
-Procedure Coding System (HCPCS)/Current Procedural Terminology (CPT) codes
-that should not be reported together for a variety of reasons. The purpose
-of the PTP edits is to prevent improper payments when incorrect code
-combinations are reported. Practitioner services also refers to ambulatory
-surgical centers. DME refers to provider claims for durable medical
-equipment.</p><div class="section">
-<h3 id="data-source">Data Source<a class="anchor" aria-label="anchor" href="#data-source"></a></h3>
-
-
-<p>Centers for Medicare &amp; Medicaid Services</p>
-</div>
-
-<div class="section">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The CMS National Correct Coding Initiative (NCCI) promotes
+national correct coding methodologies and reduces improper coding
+which may result in inappropriate payments of Medicare Part B claims
+and Medicaid claims. NCCI procedure-to-procedure (PTP) edits define
+pairs of Healthcare Common Procedure Coding System (HCPCS)/Current
+Procedural Terminology (CPT) codes that should not be reported together
+for a variety of reasons. The purpose of the PTP edits is to prevent
+improper payments when incorrect code combinations are reported.
+Practitioner services also refers to ambulatory surgical centers.
+DME refers to provider claims for durable medical equipment.</p><div class="section">
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
 
 <ul><li><p><a href="https://data.medicaid.gov/dataset/bf3c4970-7dce-49df-b555-bb62ccf9ffb6" class="external-link">CMS' NCCI Procedure to Procedure Edits (PTP) API</a></p></li>
 </ul></div>
 
     </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>Update Frequency: <strong>Quarterly</strong></p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Returns the first 10,000 results</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">codex_ptp</span><span class="op">(</span>category <span class="op">=</span> <span class="st">"DME"</span>,</span></span>
-<span class="r-in"><span>          comprehensive <span class="op">=</span> <span class="fl">29000</span>,</span></span>
-<span class="r-in"><span>          component <span class="op">=</span> <span class="fl">29010</span>,</span></span>
-<span class="r-in"><span>          mod <span class="op">=</span> <span class="fl">0</span>,</span></span>
-<span class="r-in"><span>          reason <span class="op">=</span> <span class="st">"mutually"</span>,</span></span>
-<span class="r-in"><span>          explain <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">codex_ptp</span><span class="op">(</span>explain <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_ptp</span><span class="op">(</span>category <span class="op">=</span> <span class="st">"DME Services"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_ptp</span><span class="op">(</span>column_1 <span class="op">=</span> <span class="st">"29000"</span>, modifier_indicator <span class="op">=</span> <span class="st">"1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_ptp</span><span class="op">(</span>column_2 <span class="op">=</span> <span class="st">"29015"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_ptp</span><span class="op">(</span>modifier_indicator <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">codex_ptp</span><span class="op">(</span>ptp_edit_rationale <span class="op">=</span> <span class="st">"Mutually exclusive procedures"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
