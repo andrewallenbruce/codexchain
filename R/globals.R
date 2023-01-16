@@ -5,22 +5,10 @@ utils::globalVariables(c(
   "V1", # <codex_icd10>
   "V2", # <codex_icd10>
   "quarter_begin_date", # <codex_mue>
-  "mue_value", # <codex_mue>
-  "hcpcscpt_code", # <codex_mue>
   "quarter_begin_date", # <codex_ptp>
   "effective_date", # <codex_ptp>
   "deletion_date", # <codex_ptp>
-  "modifier_indicator", # <codex_ptp>
-  "column_1", # <codex_ptp>
-  "column_2", # <codex_ptp>
-  "ptp_edit_rationale", # <codex_ptp>
   "modifier_use", # <codex_ptp>
-  ":=", # <age_days>
-  "int", # <days_today>
-  "secs", # <days_today>
-  "mins", # <days_today>
-  ":=", # <days_today>
-  "hrs", # <days_today>
   "kg", # <bmi_adult>
   "cm", # <bmi_adult>
   "m", # <bmi_adult>

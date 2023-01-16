@@ -16,19 +16,34 @@ knitr::opts_chunk$set(
   fig.path  = "man/figures/README-"
 )
 options(knitr.table.format = "html")
-```
 
-```{r}
 library(codexchain)
 library(reactable)
+library(htmltools)
+
+row <- function(...) {
+  div(
+    class = "custom_note",
+    ...
+  )
+}
+```
+
+```{css, echo=FALSE}
+.custom_note {
+  border-left: solid 5px hsl(220, 100%, 30%);
+  background-color: hsl(220, 100%, 95%);
+  padding: 5px;
+  margin-bottom: 10px
+}
 ```
 
 <br>
 
-> **Note**  
-> *ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical Modification) is a medical coding system for classifying diagnoses and reasons for visits in U.S. health care settings.*
 
-> *ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical Modification) is a medical coding system for classifying diagnoses and reasons for visits in U.S. health care settings.*
+```{r echo=FALSE, warning=FALSE}
+row("ICD-10-CM (International Classification of Diseases, 10th Revision, Clinical Modification) is a medical coding system for classifying diagnoses and reasons for visits in U.S. health care settings.")
+```
 
 <br>
 
@@ -120,10 +135,10 @@ nh_sample <- NHANES::NHANES |>
 bmi <- nh_sample |> 
   dplyr::mutate(weight = units::set_units(weight, kg),
                 height = units::set_units(height, cm),
-                bmi_adult  = bmi_adult(weight, height))
+                body_mass_index = bmi_adult(weight, height))
 
-bmi |> dplyr::mutate(icd_10_code = assign_bmi_icd(bmi_adult),
-                     bmi_status = assign_bmi_status(bmi_adult)) |> 
+bmi |> dplyr::mutate(icd_10_code = assign_bmi_icd(body_mass_index),
+                     bmi_status = assign_bmi_status(body_mass_index)) |> 
   dplyr::slice_max(order_by = id, prop = 0.15) |> 
   gluedown::md_table()
 ```

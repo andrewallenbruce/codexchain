@@ -12,8 +12,6 @@ URL: https://github.com/andrewallenbruce/codexchain,
     https://andrewallenbruce.github.io/codexchain/
 BugReports: https://github.com/andrewallenbruce/codexchain/issues
 Imports: 
-    attempt,
-    curl,
     httr2,
     units,
     janitor,
@@ -27,6 +25,7 @@ Suggests:
     gt,
     gtExtras,
     httptest2,
+    NHANES,
     reactable,
     rmarkdown,
     roxyglobals (>= 0.2.1),

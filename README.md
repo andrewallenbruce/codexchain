@@ -158,9 +158,9 @@ codex_icd10(code = "z",
 | Z00.5          | Encounter for examination of potential donor of organ and tissue                         |
 | Z00.6          | Encounter for examination for normal comparison and control in clinical research program |
 
-<br>
+<br> <br>
 
-### BMI Coding Example
+## BMI Coding Example
 
 ``` r
 codex_icd10(term = "bmi adult", 
@@ -201,57 +201,59 @@ codex_icd10(term = "bmi adult",
 
 ``` r
 NHANES::NHANES |> 
+  dplyr::slice_sample(n = 30) |> 
   janitor::clean_names() |> 
   dplyr::filter(age >= 20) |> 
-  dplyr::select(id, gender, age, weight, height) |> 
-  dplyr::slice_sample(n = 20) |> 
-  dplyr::mutate(bmi = codexchain:::calc_bmi(wt = weight, ht = height),
-                icd_10_code = codexchain:::assign_bmi_icd(bmi),
-                bmi_status = codexchain:::assign_bmi_status(bmi)) |> 
+  dplyr::select(age, weight, height) |> 
+  dplyr::mutate(
+    weight = units::set_units(weight, kg),
+    height = units::set_units(height, cm),
+    body_mass_index = bmi_adult(weight = weight, height = height),
+    icd_10_code = assign_bmi_icd(body_mass_index),
+    bmi_status = assign_bmi_status(body_mass_index)) |> 
   gluedown::md_table()
 ```
 
-|    id | gender | age | weight | height |      bmi | icd_10_code | bmi_status     |
-|------:|:-------|----:|-------:|-------:|---------:|:------------|:---------------|
-| 61269 | male   |  37 |   97.2 |  169.3 | 33.91192 | Z68.33      | Obese          |
-| 68429 | male   |  27 |  112.4 |  190.5 | 30.97251 | Z68.30      | Obese          |
-| 52535 | male   |  43 |   82.6 |  180.0 | 25.49383 | Z68.25      | Overweight     |
-| 68592 | male   |  34 |   73.5 |  172.9 | 24.58654 | Z68.24      | Healthy Weight |
-| 70420 | female |  55 |  100.0 |  159.4 | 39.35713 | Z68.39      | Obese          |
-| 66729 | female |  64 |   57.8 |  161.7 | 22.10588 | Z68.22      | Healthy Weight |
-| 62720 | male   |  58 |   73.8 |  168.1 | 26.11686 | Z68.26      | Overweight     |
-| 61569 | female |  31 |   60.5 |  158.9 | 23.96115 | Z68.23      | Healthy Weight |
-| 62347 | female |  71 |   65.7 |  165.4 | 24.01565 | Z68.24      | Healthy Weight |
-| 52134 | male   |  61 |  168.8 |  187.1 | 48.21974 | Z68.42      | Obese          |
-| 69843 | male   |  40 |   90.0 |  185.2 | 26.23980 | Z68.26      | Overweight     |
-| 56909 | female |  48 |  116.3 |  171.2 | 39.68005 | Z68.39      | Obese          |
-| 69930 | female |  27 |   83.2 |  166.6 | 29.97598 | Z68.29      | Overweight     |
-| 71099 | female |  80 |   69.7 |  159.2 | 27.50088 | Z68.27      | Overweight     |
-| 52369 | female |  69 |   77.1 |  163.6 | 28.80632 | Z68.28      | Overweight     |
-| 61682 | female |  80 |   76.2 |  159.3 | 30.02779 | Z68.30      | Obese          |
-| 71315 | male   |  44 |  162.2 |  200.4 | 40.38829 | Z68.41      | Obese          |
-| 68908 | female |  59 |   78.9 |  155.1 | 32.79846 | Z68.32      | Obese          |
-| 68875 | male   |  52 |   89.0 |  174.3 | 29.29512 | Z68.29      | Overweight     |
-| 66053 | female |  65 |   75.7 |  154.8 | 31.59032 | Z68.31      | Obese          |
+| age |       weight |       height |     body_mass_index | icd_10_code | bmi_status     |
+|----:|-------------:|-------------:|--------------------:|:------------|:---------------|
+|  62 |  99.0 \[kg\] | 166.1 \[cm\] | 35.88359 \[kg/m^2\] | Z68.35      | Obese          |
+|  79 | 103.6 \[kg\] | 172.6 \[cm\] | 34.77588 \[kg/m^2\] | Z68.34      | Obese          |
+|  47 |  87.6 \[kg\] | 174.7 \[cm\] | 28.70241 \[kg/m^2\] | Z68.28      | Overweight     |
+|  68 |  72.7 \[kg\] | 159.2 \[cm\] | 28.68457 \[kg/m^2\] | Z68.28      | Overweight     |
+|  52 |  58.7 \[kg\] | 146.4 \[cm\] | 27.38772 \[kg/m^2\] | Z68.27      | Overweight     |
+|  53 |  87.5 \[kg\] | 163.7 \[cm\] | 32.65207 \[kg/m^2\] | Z68.32      | Obese          |
+|  61 |  71.5 \[kg\] | 160.6 \[cm\] | 27.72139 \[kg/m^2\] | Z68.27      | Overweight     |
+|  73 |  66.8 \[kg\] | 157.3 \[cm\] | 26.99722 \[kg/m^2\] | Z68.26      | Overweight     |
+|  49 |  74.6 \[kg\] | 177.1 \[cm\] | 23.78492 \[kg/m^2\] | Z68.23      | Healthy Weight |
+|  59 |  95.4 \[kg\] | 173.7 \[cm\] | 31.61904 \[kg/m^2\] | Z68.31      | Obese          |
+|  24 |  66.8 \[kg\] | 164.4 \[cm\] | 24.71570 \[kg/m^2\] | Z68.24      | Healthy Weight |
+|  57 |  81.1 \[kg\] | 165.9 \[cm\] | 29.46647 \[kg/m^2\] | Z68.29      | Overweight     |
+|  52 |  83.9 \[kg\] | 170.4 \[cm\] | 28.89501 \[kg/m^2\] | Z68.28      | Overweight     |
+|  31 | 136.3 \[kg\] | 180.9 \[cm\] | 41.65036 \[kg/m^2\] | Z68.41      | Obese          |
+|  70 |  84.0 \[kg\] | 180.5 \[cm\] | 25.78249 \[kg/m^2\] | Z68.25      | Overweight     |
+|  52 |  39.3 \[kg\] | 144.3 \[cm\] | 18.87382 \[kg/m^2\] | Z68.1       | Healthy Weight |
+|  76 |  69.4 \[kg\] | 150.5 \[cm\] | 30.63984 \[kg/m^2\] | Z68.30      | Obese          |
+|  32 |  87.2 \[kg\] | 177.1 \[cm\] | 27.80221 \[kg/m^2\] | Z68.27      | Overweight     |
+|  52 |  55.8 \[kg\] | 160.7 \[cm\] | 21.60740 \[kg/m^2\] | Z68.21      | Healthy Weight |
 
-<br>
+<br> <br>
+
+------------------------------------------------------------------------
 
 ## NLM’s MedlinePlus Connect API
 
 ``` r
 rx <- codex_medline(code_title = "Chantix 0.5 MG Oral Tablet", 
-              code_system = "rxcui")
+                    code_system = "rxcui")
 
-rx |> 
-  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  gluedown::md_table()
+rx |> dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+      tidyr::pivot_longer(cols = dplyr::everything()) |> 
+      gluedown::md_table()
 ```
 
 | name                | value                                                                                                                                                                                                                                           |
 |:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| updated             | 2023-01-06 09:58:20                                                                                                                                                                                                                             |
+| updated             | 2023-01-16 16:23:23                                                                                                                                                                                                                             |
 | entry_title         | Varenicline                                                                                                                                                                                                                                     |
 | source              | U.S. National Library of Medicine                                                                                                                                                                                                               |
 | search_description  | , RXNORM, Chantix 0.5 MG Oral Tablet, PAT                                                                                                                                                                                                       |
@@ -259,245 +261,44 @@ rx |>
 | entry_link          | <https://medlineplus.gov/druginfo/meds/a606024.html?utm_source=mplusconnect&utm_medium=service>                                                                                                                                                 |
 | entry_summary       | Varenicline is used along with education and counseling to help people stop smoking. Varenicline is in a class of medications called smoking cessation aids. It works by blocking the pleasant effects of nicotine (from smoking) on the brain. |
 
-``` r
-sno <- codex_medline(code = "41381004", 
-              code_title = "Pneumonia due to Pseudomonas", 
-              code_system = "snomed")
+<br> <br>
 
-sno |> 
-  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  gluedown::md_table()
-```
-
-| name                | value                                                                               |
-|:--------------------|:------------------------------------------------------------------------------------|
-| updated             | 2023-01-06 09:58:20                                                                 |
-| entry_title         | Pneumonia                                                                           |
-| source              | U.S. National Library of Medicine                                                   |
-| search_description  | 41381004, SNOMEDCT, Pneumonia due to Pseudomonas, PAT                               |
-| results_description | MedlinePlus Connect results for SNOMED CT 41381004                                  |
-| entry_link          | <https://medlineplus.gov/pneumonia.html?utm_source=mplusconnect&utm_medium=service> |
-| entry_summary       | What is pneumonia?                                                                  |
-
-Pneumonia is an infection in one or both of the lungs. It causes the air
-sacs of the lungs to fill up with fluid or pus. It can range from mild
-to severe, depending on the type of germ causing the infection, your
-age, and your overall health.
-
-What causes pneumonia?
-
-Bacterial, viral, and fungal infections can cause pneumonia.
-
-Bacteria are the most common cause. Bacterial pneumonia can occur on its
-own. It can also develop after you’ve had certain viral infections such
-as a cold or the flu. Several different types of bacteria can cause
-pneumonia, including:
-
-• Streptococcus pneumoniae
-
-• Legionella pneumophila; this pneumonia is often called Legionnaires’
-disease
-
-• Mycoplasma pneumoniae
-
-• Chlamydia pneumoniae
-
-• Haemophilus influenzae
-
-Viruses that infect the respiratory tract may cause pneumonia. Viral
-pneumonia is often mild and goes away on its own within a few weeks. But
-sometimes it is serious enough that you need to get treatment in a
-hospital. If you have viral pneumonia, you are at risk of also getting
-bacterial pneumonia. The different viruses that can cause pneumonia
-include:
-
-• Respiratory syncytial virus (RSV)
-
-• Some common cold and flu viruses
-
-• SARS-CoV-2, the virus that causes COVID-19
-
-Fungal pneumonia is more common in people who have chronic health
-problems or weakened immune systems. Some of the types include:
-
-• Pneumocystis pneumonia (PCP)
-
-• Coccidioidomycosis, which causes valley fever
-
-• Histoplasmosis
-
-• Cryptococcus
-
-Who is at risk for pneumonia?
-
-Anyone can get pneumonia, but certain factors can increase your risk:
-
-• Age; the risk is higher for children who are age 2 and under and
-adults age 65 and older
-
-• Exposure to certain chemicals, pollutants, or toxic fumes
-
-• Lifestyle habits, such as smoking, heavy alcohol use, and
-malnourishment
-
-• Being in a hospital, especially if you are in the ICU. Being sedated
-and/or on a ventilator raises the risk even more.
-
-• Having a lung disease
-
-• Having a weakened immune system
-
-• Have trouble coughing or swallowing, from a stroke or other condition
-
-• Recently being sick with a cold or the flu
-
-What are the symptoms of pneumonia?
-
-The symptoms of pneumonia can range from mild to severe and include:
-
-• Fever
-
-• Chills
-
-• Cough, usually with phlegm (a slimy substance from deep in your lungs)
-
-• Shortness of breath
-
-• Chest pain when you breathe or cough
-
-• Nausea and/or vomiting
-
-• Diarrhea
-
-The symptoms can vary for different groups. Newborns and infants may not
-show any signs of the infection. Others may vomit and have a fever and
-cough. They might seem sick, with no energy, or be restless.
-
-Older adults and people who have serious illnesses or weak immune
-systems may have fewer and milder symptoms. They may even have a lower
-than normal temperature. Older adults who have pneumonia sometimes have
-sudden changes in mental awareness.
-
-What other problems can pneumonia cause?
-
-Sometimes pneumonia can cause serious complications such as:
-
-• Bacteremia, which happens when the bacteria move into the bloodstream.
-It is serious and can lead to septic shock.
-
-• Lung abscesses, which are collections of pus in cavities of the lungs
-
-• Pleural disorders, which are conditions that affect the pleura. The
-pleura is the tissue that covers the outside of the lungs and lines the
-inside of your chest cavity.
-
-• Kidney failure
-
-• Respiratory failure
-
-How is pneumonia diagnosed?
-
-Sometimes pneumonia can be hard to diagnose. This is because it can
-cause some of the same symptoms as a cold or the flu. It may take time
-for you to realize that you have a more serious condition.
-
-Your health care provider may use many tools to make a diagnosis:
-
-• A medical history, which includes asking about your symptoms
-
-• A physical exam, including listening to your lungs with a stethoscope
-
-• Various tests, such as
-
-• A chest x-ray
-
-• Blood tests such as a complete blood count (CBC) to see if your immune
-system is actively fighting an infection
-
-• A Blood culture to find out whether you have a bacterial infection
-that has spread to your bloodstream
-
-If you are in the hospital, have serious symptoms, are older, or have
-other health problems, you may also have more tests, such as:
-
-• Sputum test, which checks for bacteria in a sample of your sputum
-(spit) or phlegm (slimy substance from deep in your lungs).
-
-• Chest CT scan to see how much of your lungs is affected. It may also
-show if you have complications such as lung abscesses or pleural
-effusions.
-
-• Pleural fluid culture, which checks for bacteria in a fluid sample
-that was taken from the pleural space
-
-• Pulse oximetry or blood oxygen level test, to check how much oxygen is
-in your blood
-
-• Bronchoscopy, a procedure used to look inside your lungs’ airways
-
-What are the treatments for pneumonia?
-
-Treatment for pneumonia depends on the type of pneumonia, which germ is
-causing it, and how severe it is:
-
-• Antibiotics treat bacterial pneumonia and some types of fungal
-pneumonia. They do not work for viral pneumonia.
-
-• In some cases, your provider may prescribe antiviral medicines for
-viral pneumonia
-
-• Antifungal medicines treat other types of fungal pneumonia
-
-You may need to be treated in a hospital if your symptoms are severe or
-if you are at risk for complications. While there, you may get
-additional treatments. For example, if your blood oxygen level is low,
-you may receive oxygen therapy.
-
-It may take time to recover from pneumonia. Some people feel better
-within a week. For other people, it can take a month or more.
-
-Can pneumonia be prevented?
-
-Vaccines can help prevent pneumonia caused by pneumococcal bacteria or
-the flu virus. Having good hygiene, not smoking, and having a healthy
-lifestyle may also help prevent pneumonia.
-
-NIH: National Heart, Lung, and Blood Institute \|
-
-<br>
+------------------------------------------------------------------------
 
 ## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 
 ``` r
 codex_cert(hcpcs = "81595", 
            decision = "Disagree") |> 
-  dplyr::select(-type_of_bill, -drg) |> 
-           gluedown::md_table()
+  dplyr::select(-type_of_bill, 
+                -drg, 
+                -claim_control_number) |> 
+  gluedown::md_table()
 ```
 
-| year | claim_control_number | part       | hcpcs_procedure_code | provider_type                               | review_decision | error_code                 |
-|-----:|---------------------:|:-----------|:---------------------|:--------------------------------------------|:----------------|:---------------------------|
-| 2021 |              2233505 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2235257 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2250710 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2253897 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2260715 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2261152 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2261632 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2263045 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2264507 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
-| 2021 |              2266057 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| year | part       | hcpcs_procedure_code | provider_type                               | review_decision | error_code                 |
+|-----:|:-----------|:---------------------|:--------------------------------------------|:----------------|:---------------------------|
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
+| 2021 | 1\. Part B | 81595                | Clinical Laboratory (Billing Independently) | Disagree        | Insufficient Documentation |
 
-<br>
+<br> <br>
+
+------------------------------------------------------------------------
 
 ## NCCI Procedure-to-Procedure Edits (PTP) API
 
 ``` r
-codex_ptp() |> 
-  head() |> 
+codex_ptp(column_1 = "29000") |> 
   dplyr::select(-record_number) |> 
+  head() |> 
   gluedown::md_table()
 ```
 
@@ -513,9 +314,82 @@ codex_ptp() |>
 <br>
 
 ``` r
-codex_ptp(explain = TRUE) |> 
-  head() |> 
+codex_ptp(column_2 = "L1951") |> 
   dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+
+| quarter_begin_date | category     | column_1 | column_2 | effective_date | deletion_date | modifier_indicator | ptp_edit_rationale            |
+|:-------------------|:-------------|:---------|:---------|:---------------|:--------------|:-------------------|:------------------------------|
+| 2022-10-01         | DME Services | 29305    | L1951    | 2013-04-01     | NA            | 1                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29325    | L1951    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29345    | L1951    | 2013-04-01     | NA            | 1                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29355    | L1951    | 2013-04-01     | NA            | 1                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29358    | L1951    | 2013-04-01     | NA            | 1                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29365    | L1951    | 2013-04-01     | NA            | 1                  | Mutually exclusive procedures |
+
+<br>
+
+``` r
+codex_ptp(category = "DME Services") |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+
+| quarter_begin_date | category     | column_1 | column_2 | effective_date | deletion_date | modifier_indicator | ptp_edit_rationale            |
+|:-------------------|:-------------|:---------|:---------|:---------------|:--------------|:-------------------|:------------------------------|
+| 2022-10-01         | DME Services | 29000    | 29010    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29015    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29020    | 2013-04-01     | 2014-12-31    | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29025    | 2013-04-01     | 2014-12-31    | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29035    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29040    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+
+<br>
+
+``` r
+codex_ptp(modifier_indicator = "0") |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+
+| quarter_begin_date | category     | column_1 | column_2 | effective_date | deletion_date | modifier_indicator | ptp_edit_rationale            |
+|:-------------------|:-------------|:---------|:---------|:---------------|:--------------|:-------------------|:------------------------------|
+| 2022-10-01         | DME Services | 29000    | 29010    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29015    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29020    | 2013-04-01     | 2014-12-31    | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29025    | 2013-04-01     | 2014-12-31    | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29035    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+| 2022-10-01         | DME Services | 29000    | 29040    | 2013-04-01     | NA            | 0                  | Mutually exclusive procedures |
+
+<br>
+
+``` r
+codex_ptp(column_1 = "29000", modifier_indicator = "1") |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+
+| quarter_begin_date | category                     | column_1 | column_2 | effective_date | deletion_date | modifier_indicator | ptp_edit_rationale                             |
+|:-------------------|:-----------------------------|:---------|:---------|:---------------|:--------------|:-------------------|:-----------------------------------------------|
+| 2022-10-01         | Outpatient Hospital Services | 29000    | 0213T    | 2010-10-01     | NA            | 1                  | Misuse of column two code with column one code |
+| 2022-10-01         | Outpatient Hospital Services | 29000    | 0214T    | 2015-10-01     | NA            | 1                  | Misuse of column two code with column one code |
+| 2022-10-01         | Outpatient Hospital Services | 29000    | 0215T    | 2015-10-01     | NA            | 1                  | Misuse of column two code with column one code |
+| 2022-10-01         | Outpatient Hospital Services | 29000    | 0216T    | 2010-10-01     | NA            | 1                  | Misuse of column two code with column one code |
+| 2022-10-01         | Outpatient Hospital Services | 29000    | 0217T    | 2015-10-01     | NA            | 1                  | Misuse of column two code with column one code |
+| 2022-10-01         | Outpatient Hospital Services | 29000    | 0218T    | 2015-10-01     | NA            | 1                  | Misuse of column two code with column one code |
+
+<br>
+
+``` r
+codex_ptp(ptp_edit_rationale = "Mutually exclusive procedures", 
+          explain = TRUE) |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
   gluedown::md_table()
 ```
 
@@ -528,23 +402,125 @@ codex_ptp(explain = TRUE) |>
 | 2022-10-01         | DME Services | 29000               | 29035           | 2013-04-01     | NA            | Allowed (0)  | Mutually exclusive procedures |
 | 2022-10-01         | DME Services | 29000               | 29040           | 2013-04-01     | NA            | Allowed (0)  | Mutually exclusive procedures |
 
-<br>
+<br> <br>
+
+------------------------------------------------------------------------
 
 ## NCCI Medically Unlikely Edits (MUEs) API
 
 ``` r
-codex_mue() |> 
-     head() |> 
-     gluedown::md_table()
+codex_mue(category = "Practitioner Services", 
+          hcpcscpt_code = "G0121") |> 
+  dplyr::select(-record_number) |> 
+  dplyr::arrange(desc(quarter_begin_date)) |> 
+  gluedown::md_table()
 ```
 
-| quarter_begin_date | category                     | hcpcs_code | mue_value | mue_rationale                 |
-|:-------------------|:-----------------------------|:-----------|----------:|:------------------------------|
-| 2018-01-01         | Practitioner Services        | G0121      |         1 | Anatomic Consideration        |
-| 2018-01-01         | Practitioner Services        | 90660      |         1 | Clinical: Medicare Data       |
-| 2018-01-01         | Practitioner Services        | J9060      |        24 | Prescribing Information       |
-| 2018-01-01         | Outpatient Hospital Services | 61781      |         1 | Nature of Service / Procedure |
-| 2018-01-01         | Outpatient Hospital Services | 64913      |         3 | CMS NCCI Policy               |
-| 2018-01-01         | Outpatient Hospital Services | 95146      |        10 | Clinical: Medicare Data       |
+| quarter_begin_date | category              | hcpcs_code | mue_value | mue_rationale          |
+|:-------------------|:----------------------|:-----------|----------:|:-----------------------|
+| 2022-10-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2022-07-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2022-04-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2022-01-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2021-10-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2021-07-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2021-04-01         | practitioner services | G0121      |         1 | Anatomic Consideration |
+| 2021-01-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2020-10-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2020-07-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2020-04-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2020-01-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2019-10-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2019-07-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2019-04-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2019-01-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2018-10-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2018-07-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2018-04-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
+| 2018-01-01         | Practitioner Services | G0121      |         1 | Anatomic Consideration |
 
 <br>
+
+``` r
+codex_mue(category = "DME Services", 
+          mue_value = "2", 
+          mue_rationale = "Code Descriptor / CPT Instruction") |> 
+  dplyr::select(-record_number) |> 
+  dplyr::filter(quarter_begin_date >= as.Date("2022-10-01")) |> 
+  dplyr::arrange(desc(quarter_begin_date)) |> 
+  gluedown::md_table()
+```
+
+| quarter_begin_date | category     | hcpcs_code | mue_value | mue_rationale                     |
+|:-------------------|:-------------|:-----------|----------:|:----------------------------------|
+| 2022-10-01         | DME Services | A4635      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | A4636      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0111      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0113      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0116      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0117      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0154      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0157      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0159      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0175      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0310      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0952      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0959      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0960      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0961      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0973      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E0974      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E1020      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2205      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2206      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2207      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2211      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2212      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2213      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2216      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2218      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2220      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2224      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2227      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2228      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2358      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2359      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2361      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2363      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2365      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2368      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2369      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2370      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2371      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2381      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2382      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2383      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2386      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2388      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2390      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | E2619      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0051      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0065      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0069      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0070      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0071      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0072      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0077      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | K0733      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L1070      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L1080      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L1100      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L1110      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L2182      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L2184      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L2186      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L3600      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L3610      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L3620      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L3630      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L5280      |         2 | Code Descriptor / CPT Instruction |
+| 2022-10-01         | DME Services | L5341      |         2 | Code Descriptor / CPT Instruction |
+
+<br>
+
+------------------------------------------------------------------------

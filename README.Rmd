@@ -91,8 +91,9 @@ codex_icd10(code = "z",
 ```
 
 <br>
+<br>
 
-### BMI Coding Example
+## BMI Coding Example
 
 ```{r results='asis', echo=TRUE}
 codex_icd10(term = "bmi adult", 
@@ -104,87 +105,138 @@ codex_icd10(term = "bmi adult",
 
 ```{r results='asis', echo=TRUE}
 NHANES::NHANES |> 
+  dplyr::slice_sample(n = 30) |> 
   janitor::clean_names() |> 
   dplyr::filter(age >= 20) |> 
-  dplyr::select(id, gender, age, weight, height) |> 
-  dplyr::slice_sample(n = 20) |> 
-  dplyr::mutate(bmi = codexchain:::calc_bmi(wt = weight, ht = height),
-                icd_10_code = codexchain:::assign_bmi_icd(bmi),
-                bmi_status = codexchain:::assign_bmi_status(bmi)) |> 
+  dplyr::select(age, weight, height) |> 
+  dplyr::mutate(
+    weight = units::set_units(weight, kg),
+    height = units::set_units(height, cm),
+    body_mass_index = bmi_adult(weight = weight, height = height),
+    icd_10_code = assign_bmi_icd(body_mass_index),
+    bmi_status = assign_bmi_status(body_mass_index)) |> 
   gluedown::md_table()
 ```
 
 <br>
+<br>
+
+-------------------------------------------------------------------------------
 
 ## NLM's MedlinePlus Connect API
 
 ```{r results='asis', echo=TRUE}
 rx <- codex_medline(code_title = "Chantix 0.5 MG Oral Tablet", 
-              code_system = "rxcui")
+                    code_system = "rxcui")
 
-rx |> 
-  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  gluedown::md_table()
-```
-
-
-
-```{r results='asis', echo=TRUE}
-sno <- codex_medline(code = "41381004", 
-              code_title = "Pneumonia due to Pseudomonas", 
-              code_system = "snomed")
-
-sno |> 
-  #dplyr::mutate(entry_summary = stringr::str_wrap(entry_summary)) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  gluedown::md_table()
+rx |> dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+      tidyr::pivot_longer(cols = dplyr::everything()) |> 
+      gluedown::md_table()
 ```
 
 
 <br>
+<br>
+
+------------------------------------------------------------------------------
 
 ## Medicare Fee-for-Service Comprehensive Error Rate Testing API
 
 ```{r results='asis', echo=TRUE}
 codex_cert(hcpcs = "81595", 
            decision = "Disagree") |> 
-  dplyr::select(-type_of_bill, -drg) |> 
-           gluedown::md_table()
+  dplyr::select(-type_of_bill, 
+                -drg, 
+                -claim_control_number) |> 
+  gluedown::md_table()
 ```
 
 
 <br>
+<br>
 
+------------------------------------------------------------------------------
 
 ## NCCI Procedure-to-Procedure Edits (PTP) API
 
 ```{r results='asis', echo=TRUE}
-codex_ptp() |> 
-  head() |> 
+codex_ptp(column_1 = "29000") |> 
   dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+<br>
+
+```{r results='asis', echo=TRUE}
+codex_ptp(column_2 = "L1951") |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
   gluedown::md_table()
 ```
 
 <br>
 
 ```{r results='asis', echo=TRUE}
-codex_ptp(explain = TRUE) |> 
-  head() |> 
+codex_ptp(category = "DME Services") |> 
   dplyr::select(-record_number) |> 
+  head() |> 
   gluedown::md_table()
 ```
 
 <br>
+
+```{r results='asis', echo=TRUE}
+codex_ptp(modifier_indicator = "0") |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+codex_ptp(column_1 = "29000", modifier_indicator = "1") |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+codex_ptp(ptp_edit_rationale = "Mutually exclusive procedures", 
+          explain = TRUE) |> 
+  dplyr::select(-record_number) |> 
+  head() |> 
+  gluedown::md_table()
+```
+
+<br>
+<br>
+
+-------------------------------------------------------------------------------
 
 ## NCCI Medically Unlikely Edits (MUEs) API
 
 ```{r results='asis', echo=TRUE}
-codex_mue() |> 
-     head() |> 
-     gluedown::md_table()
+codex_mue(category = "Practitioner Services", 
+          hcpcscpt_code = "G0121") |> 
+  dplyr::select(-record_number) |> 
+  dplyr::arrange(desc(quarter_begin_date)) |> 
+  gluedown::md_table()
+```
+<br>
+
+```{r results='asis', echo=TRUE}
+codex_mue(category = "DME Services", 
+          mue_value = "2", 
+          mue_rationale = "Code Descriptor / CPT Instruction") |> 
+  dplyr::select(-record_number) |> 
+  dplyr::filter(quarter_begin_date >= as.Date("2022-10-01")) |> 
+  dplyr::arrange(desc(quarter_begin_date)) |> 
+  gluedown::md_table()
 ```
 
 <br>
+
+-----------------------------------------------------------------------------
